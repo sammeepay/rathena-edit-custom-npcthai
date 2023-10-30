@@ -22,91 +22,91 @@
 
 alberta,97,51,0	script	Fabian	84,{
 	mes "[Fabian]";
-	mes "เมื่อท่านเดินทางไปทั่วโลก ท่านจะได้ยินเรื่องบ้า ๆ บอ ๆ";
+	mes "Man... When you travel all around the world, you'll hear of some crazy things.";
 	next;
 	mes "[Fabian]";
-	mes "ครั้งหนึ่ง ข้าเคยได้ยินมาว่ามีการ์ดที่มีพลังของสัตว์ประหลาด หากมีใครได้ครอบครอง พวกเขาจะสามารถใช้พลังของสัตว์ประหลาดตัวนั้นได้";
+	mes "Once, I heard that there are Cards which contain the power of monsters. If someone happens to get their hands on a card, they'll be able to use that monster's power.";
 	next;
 	mes "[Fabian]";
-	mes "ข้าเดาว่า มันเป็นแฟชั่นหรือการหลอกลวงบางอย่างที่พวกเขาทำให้ท่านรวบรวมการ์ดทั้งหมดหรืออะไรก็ตาม ข้าหมายความว่าการ์ดจะกุมพลังของสัตว์ประหลาดได้อย่างไร!";
+	mes "I'm guessing it's some sort of fad or scam, where they make you collect all the cards or whatever. I mean, how can a card really hold the power of a monster?!";
 	next;
 	mes "[Fabian]";
-	mes "จริงจัง...";
+	mes "Seriously...";
 	close;
 }
 
 alberta,53,39,0	script	Steiner	100,{
 	mes "[Steiner]";
-	mes "โอ้...!";
-	mes "ยินดีต้อนรับสู่ Alberta";
-	mes "นักผจญภัยรุ่นใหม่!";
+	mes "Oh...!";
+	mes "Welcome to Alberta,";
+	mes "young adventurer!";
 	next;
 	mes "[Steiner]";
-	mes "ให้อภัยข้าถ้าข้าดูเหมือนว้าวุ่นใจ ข้ากำลังพยายามทำเกี่ยวกับแผนที่ท่านเห็นไหม ข้าได้ยินมาว่ามีร้านค้าหนึ่งใน Geffen ขายเสื้อเกราะที่สามารถต้านทานเวทมนตร์ได้";
+	mes "Pardon me if I seem distracted. I'm milling about, trying to make a plan. You see, I hear that there is a store in Geffen that sells armor that is resistant to magic.";
 	next;
 	mes "[Steiner]";
-	mes "ข้าซื้อมาเป็นจำนวนมาก แล้วขายต่อที่นี่ในราคาที่สูงกว่า...";
+	mes "If I buy a lot of them in bulk, and then resell them here for a higher price...";
 	close;
 }
 
 alberta_in,20,183,0	script	Chad	1_M_03,{
 	mes "[Chad]";
-	mes "ผู้คนบอกว่า อาวุธในตำนานของ Gungnir ไม่เคยพลาดเป้าหมาย ข้าสงสัยว่ามันอาจเป็นจริง...";
+	mes "People say the legendary weapon Gungnir never misses its target. I wonder if it's possibly true...";
 	next;
 	mes "[Chad]";
-	mes "ผู้คนยังบอกด้วยว่า เด็ก ๆ จะได้รับการรวมตัวเป็นนกกระสาก่อนส่งมอบ สาว ๆ ขุดพวกที่ทำตัวเหมือนกระตุกและซานตาคลอสก็มีอยู่! แต่เฉพาะใน Lutie";
+	mes "People also say that babies are assembled by the storks before delivery, girls dig guys who act like jerks, and that Santa Claus exists! But only in Lutie.";
 	next;
 	mes "[Chad]";
-	mes "ฉันสงสัยว่า...";
-	mes "หากมีสิ่งใด";
-	mes "ที่อาจจะเป็น";
-	mes "จริง...";
+	mes "I wonder...";
+	mes "If any of that";
+	mes "is possibly";
+	mes "true...";
 	close;
 }
 
 alberta,131,139,2	script	Drunken Old Man	1_M_JOBGUIDER,{
 	mes "[Deagle]";
 	mes "^666666*Hiccup*^000000";
-	mes "ท่านกำลังมองหาอะไรอยู่";
-	mes "หลงทาง!!";
+	mes "Wh-what are you";
+	mes "staring at? Get lost!!";
 	next;
-	switch(select("ไม่ต้องพูดอะไร","ทิ้งเขาไว้คนเดียว")) {
+	switch(select("Say nothing.","Leave him alone.")) {
 	case 1:
 		mes "[Deagle]";
-		mes "ฮ่าฮ่าฮ่าฮ่า ^666666*สะอึก*^000000... ท่านมีความกังวล ตอนนี้ข้าอาจดูไร้ค่า แต่ข้าเคยเป็นกะลาสีใน 'Going Mary'";
+		mes "Hahahaha ^666666*hiccup*^000000... You've got some nerve. I may look worthless now, but I used to be a sailor on the 'Going Mary.'";
 		next;
-		switch(select("ไม่เคยได้ยินเรื่องนี้","จริงๆ? ไม่ได้ล้อเล่น!")) {
+		switch(select("Never heard of it.","Really? No kidding!")) {
 		case 1:
 			mes "[Deagle]";
-			mes "ไม่เคยได้ยินหรือ! ทุกคนรู้ว่าเรือโจรสลัดที่โด่งดัง 'Going Mary!' ^666666*สะอึก~*^000000";
+			mes "Never heard of it?! Everybody knows th'notorious pirate ship 'Going Mary!' ^666666*Hiccup~*^000000";
 			next;
 			mes "[Deagle]";
-			mes "อ่า~ วันเก่าๆ ถ้าเพียงแค่... ถ้าเพียงแค่พวกเราไม่ได้พบกับพายุนั้น...^666666*สะอึก*^000000";
+			mes "Ah~ The ol'days. If only... If only we hadn't run into that STORM...^666666*hiccup*^000000";
 			next;
 			mes "[Deagle]";
-			mes "อา~ กัปตัน ข้าคิดถึงกัปตันของเรามากกว่าทุกสิ่ง ไม่มีศัตรูเคยรอดชีวิตจากดาบของกัปตัน";
+			mes "AH~ Captain. I miss our cap'n more than anything... No foe survived before cap'n's sword.";
 			close;
 		case 2:
 			mes "[Deagle]";
-			mes "ถูกตัอง! ไม่มีใครเข้ากับลูกเรือของ 'Going Mary!' และไม่มีใครสามารถเอาชนะกัปตันในการต่อสู้ด้วยดาบ!";
+			mes "That's right! NOBODY meshes with the crew of the 'Going Mary!' And nobody can beat out cap'n in a sword fight!";
 			next;
 			mes "[Deagle]";
-			mes "กัปตัน~!!! ^666666*สะอึก~*^000000 เขาจะเหวี่ยงดาบของเขาแบบนี้แล้ว... จากนั้น!!";
+			mes "CAPTAIN~!!! ^666666*HICCUP~*^000000 He would swing his sword like this, then... THEN!!";
 			next;
 			mes "[Deagle]";
-			mes "กัปตันกำลังสู้รบและเพื่อน ๆ ของเขาที่อยู่ใกล้ ๆ ถูกล้อมรอบด้วยเปลวเพลิง!";
+			mes "The bastard the captain was fighting, and anyone of his friends near him, were surrounded in flame!";
 			next;
 			mes "[Deagle]";
-			mes "ดาบนั้นจะต้องมีพลังลึกลับบางอย่าง หรือ กัปตันเป็นคนที่ดีมาก...!";
+			mes "Man, that sword must have had some sort of mysterious power, or the captain was just that good...!";
 			next;
 			mes "[Deagle]";
-			mes "^666666*สะอึกสะอื้น* *สะอึกสะอื้น...*^000000 พระเจ้า ข้าคิดถึงทุกคน! ตอนนี้ข้าซึมเศร้า! ได้โปรดไปซะ";
+			mes "Phew~~ ^666666*Sob* *Sob...*^000000 God, I miss everyone! Now I'm depressed! Please, go away now.";
 			close;
 		}
 	case 2:
 		mes "[Deagle]";
-		mes "ถูกตัอง!";
-		mes "ไปให้พ้น~";
+		mes "That's right!";
+		mes "Go AWAY~";
 		close;
 	}
 }
@@ -114,26 +114,26 @@ alberta,131,139,2	script	Drunken Old Man	1_M_JOBGUIDER,{
 alberta,58,80,2	script	Shakir	99,{
 	mes "[Shakir]";
 	if (rand(2)) {
-		mes "พ่อค้าเรามีทักษะการเจรจาต่อรองของเราเองเมื่อเราขายสินค้า ความสามารถนี้ทำให้เราได้รับเงินมากกว่าคนอื่นเมื่อขายสินค้า";
+		mes "We Merchants have our own negotiating skill when we sell goods. This skill can get us more money than when other people sell goods.";
 		next;
 		mes "[Shakir]";
-		mes "มันเป็นมากกว่าแค่การตะโกน 'ท่านจะต้องมีเงินมากขึ้น!' ท่านจำเป็นต้องมีพรสวรรค์และสำนวนหลัก!";
+		mes "It's more than just yelling 'You'll have to give more money please!' You need to have charisma, and master rhetoric!";
 		next;
 		mes "[Shakir]";
-		mes "เราสามารถได้รับ zeny มากขึ้นถึง 24 % ด้วยความสามารถอันเหลือเชื่อนี้ แต่อย่าลืมฝึกอย่างหนักเพื่อให้ได้มา!!";
+		mes "We can get up to 24 % more zeny with this incredible skill. But remember to train hard to acquire it!!";
 	} else {
-		mes "พ่อค้าสามารถ";
-		mes "เปิดร้านค้าริมถนน";
-		mes "เพื่อทำธุรกิจ";
+		mes "We Merchants can";
+		mes "open roadside stands";
+		mes "to do business.";
 		next;
 		mes "[Shakir]";
-		mes "ด้วยทักษะการลดราคา เราสามารถซื้อสินค้าราคาถูกจากร้านค้าในเมือง และโหลดลงในรถเข็นที่เราเช่า";
+		mes "With the Discount skill, we can buy goods really cheap from the stores in towns and load them into the cart we rent.";
 		next;
 		mes "[Shakir]";
-		mes "หลังจากนั้น เราสามารถท่องเที่ยวได้ทุกที่ และขายสินค้าของเราเพื่อทำกำไร!";
+		mes "Then afterwards, we can travel anywhere, and sells our goods to make a profit!";
 		next;
 		mes "[Shakir]";
-		mes "วิธีนี้ ทำให้ธุรกิจสะดวกและปลอดภัยมากขึ้น อย่าเผลอหลับไปแม้ว่ามันจะง่ายเกินไปที่จะทำเช่นนั้น";
+		mes "This way, business is more convenient and safe. Don't fall asleep, although it's too easy to do that.";
 	}
 	close;
 }
@@ -142,70 +142,70 @@ alberta,62,156,2	script	Sonya	102,{
 	mes "[Sonya]";
 	switch(rand(3)){
 	case 0:
-		mes "เฮ้ ท่านรู้ไหมครั้งหนึ่งข้ากำลังเดินผ่านป่า และข้าเห็นก้านสีเขียวเล็ก ๆ นี้เคลื่อนที่ไปมา";
+		mes "Hey, you know, this one time I was walking through the forest and I saw this little green stem moving around.";
 		next;
 		mes "[Sonya]";
-		mes "ข้าไปดูว่ามันคืออะไร และเมื่อข้าไปสัมผัส ก้านตบมือของข้าจริง ๆ !";
+		mes "I went to see what it was and when I went to touch it. The stem actually slapped my hand!";
 		next;
 		mes "[Sonya]";
-		mes "มันทำให้ข้าตกใจ ดังนั้นข้าจึงกระโดดกลับ แล้วข้าก็รู้ว่ามันไม่ได้เป็นพืช แต่เป็นสัตว์ที่เล็กมาก";
+		mes "It startled me, so I jumped back a bit and then I realized it wasn't a stem, but a very small animal.";
 		next;
 		mes "[Sonya]";
-		mes "โชคดีที่ข้าไม่ได้อารมณ์เสีย แม้แต่สัตว์ขนาดเล็กก็อาจเป็นอันตรายได้หากโกรธ";
+		mes "I was lucky I didn't upset it. Even the smallest animal can be dangerous if angered.";
 		close;
 	case 1:
-		mes "ท่านรู้จักหมีขี้เกียจที่อาศัยอยู่ในป่าระหว่างทางไปยัง Payon หรือไม่?";
+		mes "You know those lazy looking bears that live in the forest on the way to Payon?";
 		next;
 		mes "[Sonya]";
-		mes "เพื่อความสนุก ข้าขว้างก้อนหินใส่มัน และทันใดนั้นหินก็พุ่งมาที่ข้า! ข้ากลัวมากข้าเริ่มวิ่งหนีแล้วก็ แบม!!!";
+		mes "Just for fun, I threw a rock at it and all of sudden it rushed at me! I was sooooo scared, I started to run away, then BAM!!!";
 		next;
 		mes "[Sonya]";
-		mes "มันวิ่งไปที่กิ่งไม้เตี้ย ๆ แล้วกระแทกตัวเองออกมา! ข้าสาบานข้าจะไม่ปลุกสัตว์เพื่อความสนุกอีก!";
+		mes "It ran into a low tree branch and knocked itself out! I swear, I'll never provoke an animal for fun again!";
 		close;
 	case 2:
-		mes "ครั้งหนึ่ง ข้าเคยเห็นหมาป่าฝูงหนึ่งแบกหมีขี้เกียจตัวโต!";
+		mes "I once saw a pack of wolves take on one of those huge, lazy bears!";
 		next;
 		mes "[Sonya]";
-		mes "หมาป่ามีความสามัคคี หากหนึ่งในนั้นถูกโจมตีจากนั้นหมาป่าที่อยู่ใกล้ ๆ จะวิ่งไปช่วย";
+		mes "Wolves are much more cooperative than they may seem. If one of them is attacked, then any nearby wolves will run to help.";
 		next;
 		mes "[Sonya]";
-		mes "หากท่านต้องการต่อสู้กับคนอื่น ๆ ในระเเวกใกล้เคียง ระวังตัวด้วย อย่าตะโกนเสียงดัง!";
+		mes "I'd think twice if you ever want to fight one when others of its kind are around. Be careful: don't get ganged up on!";
 		close;
 	}
 }
 
 alberta,93,174,2	script	Grandmother Alma	103,{
 	mes "[Grandmother Alma]";
-	mes "เมื่อไม่นานมานี้";
-	mes "เรือที่ถูกทิ้ง";
-	mes "ล่องลอยไปยัง";
-	mes "ท่าเรือ Alberta";
+	mes "Some time ago,";
+	mes "a derelict ship";
+	mes "drifted into";
+	mes "Alberta harbour.";
 	next;
 	mes "[Grandmother Alma]";
-	mes "หวังว่าจะช่วยผู้รอดชีวิตให้รอดได้บ้าง ชาวเมืองบางคนก็เสี่ยงภัย อย่างไรก็ตามพวกเขาต่างก็วิ่งหนีไปด้วยความกลัวโดยบอกว่าศพกำลังเดินอยู่ในเรือ";
+	mes "Hoping to save any survivors, some of the townspeople ventured into the ship. However, they all ran out terrified, saying that corpses were walking around inside the ship.";
 	next;
 	mes "[Grandmother Alma]";
-	mes "เรือก็เต็มไปด้วยสิ่งมีชีวิตที่เป็นอันตรายทางทะเล และพวกเขาไม่สามารถเข้าไปข้างในแม้ว่าพวกเขาต้องการ";
+	mes "The ship was also packed with dangerous marine organisms, and they couldn't get inside, even if they wanted to.";
 	next;
 	mes "[Grandmother Alma]";
-	mes "เราไม่สามารถทำอะไรเกี่ยวกับเรือที่เป็นลางร้ายขนาดนั้นและทิ้งมันไว้เหมือนเดิม ทุกวันนี้ทีมสำรวจพยายามเข้าไปในเรือลำนั้นและกำจัดสัตว์ประหลาด";
+	mes "We couldn't do anything about that ominous looking ship, and just left it as it was. Nowadays, exploration teams try to enter that ship and wipe out its monsters.";
 	next;
 	mes "[Grandmother Alma]";
-	mes "ดังนั้นอาจเป็นประสบการณ์ที่ดีสำหรับคนหนุ่มสาวอย่างท่านที่จะรับสมัคร แต่ก็ยังไม่คุ้มที่จะเสี่ยงชีวิตหากท่านยังไม่แข็งแรงพอ";
+	mes "So it might be a good experience for a young person like yourself to be a recruit. But, it's still not worth risking your life if you're not strong enough.";
 	close;
 }
 
 alberta,189,151,5	script	Fisk	4W_SAILOR,{
 	mes "[Fisk]";
-	mes "เพื่อน";
-	mes "ของข้า";
-	mes "ท่านอยากไปที่ใด";
+	mes "Ahoy mate,";
+	mes "where'd ya";
+	mes "wanna go?";
 	next;
-	switch(select("Sunken Ship -> 250 zeny.","Izlude Marina -> 500 zeny.","ไม่เป็นไร")) {
+	switch(select("Sunken Ship -> 250 zeny.","Izlude Marina -> 500 zeny.","Never mind.")) {
 	case 1:
 		if (Zeny < 250) {
 			mes "[Fisk]";
-			mes "เฮ้ อย่าพยายามที่จะโกงข้า! ข้าบอกว่า 250 zeny!";
+			mes "Hey now, don't try to cheat me! I said 250 zeny!";
 			close;
 		}
 		Zeny = Zeny - 250;
@@ -214,7 +214,7 @@ alberta,189,151,5	script	Fisk	4W_SAILOR,{
 	case 2:
 		if (Zeny < 500) {
 			mes "[Fisk]";
-			mes "ไม่มีทางที่ท่านจะไปที่นั่นได้ หากไม่มี 500 zeny ก่อน!";
+			mes "Ain't no way yer getting there without the 500 zeny first!";
 			close;
 		}
 		Zeny = Zeny - 500;
@@ -225,44 +225,44 @@ alberta,189,151,5	script	Fisk	4W_SAILOR,{
 		end;
 	case 3:
 		mes "[Fisk]";
-		mes "เอาล่ะ...";
-		mes "ผู้ไม่่ชำนาญทะเล";
+		mes "Alright...";
+		mes "Landlubber.";
 		close;
 	}
 }
 
 alb2trea,39,50,6	script	Fisk#a2t	4W_SAILOR,{
 	mes "[Fisk]";
-	mes "ท่านอยากกลับไปที่แผ่นดินใหญ่ใน Alberta ใช่มั้ย?";
+	mes "So you wanna head back to the mainland in Alberta, eh?";
 	next;
-	if (select("ใช้, ได้โปรด","ข้าเปลี่ยนใจแล้ว") == 1)
+	if (select("Yes please.","I changed my mind.") == 1)
 		warp "alberta",192,169;
 	close;
 }
 
 alberta,195,151,2	script	Paul	4_M_04,{
 	mes "[Paul]";
-	mes "วันที่ดี~";
-	mes "ท่านต้องการ";
-	mes "เข้าร่วมทีม";
-	mes "สำรวจของ";
-	mes "Sunken Ship หรือไม่?";
+	mes "Good day~";
+	mes "Would you like";
+	mes "to join the";
+	mes "exploration team";
+	mes "of the Sunken Ship?";
 	next;
 	mes "[Paul]";
-	mes "โอ้! ก่อนที่ท่านจะเข้าร่วมข้าต้องเตือนท่าน หากท่านไม่แข็งแกร่งพอท่านไม่ควรที่จะไป";
+	mes "Oh! Before you join, I must warn you. If you're not that strong, you may not want to go.";
 	next;
 	mes "[Paul]";
-	mes "ดังนั้นหาก";
-	mes "ต้องการลงทะเบียน?";
-	mes "ค่าธรรมเนียม";
-	mes "เพียง 200 Zeny";
-	mes "เท่านั้น!";
+	mes "So, want";
+	mes "to sign up?";
+	mes "The admission";
+	mes "fee is only";
+	mes "200 Zeny.";
 	next;
-	switch(select("สมัครเลย!","เอ่อ, ไม่เป็นไร")) {
+	switch(select("Sign me up!","Uh, no thanks.")) {
 	case 1:
 		if (Zeny < 200) {
 			mes "[Paul]";
-			mes "ดูเหมือนว่าท่านไม่มีเงินเพื่อนของข้า แต่โปรดกลับมาอีกครั้งเมื่อท่านสามารถจ่ายได้";
+			mes "It seems you don't have the money, my friend. But please come back when you're able to pay.";
 			close;
 		}
 		Zeny = Zeny - 200;
@@ -270,10 +270,10 @@ alberta,195,151,2	script	Paul	4_M_04,{
 		close;
 	case 2:
 		mes "[Paul]";
-		mes "เอาล่ะ, ดี...";
-		mes "ข้าจะอยู่";
-		mes "ใกล้ๆ ถ้าท่าน";
-		mes "เปลี่ยนใจ";
+		mes "Alright, well...";
+		mes "I'll be around";
+		mes "if you change";
+		mes "your mind.";
 		close;
 	}
 }
@@ -281,67 +281,67 @@ alberta,195,151,2	script	Paul	4_M_04,{
 alberta,190,173,4	script	Phelix	4_M_03,{
 	mes "[Phelix]";
 	if ((MaxWeight - Weight) < 10000) {
-		mes "รอสักครู่!!";
-		mes "ท่านนำสิ่งต่าง ๆ มากมายเกินไป!";
-		mes "ท่านไม่สามารถรับของได้อีก!";
-		mes "โปรดลดจำนวนไอเทม";
-		mes "จากนั้นมาหาข้าอีกครั้ง";
+		mes "Wait a moment!!";
+		mes "You have brought too many things!";
+		mes "You cannot accept any more items!";
+		mes "Please reduce the amount of items,";
+		mes "then come see me again.";
 		close;
 	}
 	if (@event_zelopy == 0) {
-		mes "ท่านมาทำอะไรที่นี่?";
-		mes "ไม่มีอะไรที่ท่านจะได้รับฟรีบนเรือลำนี้ ถ้าท่านต้องการบางสิ่งบางอย่าง ทำงานเพื่อมัน!!";
+		mes "The hell are you doing here?";
+		mes "There is nothing you can get for free on this ship, if you want somethin', work for it!!";
 		next;
 		mes "[Phelix]";
-		mes "อืม, ทำไมท่านไม่นำ 10 jellopies มาให้ข้า และข้าจะให้ 1 red potion. เสียงนั้นเป็นอย่างไร?";
-		mes "หรือ ถ้ามันยากเกินไปก็ 3 jellopies ต่อ 1 Carrot";
+		mes "Hmm, so why don't you bring me 10 Jellopies and I will give 1 potion. How's that sound?";
+		mes "Or if that's too hard for your pansy ass, 3 Jellopies for 1 Carrot.";
 		next;
 		mes "[Phelix]";
-		mes "หากท่านสนใจข้อเสนอของข้า โปรดรับข้อเสนอที่ข้าพูดถึง";
+		mes "If you're interested in my offer, get me the stuff I mentioned.";
 		@event_zelopy = 1;
 		close;
 	}
-	mes "อืม.. ท่านต้องการแลกเปลี่ยน jellopies สำหรับ Red Potions หรือ Carrots? อันไหนล่ะ?";
+	mes "Hmm.. you want to exchange Jellopies for Red Potions or some Carrots eh? Well.. which one?";
 	next;
-	switch(select("Red Potions","Carrots")) {
+	switch(select("Red Potions please.","Carrots please.")) {
 	case 1:
 		mes "[Phelix]";
-		mes "เอาล่ะ...";
-		mes "มาดูกันว่า";
-		mes "มีอะไรเกิดขึ้น...";
+		mes "Alright...";
+		mes "Let's see";
+		mes "what'cha got...";
 		next;
 		mes "[Phelix]";
 		if (countitem(909) < 10) {
-			mes "เฮ้! ท่านไม่ฟังหรอ ข้าพูดว่า 10 jellopies สำหรับ 1 Red Potion.. เป็นคนหูหนวกใช่มั้ย";
+			mes "Hey! Weren't you listening? I said 10 Jellopies for 1 Red Potion.. are ya deaf?";
 			close;
 		} else {
 			.@max = countitem(909)/10;
-			mes "อืม, ไม่เลว...";
-			mes "ท่านต้องการรับ";
-			mes "ยาจำนวนเท่าใด?";
+			mes "Hmm, not bad...";
+			mes "How many potions";
+			mes "do you want to get?";
 			next;
-			switch(select("มากเท่าที่ข้าสามารถรับได้","ข้าต้องการสิ่งนี้มากมาย","ไม่เป็นไร, ข้าชอบ jellopy")) {
+			switch(select("As many as I can, please.","I want this many.","Never mind, I like my jellopy.")) {
 			case 1:
 				delitem 909,.@max*10;// Jellopy
 				getitem 501,.@max;// Red_Potion
 				break;
 			case 2:
 				mes "[Phelix]";
-				mes "ข้าจะไม่ให้ท่านมากกว่า 100 ต่อครั้ง หากท่านไม่ต้องการเพียงแค่ระบุว่า '0'";
-				mes "ตอนนี้, สิ่งที่ท่านจะได้รับมากที่สุดคือ " + .@max + " แต่จำไว้ว่ามากสุดไม่เกิน 100 ต่อครั้ง";
+				mes "I'm not giving you more than 100 at a time so don't bother, OK? If you don't want any, just say '0'.";
+				mes "Right now, the most you can get is " + .@max + " but remember, 100 at most, you want to break my back?.";
 				input .@amount;
 				next;
 				mes "[Phelix]";
 				if (.@amount <= 0) {
-					mes "เป็นบุญคุณมาก, มาอีกครั้งได้ตลอดเวลา";
+					mes "Much obliged, come again anytime.";
 					close;
 				}
 				if (.@amount > 100) {
-					mes "เฮ้, ข้าจะพูดอย่างไรดี? ไม่เกิน 100 ต่อครั้ง!";
+					mes "Hey, what'd I say? 100 at a time at most, you're trying to kill me aren't you!";
 					close;
 				}
 				if (countitem(909) < .@amount*10) {
-					mes "อืม, ดูเหมือนว่าท่านจะมีไม่เพียงพอ ไปหาเจล jellopies มากกว่านี้ถ้าท่านต้องการอะไรจากข้า";
+					mes "Hmm, it looks like you don't have enough. Go get more Jellopies if you want anything else from me.";
 					close;
 				}
 				delitem 909,.@amount*10;// Jellopy
@@ -349,48 +349,48 @@ alberta,190,173,4	script	Phelix	4_M_03,{
 				break;
 			case 3:
 				mes "[Phelix]";
-				mes "ไม่มีปัญหา,";
-				mes "พบกันใหม่ครั้งหน้า";
+				mes "No problem,";
+				mes "see you next time.";
 				close;
 			}
 			mes "[Phelix]";
-			mes "ท่านจะไปแล้ว! อย่างที่ข้าสัญญาไว้ อย่าไป suckin พวกเขาทั้งหมดในครั้งเดียว";
+			mes "There you go! As I promised. Don't go suckin' them all down at once.";
 			close;
 		}
 	case 2:
 		mes "[Phelix]";
-		mes "เอาล่ะ, เรามาดูกันว่าท่านได้อะไร...";
+		mes "Alright, let's see what ya got...";
 		next;
 		mes "[Phelix]";
 		if (countitem(909) < 3) {
-			mes "อืม, ข้าพูดว่า 3 jellopies ต่อ 1 Carrot.. เข้าใจมั้ย?";
+			mes "Hmm, look pansy ass, I said 3 Jellopies for 1 Carrot.. got it?";
 			close;
 		}
 		.@max = countitem(909)/3;
-		mes "ไม่เลวเกินไป...";
-		mes "ท่านต้องการเท่าไหร่";
+		mes "Not too bad pansy...";
+		mes "How many do you want?";
 		next;
-		switch(select("ได้โปรด, ได้มากเท่าที่ทำได้","ข้าต้องการสิ่งนี้มากมาย","ไม่เป็นไร, ข้าชอบ jellopy")) {
+		switch(select("As many as I can get, please","I want this many.","Never mind, I like my jellopy.")) {
 		case 1:
 			delitem 909,.@max*3;// Jellopy
 			getitem 515,.@max;// Carrot
 			break;
 		case 2:
 			mes "[Phelix]";
-			mes "ข้าจะไม่ให้ท่านมากกว่า 100 ต่อครั้ง หากท่านไม่ต้องการเพียงแค่ระบุว่า '0'";
+			mes "Right I'm not giving you more than 100 at a time so don't bother, okay? If you don't want any, just say '0'.";
 			input .@amount;
 			next;
 			mes "[Phelix]";
 			if (.@amount == 0) {
-				mes "เอาล่ะ, แล้วเจอกันใหม่คราวหน้า";
+				mes "Alright then, see you next time.";
 				close;
 			}
 			if (.@amount > 100) {
-				mes "เฮ้, ข้าจะพูดอย่างไรดี? ไม่เกิน 100 ต่อครั้ง!";
+				mes "Hey pansy ass, I said 100 at most, no more than that! I'm not going to break my back for the likes of you!";
 				close;
 			}
 			if (countitem(909) < .@amount*3) {
-				mes "อืม, ดูเหมือนว่าท่านจะมีไม่เพียงพอ ไปหาเจล jellopies มากกว่านี้ถ้าท่านต้องการอะไรจากข้า";
+				mes "Seems you don't have enough. Go get some more if you want anything else.";
 				close;
 			}
 			delitem 909,.@amount*3;// Jellopy
@@ -398,11 +398,11 @@ alberta,190,173,4	script	Phelix	4_M_03,{
 			break;
 		case 3:
 			mes "[Phelix]";
-			mes "ในภายหลัง";
+			mes "Catch'ya later.";
 			close;
 		}
 		mes "[Phelix]";
-		mes "ไปแล้วเหรอ~! อย่างที่ข้าสัญญาไว้ พยายามอย่าทำสิ่งนี้ในใบหน้าของท่าน";
+		mes "There you go~! As I promised. Try not to stuff yer face.";
 		close;
 	}
 }
