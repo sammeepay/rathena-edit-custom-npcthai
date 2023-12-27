@@ -702,195 +702,195 @@ OnAgitInvest:
 		set .@npc$,"alde";
 		set .@name$,"Megrez";
 		set .@realm$,"Luina";
-		set .@intro$,"Luina Branch Manager in Al De Baran";
+		set .@intro$,"ผู้จัดการสาขา Luina ใน Al De Baran";
 	} else if (compare(strnpcinfo(4),"gef")) {
 		set .@npc$,"gef";
 		set .@name$,"Meraq";
 		set .@realm$,"Britoniah";
-		set .@intro$,"Britoniah Branch Manager";
+		set .@intro$,"ผู้จัดการสาขา Britoniah";
 	} else if (compare(strnpcinfo(4),"pay")) {
 		set .@npc$,"pay";
 		set .@name$,"Phecda";
 		set .@realm$,"Greenwood Lake";
-		set .@intro$,"Payon Greenwood Lake Branch Manager";
+		set .@intro$,"ผู้จัดการสาขา Payon Greenwood Lake";
 	} else if (compare(strnpcinfo(4),"prt")) {
 		set .@npc$,"prt";
 		set .@name$,"Dubae";
 		set .@realm$,"Valkyrie Realm";
-		set .@intro$,"Prontera Valkyrie Realm Branch Manager";
+		set .@intro$,"ผู้จัดการสาขาอาณาจักร Prontera Valkyrie";
 	}
 	set .@n$,"["+.@name$+"]";
 
 	mes .@n$;
-	mes "I'm "+.@name$+", the "+.@intro$+" of the Cat Paw Merchant Guild.";
-	mes "I consult about investments for the Abyss Gate development.";
-	mes "How may I help you?";
+	mes "ฉันชื่อ "+.@name$+", เป็น "+.@intro$+" ของสมาคมพ่อค้าอุ้งตีนแมว";
+	mes "ฉันปรึกษาเรื่องการลงทุนเพื่อการพัฒนา ประตูนรก";
+	mes "ฉันจะช่วยคุณได้อย่างไร?";
 	next;
-	switch(select("What is the Abyss Gate?:Investing in the gate development?:I want to invest in this area.:Cancel")) {
+	switch(select("ประตูนรกคืออะไร?:ลงทุนพัฒนาประตู?:ฉันต้องการลงทุนในพื้นที่นี้:ยกเลิก")) {
 	case 1:
 		mes .@n$;
-		mes "It is only called the Abyss Gate for convenience but it's simply a ^4d4dffgap to another dimension^000000.";
+		mes "เพื่อความสะดวกเรียกว่า ประตูนรก เท่านั้น แต่เป็นเพียง ^4d4dffช่องว่างสู่อีกมิติหนึ่ง^000000.";
 		next;
 		mes .@n$;
-		mes "More of these gaps are found here and there after Morocc created the Crack of Dimension.";
-		mes "I personally think that the Abyss Gate found recently is part of the past or even from the future.";
+		mes "พบช่องว่างเหล่านี้มากขึ้นที่นี่และที่นั่นหลังจากที่ Morocc สร้าง Crack of Dimension";
+		mes "โดยส่วนตัวแล้วผมคิดว่า ประตูนรก ที่เพิ่งค้นพบนั้นเป็นส่วนหนึ่งของอดีตหรือแม้แต่จากอนาคตด้วยซ้ำ";
 		next;
 		mes .@n$;
-		mes "It is said that the Abyss Gate forcefully connects to another dimension beyond our world.";
-		mes "Probably because there are those that follow the Emperium's power.";
+		mes "ว่ากันว่า ประตูนรก เชื่อมโยงอย่างเข้มแข็งกับอีกมิติหนึ่งที่อยู่นอกเหนือโลกของเรา";
+		mes "อาจเป็นเพราะมีผู้ที่ติดตามอำนาจของ Emperium";
 		next;
 		mes .@n$;
-		mes "There are a total of 4 Abyss Gates found so far. They all connect to the Agit region overflowing with the Emperium's force.";
+		mes " จนถึงตอนนี้มีประตูนรก ทั้งหมด 4 ประตูที่ถูกค้นพบ พวกมันเชื่อมต่อกับพื้นที่ Agit ซึ่งเต็มไปด้วยพลังของ Emperium";
 		next;
 		mes .@n$;
-		mes "We named each by dimension beyond the gap.";
-		mes "^4d4dffWay of the Warrior, Hill of the Dead, Winds of the Ancient, and the Hero's Tears.^000000";
-		mes "And all these four gaps are called the ^4d4dffAbyss Gate^000000.";
+		mes "เราตั้งชื่อแต่ละมิติเหนือช่องว่าง";
+		mes "^4d4dffวิถีแห่งนักรบ, เนินเขาแห่งความตาย, สายลมแห่งสมัยโบราณ และน้ำตาของวีรบุรุษ^000000";
+		mes "และช่องว่างทั้งสี่นี้เรียกว่า ^4d4dffประตูนรก^000000.";
 		next;
 		mes .@n$;
-		mes "The gap may lead to the past, future or even an unknown world.";
-		mes "The power the Abyss Gate holds is both fearful but sweet";
+		mes "ช่องว่างอาจนำไปสู่อดีต อนาคต หรือแม้แต่โลกที่ไม่มีใครรู้จัก";
+		mes "พลังที่ ประตูนรก ครอบครองนั้นทั้งน่ากลัวแต่ก็ไพเราะ";
 		next;
 		mes .@n$;
-		mes "Are you also interested in exploring the Abyss Gate?";
-		mes "Ha ha. You'll need to go through several steps before exploring.";
+		mes "คุณสนใจที่จะสำรวจ ประตูนรก หรือไม่?";
+		mes "ฮ่าฮ่า คุณจะต้องผ่านหลายขั้นตอนก่อนจะสำรวจ";
 		next;
 		mes .@n$;
-		mes "If you are interested,";
-		mes "will you take the time to sit down and talk about investing in maintaining the Abyss Gate?";
+		mes "ถ้าคุณสนใจ";
+		mes "คุณพอจะมีเวลานั่งลงและพูดคุยเกี่ยวกับการลงทุนในการบำรุงรักษา ประตูนรก ไหม?";
 		close;
 	case 2:
 		mes .@n$;
-		mes "Are you curious about investing in the Gate development?";
-		mes "What do you want to know about?";
+		mes "คุณอยากรู้เกี่ยวกับการลงทุนในการพัฒนา ประตู หรือไม่?";
+		mes "คุณอยากรู้เรื่องอะไร?";
 		next;
-		switch(select("About the Gate?:About investments?:How to invest?:Benefits from investing?")) {
+		switch(select("เกี่ยวกับประตู?:เกี่ยวกับการลงทุน?:ลงทุนอย่างไร?:ประโยชน์จากการลงทุน?")) {
 		case 1:
 			mes .@n$;
-			mes "The Gate is what it is named after, a door.";
-			mes "A dimensional passageway that connects here to there.";
+			mes "ประตูคือสิ่งที่ถูกตั้งชื่อตาม ประตู";
+			mes "ทางเดินมิติที่เชื่อมต่อจากที่นี่ไปที่นั่น";
 			next;
 			mes .@n$;
-			mes "The Abyss Gate was created as a very unstable path from beyond the dimensional gap,";
-			mes "therefore traveling through the Gate will need an artificial dimension connection.";
+			mes "ประตู Abyss ถูกสร้างขึ้นเพื่อเป็นเส้นทางที่ไม่แน่นอนจากช่องว่างมิติ";
+			mes "ดังนั้นการเดินทางผ่านประตูจะต้องเชื่อมต่อมิติเทียม";
 			next;
 			mes .@n$;
-			mes "Humans are far from having the advanced technology that's needed";
-			mes "but our Cat Paw Merchant Guild holds the high technology to use the Crack of Dimension.";
+			mes "มนุษย์ยังห่างไกลจากการมีเทคโนโลยีขั้นสูงที่จำเป็น";
+			mes "แต่ Cat Paw Merchant Guild ของเรามีเทคโนโลยีชั้นสูงเพื่อใช้ Crack of Dimension";
 			next;
 			mes .@n$;
-			mes "So we made a proposal.";
-			mes "With the promise of support the Cat Paw Merchant Guild and paying for the immense expense for maintaining the connection with the Gate,";
-			mes "we will make the connection to the Crack of Dimension.";
+			mes "ดังนั้นเราจึงได้ยื่นข้อเสนอ";
+			mes "ด้วยสัญญาว่าจะสนับสนุน Cat Paw Merchant Guild และจ่ายค่าใช้จ่ายจำนวนมหาศาลเพื่อรักษาการเชื่อมต่อกับประตู";
+			mes "เราจะเชื่อมต่อกับ Crack of Dimension";
 			next;
 			mes .@n$;
-			mes "Of course working on the Crack of Dimension is no easy job and it does come with risks.";
-			mes "There are cases where people go missing from traveling between.";
+			mes "แน่นอนว่าการทำงานกับ Crack of Dimension ไม่ใช่เรื่องง่าย และมันมาพร้อมกับความเสี่ยง";
+			mes "มีหลายกรณีที่ผู้คนหายไปจากการเดินทางระหว่าง";
 			next;
 			mes .@n$;
-			mes "The best maintaining duration is about 4 days";
-			mes "You invest in us and we create the door that connects to the dimensional gap.";
+			mes "ระยะเวลาการรักษาที่ดีที่สุดคือประมาณ 4 วัน";
+			mes "คุณลงทุนกับเราและเราสร้างประตูที่เชื่อมต่อกับช่องว่างมิติ";
 			next;
 			mes .@n$;
-			mes "Doesn't this sound like the perfect win-win proposal?";
+			mes "ฟังดูเป็นข้อเสนอ win-win ที่สมบูรณ์แบบไม่ใช่เหรอ?";
 			close;
 		case 2:
 			mes .@n$;
-			mes "Forcing through the unstable dimensional gap and creating a passageway is very dangerous.";
-			mes "Not to mention the huge resources needed.";
+			mes "การบังคับผ่านช่องว่างมิติที่ไม่เสถียรและสร้างทางเดินนั้นอันตรายมาก";
+			mes "ไม่ต้องพูดถึงทรัพยากรจำนวนมหาศาลที่จำเป็น";
 			next;
 			mes .@n$;
-			mes "If you take care of the charges and also the danger pay by investing in the Cat Paw Merchant Guild,";
-			mes "we'll create and maintain the gate regardless of the risks.";
+			mes "ถ้าคุณดูแลค่าใช้จ่ายและอันตรายที่จ่ายโดยการลงทุนใน Cat Paw Merchant Guild";
+			mes "เราจะสร้างและบำรุงรักษาประตูโดยไม่คำนึงถึงความเสี่ยง";
 			next;
 			mes .@n$;
-			mes "But then of course the money involved for the gate costs will be extreme.";
-			mes "It will be easy if you can find investors to share the amount.";
+			mes "แต่แน่นอนว่าเงินที่เกี่ยวข้องกับค่าประตูจะสูงมาก";
+			mes "มันจะง่ายถ้าคุณสามารถหานักลงทุนมาแบ่งปันจำนวนนี้ได้";
 			next;
 			mes .@n$;
-			mes "There is a basic charge to start connecting the gate.";
-			mes "Results depend on the how much investment money is collected.";
+			mes "มีค่าใช้จ่ายพื้นฐานในการเริ่มเชื่อมต่อประตู";
+			mes "ผลลัพธ์ขึ้นอยู่กับจำนวนเงินที่ลงทุนที่รวบรวมได้";
 			next;
 			mes .@n$;
-			mes "The Abyss Gate exists in each Agit region.";
-			mes "Can you imagine how much money and sacrifice our guild will have to go through to develop in all areas?";
+			mes "ประตูนรก มีอยู่ในแต่ละภูมิภาค Agit";
+			mes "คุณลองจินตนาการดูไหมว่ากิลด์ของเราจะต้องใช้เงินและความเสียสละจำนวนเท่าใดเพื่อพัฒนาในทุกด้าน";
 			next;
 			mes .@n$;
-			mes "This explains the regional competition in investments.";
-			mes "If not enough gate maintenance costs are collected then it is obvious the region with the most investments will receive the benefits";
+			mes "สิ่งนี้จะอธิบายการแข่งขันด้านการลงทุนในระดับภูมิภาค";
+			mes "หากรวบรวมค่าบำรุงรักษาประตูได้ไม่เพียงพอ ก็ชัดเจนว่าภูมิภาคที่มีการลงทุนมากที่สุดจะได้รับผลประโยชน์";
 			next;
 			mes .@n$;
-			mes "If ^4d4dffthe Abyss Gate is successfully connected then the dungeon of the hideout area";
-			mes "will be open to others instead of being guild exclusive^000000 which will be very attractive for investment.";
+			mes "หาก ^4d4dffเชื่อมต่อ ประตูนรก สำเร็จ แสดงว่าดันเจี้ยนของพื้นที่ซ่อนตัว";
+			mes "จะเปิดให้คนอื่นๆ แทนที่จะเป็นกิลด์พิเศษ^000000 ซึ่งจะน่าสนใจมากสำหรับการลงทุน";
 			next;
 			mes .@n$;
-			mes "But then again, this is only for when the gate is connected.";
+			mes "แต่ขอย้ำอีกครั้งว่าใช้ได้เฉพาะเมื่อเชื่อมต่อประตูเท่านั้น";
 			close;
 		case 3:
 			mes .@n$;
-			mes "It's simple.";
-			mes "Visit the branch manager of the ^4d4dffregion you want to invest in during the investment duration^000000 and make your investment.";
+			mes "มันง่ายมาก";
+			mes "เยี่ยมชมผู้จัดการสาขาของ ^4d4dffภูมิภาคที่คุณต้องการลงทุนในช่วงระยะเวลาการลงทุน^000000 และทำการลงทุนของคุณ";
 			next;
 			mes .@n$;
-			mes "We usually receive ^4d4dffthe common currency here, Zeny^000000.";
-			mes "But since we're talking about supporting our Cat Paw Merchant Guild, you can also invest with items in demand in Malangdo.";
+			mes "เรามักจะได้รับ ^4d4dffสกุลเงินทั่วไปที่นี่ Zeny^000000";
+			mes "แต่เนื่องจากเรากำลังพูดถึงการสนับสนุน Cat Paw Merchant Guild ของเรา คุณจึงสามารถลงทุนกับสินค้าที่เป็นที่ต้องการใน Malangdo ได้";
 			next;
 			mes .@n$;
-			mes "Provide the items in need to Namis in Malangdo who is in charge of general affairs in our guild.";
-			mes "Bring back your Investment Certificate to add it to the investment tribute.";
+			mes "มอบสิ่งของที่ต้องการให้กับ Namis ใน Malangdo ซึ่งรับผิดชอบงานทั่วไปในกิลด์ของเรา";
+			mes "นำใบรับรองการลงทุนของคุณกลับมาเพื่อเพิ่มให้กับการลงทุน";
 			next;
 			mes .@n$;
-			mes "You must visit and invest at the region you want in order for your investment to be counted as a tribute.";
+			mes "คุณต้องเยี่ยมชมและลงทุนในภูมิภาคที่คุณต้องการเพื่อที่การลงทุนของคุณจะถูกนับเป็นเครื่องบรรณาการ";
 			close;
 		case 4:
 			mes .@n$;
-			mes "The Abyss Gate is basically contracting and connecting with the castle that owns the Agit;";
-			mes "therefore, we will provide all we have once the costs for connecting and maintaining the gate are sufficient.";
+			mes "โดยพื้นฐานแล้ว ประตูนรก นั้นหดตัวและเชื่อมต่อกับปราสาทที่เป็นเจ้าของ Agit;";
+			mes "ดังนั้น เราจะจัดหาทุกอย่างที่เรามีเมื่อค่าใช้จ่ายในการเชื่อมต่อและบำรุงรักษาประตูมีเพียงพอแล้ว";
 			next;
 			mes .@n$;
-			mes "In terms of the minimum and maximum costs for the whole work,";
-			mes "if the collected investment ^4d4dffexceeds the minimum costs^000000, we can connect you to the ^4d4dffdeepest layer of an unknown guild dungeon^000000.";
+			mes "ในแง่ของต้นทุนขั้นต่ำและสูงสุดสำหรับงานทั้งหมด";
+			mes "หากการลงทุนที่รวบรวมได้ ^4d4dffเกินค่าใช้จ่ายขั้นต่ำ^000000 เราสามารถเชื่อมต่อคุณกับชั้น ^4d4dffที่ลึกที่สุดของดันเจี้ยนกิลด์ที่ไม่รู้จัก^000000";
 			next;
 			mes .@n$;
-			mes "If investments exceed the maximum costs, that region will be connected to the";
-			mes "^4d4dffAbyss Gate^000000 regardless of the investment rank which includes the deepest layer of the guild dungeon.";
+			mes "หากการลงทุนเกินต้นทุนสูงสุด ภูมิภาคนั้นจะเชื่อมต่อกับ";
+			mes "^4d4dffประตูนรก^000000 โดยไม่คำนึงถึงอันดับการลงทุนซึ่งรวมถึงชั้นที่ลึกที่สุดของดันเจี้ยนกิลด์";
 			next;
 			mes .@n$;
-			mes "^ff0000If there is no Agit region that reached the maximum investment, then the region with the";
-			mes "highest investment participation will get the Abyss Gate connected with the investment collected from all regions.^000000";
+			mes "^ff0000หากไม่มีภูมิภาค Agit ที่เข้าถึงการลงทุนสูงสุด ดังนั้นภูมิภาคที่มี";
+			mes "การมีส่วนร่วมในการลงทุนสูงสุดจะทำให้ ประตูนรก เชื่อมโยงกับการลงทุนที่รวบรวมจากทุกภูมิภาค^000000";
 			next;
 			mes .@n$;
-			mes "Once the Abyss Gate is connected, the deepest layer (2F) of the guild dungeon";
-			mes "will be open to all adventurers that participated in the regional investment.";
+			mes "เมื่อ ประตูนรก เชื่อมต่อกัน ชั้นที่ลึกที่สุด (2F) ของดันเจี้ยนกิลด์";
+			mes "จะเปิดให้นักผจญภัยทุกคนที่เข้าร่วมในการลงทุนระดับภูมิภาค";
 			next;
 			mes .@n$;
-			mes "Visits to the dungeon will be counted for the next investment for the Agit region";
-			mes "so being in good terms with the guild that claims the Agit castle will be a bonus.";
+			mes "การเยี่ยมชมดันเจี้ยนจะถูกนับสำหรับการลงทุนครั้งต่อไปสำหรับภูมิภาค Agit";
+			mes "ดังนั้นการมีความสัมพันธ์ที่ดีกับกิลด์ที่อ้างว่าปราสาท Agit จะเป็นโบนัส";
 			next;
 			mes .@n$;
-			mes "By the way, it isn't easy to maintain the connection with the Abyss Gate and investments and reconnection is needed weekly";
-			mes "so please continue your support and investment if you want the power of the unknown.";
+			mes "ยังไงก็ตาม มันไม่ง่ายเลยที่จะรักษาการเชื่อมต่อกับ ประตูนรก และจำเป็นต้องมีการลงทุนและการเชื่อมต่อใหม่ทุกสัปดาห์";
+			mes "ดังนั้นโปรดสนับสนุนและลงทุนต่อไปถ้าคุณต้องการพลังแห่งความไม่รู้";
 			close;
 		}
 	case 3:
 		if (checkweight(1201,1) == 0 || MaxWeight - Weight < 1000) {
-			mes "- Currently you're carrying -";
-			mes "- too many items with you. -";
-			mes "- Please try again after you -";
-			mes "- lose some weight. -";
+			mes "- ขณะนี้คุณกำลังถือ -";
+			mes "- มีของกับคุณมากเกินไป -";
+			mes "- กรุณาลองอีกครั้งหลังจากที่คุณ -";
+			mes "- ลดน้ำหนักหน่อย -";
 			close;
 		}
 		if (countitem(6488) >= 4800) {
 			mes .@n$;
-			mes "You have too many Thank You Tickets to receive any more.";
-			mes "Cannot give you any more tickets. Please use your ticket and come back.";
-			mes "The ticket can be exchanged with various items in Malangdo.";
+			mes "คุณมี Thank Invest Tickets มากเกินไปที่จะรับเพิ่ม";
+			mes "ไม่สามารถให้ตั๋วแก่คุณได้อีกต่อไป โปรดใช้ตั๋วของคุณและกลับมา";
+			mes "ตั๋วสามารถแลกเปลี่ยนกับไอเทมต่างๆ ใน Malangdo";
 			close;
 		}
 		if (callfunc("F_Invest_Status") != 1) {
 			mes .@n$;
-			mes "We do not receive investments now.";
-			mes "Please come back during the investment duration.";
+			mes "เราไม่ได้รับการลงทุนในขณะนี้";
+			mes "กรุณากลับมาในระหว่างระยะเวลาการลงทุน";
 			close;
 		}
 		set .@guild, getcharid(2);
@@ -902,27 +902,27 @@ OnAgitInvest:
 				set .@menu$, .@menu$+.@castle_name$[.@i]+" ["+.@owner_name$[.@i]+"] Guild:";
 				set .@castles_owned, .@castles_owned | (1<<.@i);
 			} else
-				set .@menu$, .@menu$+"^aaaaaaNot the guild that claimed "+.@castle_name$[.@i]+"^000000:";
+				set .@menu$, .@menu$+"^aaaaaaไม่ใช่กิลด์ที่อ้างสิทธิ์ "+.@castle_name$[.@i]+"^000000:";
 		}
 		mes .@n$;
-		mes "Would you like to invest in the ^4d4dff"+.@realm$+"^000000 region?";
-		mes "If there is a castle occupied already, you will invest in the castle and the guild that is occupying it.";
+		mes "คุณต้องการลงทุนในภูมิภาค ^4d4dff"+.@realm$+"^000000 หรือไม่?";
+		mes "หากมีปราสาทที่ถูกครอบครองอยู่แล้ว คุณจะต้องลงทุนในปราสาทและกิลด์ที่ครอบครองปราสาทนั้น";
 		next;
 		if (.@castles_owned) {
-			set .@i, select(.@menu$+"Cancel");
+			set .@i, select(.@menu$+"ยกเลิก");
 			if (.@i == 6) {
 				mes .@n$;
-				mes "Canceled.";
+				mes "ยกเลิก.";
 				close;
 			}
 			if (.@guild != .@owner_id[.@i]) {
 				mes .@n$;
-				mes "The guild that is occupying "+.@castle_name$[.@i]+" is "+.@owner_name$[.@i]+".";
-				mes "Doesn't look like your guild.";
+				mes "กิลด์ที่กำลังครอบครองอยู่ "+.@castle_name$[.@i]+" คือ "+.@owner_name$[.@i]+".";
+				mes "ดูไม่เหมือนกิลด์ของคุณเลย";
 				close;
 			}
 			mes .@n$;
-			mes "Invest under "+.@castle_name$[.@i]+"'s"+.@owner_name$[.@i]+" guild name.";
+			mes "ลงทุนภายใต้ชื่อกิลด์ "+.@castle_name$[.@i]+"'s"+.@owner_name$[.@i]+".";
 			callfunc "F_Invest_Abyss","$fund_"+.@npc$+"0"+.@i,.@n$;
 			end;
 		} else {
@@ -932,8 +932,8 @@ OnAgitInvest:
 		}
 	case 4:
 		mes .@n$;
-		mes "Is that so?";
-		mes "Please come back whenever you are interested in investing in the Abyss Gate development.";
+		mes "อย่างนั้นเหรอ?”;
+		mes "โปรดกลับมาทุกครั้งที่คุณสนใจที่จะลงทุนในการพัฒนา ประตูนรก";
 		close;
 	}
 }
@@ -965,34 +965,34 @@ OnAgitInvest:
 
 	if (callfunc("F_Invest_Status") != 3) {
 		mes .@n$;
-		mes "There are currently no connected dungeon gates.";
+		mes "ขณะนี้ไม่มีประตูดันเจี้ยนที่เชื่อมต่ออยู่";
 		close;
 	}
 	set .@status, getd("$"+.@npc$+"_invest_result");
 	if (.@status == 3) {
 		mes .@n$;
-		mes "We've successfully connected the Abyss Gate ["+.@gate$+"] with the help from your investment.";
-		mes "The Agit dungeon will be open to everyone with a small entrance fee in "+.@realm$+".";
+		mes "เราประสบความสำเร็จในการเชื่อมต่อประตูนรก ["+.@gate$+"] ด้วยความช่วยเหลือจากการลงทุนของคุณ.";
+		mes "ดันเจี้ยน Agit จะเปิดให้ทุกคนเข้าชมโดยมีค่าธรรมเนียมแรกเข้าเล็กน้อยใน "+.@realm$+"";
 		next;
 		mes .@n$;
-		mes "Please visit as often as possible since the entrance fee is saved as an investment for the region.";
-		mes "Do you want to enter the Agit dungeon?";
+		mes "กรุณาเยี่ยมชมให้บ่อยที่สุดเนื่องจากค่าธรรมเนียมแรกเข้าจะถูกบันทึกไว้เป็นการลงทุนสำหรับภูมิภาค";
+		mes "คุณอยากเข้าดันเจี้ยน Agit ไหม?";
 		next;
-		set .@i, select(.@realm$+" Dungeon 1F - 10000z:"+.@realm$+" Dungeon 2F - 10000z:Cancel");
+		set .@i, select(.@realm$+" Dungeon 1F - 10000z:"+.@realm$+" Dungeon 2F - 10000z:ยกเลิก");
 		if (.@i == 3) {
 			mes .@n$;
-			mes "Canceled.";
+			mes "ยกเลิก.";
 			close;
 		}
 		if (Zeny < 10000) {
 			mes .@n$;
-			mes "I'm collecting a small entrance fee.";
-			mes "Your contribution will be saved for the next investment.";
-			mes "Entrance fee is 10000z.";
+			mes "ฉันกำลังเก็บค่าธรรมเนียมแรกเข้าเล็กน้อย";
+			mes "การบริจาคของคุณจะถูกบันทึกไว้สำหรับการลงทุนครั้งต่อไป";
+			mes "ค่าเข้า 10,000z.";
 			close;
 		}
 		mes .@n$;
-		mes "I'm sending you to the "+.@realm$+" Agit Dungeon "+.@i+"F.";
+		mes "ฉันกำลังส่งคุณไปที่ "+.@realm$+" Agit Dungeon "+.@i+"F.";
 		set Zeny, Zeny-10000;
 		setd "$fund_"+.@npc$+"_extra", getd("$fund_"+.@npc$+"_extra") + 1;
 		close2;
@@ -1007,13 +1007,13 @@ OnAgitInvest:
 		end;
 	} else if (.@status == 2) {
 		mes .@n$;
-		mes "The "+.@realm$+" Agit Dungeon 2F is now available but since it is not connected with the Abyss Gate,";
-		mes "the Agit dungeon is only accessible to the Agit guild.";
+		mes ""+.@realm$+" Agit Dungeon 2F พร้อมใช้งานแล้ว แต่เนื่องจากไม่ได้เชื่อมต่อกับ ประตูนรก";
+		mes "ดันเจี้ยน Agit นั้นสามารถเข้าถึงได้โดยกิลด์ Agit เท่านั้น";
 		close;
 	} else {
 		mes .@n$;
-		mes .@realm$+" was not chosen to be connected with a gate this time.";
-		mes "Please wait for the next investment duration.";
+		mes .@realm$+" ไม่ได้ถูกเลือกให้เชื่อมต่อกับเกตในครั้งนี้";
+		mes "โปรดรอระยะเวลาการลงทุนครั้งถัดไป";
 		close;
 	}
 	end;
@@ -1037,44 +1037,44 @@ OnAgitInvest:
 		}
 		set .@notice, $agit_result_notice;
 		if (.@notice < 1 || .@notice > 12) {
-			mes "There are currently no investment sums available.";
+			mes "ขณะนี้ไม่มีจำนวนเงินลงทุนที่มีอยู่";
 			close;
 		}
-		mes callfunc("F_GetNumSuffix",.@notice)+" total (unit in 10,000z)";
+		mes callfunc("F_GetNumSuffix",.@notice)+" ทั้งหมด (หน่วยเป็น 10,000z)";
 		for(set .@i,1; .@i<=5; set .@i,.@i+1) {
 			set .@map$, .@npc$+"g_cas0"+.@i;
 			set .@fund[.@i], getd("$@vfund_"+.@npc$+"0"+.@i);
 			mes getcastlename(.@map$)+" "+getguildname(getcastledata(.@map$,CD_GUILD_ID))+" Guild: "+.@fund[.@i];
 		}
 		set .@fund[0], getd("$@vfund_"+.@npc$+"_extra");
-		mes .@realm$+" normal: "+.@fund[0];
-		mes .@realm$+" Investment Grand Total: "+(.@fund[0]+.@fund[1]+.@fund[2]+.@fund[3]+.@fund[4]+.@fund[5]);
+		mes .@realm$+" ปกติ: "+.@fund[0];
+		mes .@realm$+" การลงทุนรวมทั้งหมด: "+(.@fund[0]+.@fund[1]+.@fund[2]+.@fund[3]+.@fund[4]+.@fund[5]);
 		close;
 	} else if (.@invest_status == 2) {
-		mes "!- Notice -!";
-		mes "No sums are available because the total investment amount is currently being calculated.";
-		mes "Please wait for the announcement of the results.";
+		mes "!- ประกาศ -!";
+		mes "ไม่มีจำนวนเงินเนื่องจากจำนวนเงินลงทุนทั้งหมดกำลังถูกคำนวณ";
+		mes "กรุณารอประกาศผล";
 		close;
 	} else if (.@invest_status == 3) {
 		setarray .@invest_result[0], $prt_invest_result,$pay_invest_result,$gef_invest_result,$alde_invest_result;
 		setarray .@invest_region$[0],  "Valkyrie Realm",  "Greenwood Lake",       "Britoniah",            "Luina";
-		mes "!- Investment Results of All Agit Regions -!";
+		mes "!- ผลการลงทุนของภูมิภาค Agit ทั้งหมด -!";
 		for(set .@i,0; .@i<4; set .@i,.@i+1) {
 			if (.@invest_result[.@i] == 1)
-				mes "^aaaaaa["+.@invest_region$[.@i]+"] below minimum^000000";
+				mes "^aaaaaa["+.@invest_region$[.@i]+"] ต่ำกว่าขั้นต่ำ^000000";
 			else if (.@invest_result[.@i] == 2) {
-				mes "["+.@invest_region$[.@i]+"] minimum achieved";
-				mes "-> Guild Dungeon Deepest Layer (2F) available";
+				mes "["+.@invest_region$[.@i]+"] สำเร็จขั้นต่ำ";
+				mes "-> Guild Dungeon Deepest Layer (2F) ใช้ได้";
 			} else if (.@invest_result[.@i] == 3) {
-				mes "^4d4dff["+.@invest_region$[.@i]+"] maximum achieved^000000";
-				mes "-> Abyss Gate available";
+				mes "^4d4dff["+.@invest_region$[.@i]+"] บรรลุสูงสุด^000000";
+				mes "-> ประตูนรกพร้อมใช้งาน";
 			} else
-				mes "No data for ["+.@invest_region$[.@i]+"].";
+				mes "ไม่มีข้อมูลสำหรับ ["+.@invest_region$[.@i]+"].";
 		}
 		close;
 	} else {
-		mes "!- Notice -!";
-		mes "No investment information will be announced now.";
+		mes "!- ประกาศ -!";
+		mes "จะไม่มีการประกาศข้อมูลการลงทุนในขณะนี้";
 		close;
 	}
 }
@@ -1101,50 +1101,50 @@ OnAgitInvest:
 	set .@GID, getcastledata(strnpcinfo(4),CD_GUILD_ID);
 	if (getcharid(2) != .@GID) {
 		mes "[Gate Manager]";
-		mes "You don't seem to be the member of guild owning this castle.";
-		mes "If you need any help, please visit any of our guild members at "+.@realm$+" Square.";
+		mes "ดูเหมือนคุณจะไม่ได้เป็นสมาชิกกิลด์ที่เป็นเจ้าของปราสาทแห่งนี้";
+		mes "หากคุณต้องการความช่วยเหลือ กรุณาเยี่ยมชมสมาชิกกิลด์ของเราที่ "+.@realm$+" Square";
 		close;
 	}
 	mes "[Gate Manager]";
-	mes "Hello, I am the Gate Manager from Cat Paw Merchant Guild warp department.";
-	mes "How may I help you today?";
+	mes "สวัสดี ฉันคือผู้จัดการประตูจากแผนกวาร์ป Cat Paw Merchant Guild";
+	mes " วันนี้ฉันจะช่วยคุณได้อย่างไร?";
 	next;
-	switch(select("Invest for gate connection:Deepest Layer Dungeon Access:Abyss Gate Access:Cancel")) {
+	switch(select("ลงทุนเพื่อเชื่อมต่อประตู:การเข้าถึงดันเจี้ยนเลเยอร์ที่ลึกที่สุด:การเข้าถึงประตูนรก:ยกเลิก")) {
 	case 1:
 		if (checkweight(1201,1) == 0 || MaxWeight - Weight < 1000) {
 			mes "[Gate Manager]";
-			mes "You have too many items to receive the Thank You Ticket as a small gift for your investment.";
-			mes "Please come back after making room in your inventory.";
+			mes "คุณมีไอเทมมากเกินไปที่จะรับ Thank Invest Tickets เป็นของขวัญเล็กๆ น้อยๆ สำหรับการลงทุนของคุณ";
+			mes "กรุณากลับมาหลังจากเพิ่มพื้นที่ในคลังของคุณแล้ว";
 			close;
 		}
 		if (countitem(6488) >= 4800) {
 			mes "[Gate Manager]";
-			mes "You have too many Thank You Tickets to receive any more.";
-			mes "Cannot give you any more tickets. Please use your ticket and come back.";
-			mes "The ticket can be exchanged with various items in Malangdo.";
+			mes "คุณมี Thank Invest Ticketss มากเกินไปที่จะรับอีกต่อไป";
+			mes "ไม่สามารถให้ตั๋วแก่คุณได้อีกต่อไป โปรดใช้ตั๋วของคุณและกลับมา";
+			mes "ตั๋วสามารถแลกเปลี่ยนกับไอเทมต่างๆ ใน Malangdo";
 			close;
 		}
 		if (callfunc("F_Invest_Status") != 1) {
 			mes "[Gate Manager]";
-			mes "We do not receive investments now.";
-			mes "Please come back during the investment duration.";
+			mes "เราไม่ได้รับการลงทุนในขณะนี้";
+			mes "กรุณากลับมาในระหว่างระยะเวลาการลงทุน";
 			close;
 		}
 		if (getcharid(2) != .@GID) {
 			mes "[Gate Manager]";
-			mes "You don't seem to be the member of the guild owning this castle.";
-			mes "Please use the normal investment from "+.@realm$+" Square.";
+			mes "ดูเหมือนคุณจะไม่ได้เป็นสมาชิกกิลด์ที่เป็นเจ้าของปราสาทแห่งนี้";
+			mes "โปรดใช้การลงทุนปกติจาก "+.@realm$+" Square";
 			close;
 		}
 		mes "[Gate Manager]";
-		mes "Proceed investing under your guild name.";
+		mes "ดำเนินการลงทุนภายใต้ชื่อกิลด์ของคุณ";
 		callfunc "F_Invest_Abyss","$fund_"+.@npc$+"0"+.@id,"[Gate Manager]";
 		end;
 	case 2:
 		callsub L_Enter,1,.@realm$,.@npc$;
 		mes "[Gate Manager]";
-		mes "You are interested in exploring the "+.@realm$+" Guild Dungeon Deepest Layer (2F).";
-		mes "Let me guide you. Good luck.";
+		mes "คุณสนใจที่จะสำรวจ "+.@realm$+" Guild Dungeon Deepest Layer (2F).";
+		mes "ให้ฉันแนะนำคุณ ขอให้โชคดี.";
 		close2;
 		if (compare(strnpcinfo(2),"alde")) {
 			switch(.@id) {
@@ -1183,7 +1183,7 @@ OnAgitInvest:
 	case 3:
 		callsub L_Enter,2,.@realm$,.@npc$;
 		mes "[Gate Manager]";
-		mes "Let me guide you to the Abyss Gap connected with "+.@realm$+", the Abyss Gate 'Way of the Warrior'.";
+		mes "ฉันจะแนะนำคุณไปยัง ช่องว่างแห่งนรก ที่เชื่อมต่อกับ "+.@realm$+", the Abyss Gate 'วิถีแห่งนักรบ'.";
 		close2;
 		if (compare(strnpcinfo(2),"alde")) {
 			switch(.@id) {
@@ -1221,7 +1221,7 @@ OnAgitInvest:
 		end;
 	case 4:
 		mes "[Gate Manager]";
-		mes "Canceled.";
+		mes "ยกเลิก.";
 		close;
 	}
 	end;
@@ -1234,21 +1234,21 @@ L_Enter:
 			return;
 		else {
 			mes "[Gate Manager]";
-			mes getarg(1)+" was not chosen to be connected with a gate this time.";
-			mes "Please wait for the next investment duration.";
+			mes getarg(1)+" ครั้งนี้ไม่ได้ถูกเลือกให้เชื่อมต่อกับประตู";
+			mes "โปรดรอระยะเวลาการลงทุนครั้งถัดไป";
 			close;
 		}
 	} else if (.@invest_status < 3) {
 		mes "[Gate Manager]";
-		mes "There are currently no connected dungeon gates.";
-		mes "A gate will be connected as soon as the investment results are available.";
-		mes "Please wait.";
+		mes "ขณะนี้ไม่มีประตูดันเจี้ยนที่เชื่อมต่ออยู่";
+		mes "ประตูจะเชื่อมต่อทันทีที่ผลการลงทุนพร้อม";
+		mes "กรุณารอสักครู่";
 		close;
 	} else {
 		mes "[Gate Manager]";
-		mes "The gate will disappear soon.";
-		mes "The dungeon is no longer accessible.";
-		mes "Please try again next time.";
+		mes "ประตูจะหายไปเร็วๆ นี้";
+		mes "ดันเจี้ยนไม่สามารถเข้าถึงได้อีกต่อไป";
+		mes "โปรดลองอีกครั้งในครั้งต่อไป";
 		close;
 	}
 }
