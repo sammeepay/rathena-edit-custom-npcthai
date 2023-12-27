@@ -156,14 +156,14 @@ OnAgitBreak:
 			setcastledata .@map$,.@i,0;
 	}
 
-	mapannounce .@map$,"Emperium has been destroyed.",bc_map,"0x00FF00",FW_BOLD,20,0,40;
+	mapannounce .@map$,"Emperium ถูกทำลายแล้ว",bc_map,"0x00FF00",FW_BOLD,20,0,40;
 	maprespawnguildid .@map$,.@guild_id,2;// Respawn all but new castle-occupants, don't remove monsters.
 
 	sleep 500;
 	if (agitcheck3())
 		donpcevent strnpcinfo(0) +"::OnEmpSpawn";
 	sleep 7000;
-	announce "The [" + getcastlename(.@map$) + "] castle has been conquered by the [" + getguildName(.@guild_id) + "] guild.",bc_all|bc_woe;
+	announce "ปราสาท [" + getcastlename(.@map$) + "]ถูกยึดครองโดยกิลด์[" + getguildName(.@guild_id) + "].",bc_all|bc_woe;
 	end;
 
 OnGuildBreak:
@@ -174,7 +174,7 @@ OnGuildBreak:
 	disablenpc "Kafra Employee#"+ .@tmp$;
 	setcastledata .@map$,CD_GUILD_ID,0;
 	sleep 7000;
-	announce "Guild Base [" + getcastlename(.@map$) + "] has been abandoned.",bc_all;
+	announce "ฐานปราสาทกิลด์ [" + getcastlename(.@map$) + "] ได้ถูกละทิ้งแล้ว",bc_all;
 	donpcevent strnpcinfo(0) +"::OnAgitInit3";
 	end;
 
@@ -183,9 +183,9 @@ S_Message:
 	.@guild_id = getcastledata(.@map$,CD_GUILD_ID);
 	
 	if (.@guild_id)
-		announce "The [" + getcastlename(.@map$) + "] castle is occupied by the [" + getguildname(.@guild_id) + "] guild.",bc_all,"0xFF0000",FW_NORMAL,10;
+		announce "ปราสาท [" + getcastlename(.@map$) + "] ถูกครอบครองโดยกิลด์ [" + getguildname(.@guild_id) + "].",bc_all,"0xFF0000",FW_NORMAL,10;
 	else
-		announce "The [" + getcastlename(.@map$) + "] castle is currently unoccupied.", bc_all,"0xFF0000",FW_NORMAL,10;
+		announce "ปราสาท [" + getcastlename(.@map$) + "] ไม่มีคนอยู่ในขณะนี้", bc_all,"0xFF0000",FW_NORMAL,10;
 	if (compare( .@map$,"te_alde" ))
 		.@string$ = "alde0"+ charat( .@map$,getstrlen(.@map$)-1 );
 	else
@@ -217,25 +217,25 @@ OnMyMobDead:
 	cutin "kafra_01",2;
 	mes "[Kafra Employee]";
 	if (.@guild_id == getcharid(2)) {
-		mes "Welcome. ^ff0000" + .@guildname$ + "^000000 Member.";
-		mes "The Kafra Corporation will stay with you wherever you go.";
+		mes "ยินดีต้อนรับ. สมาชิก ^ff0000" + .@guildname$ + "^000000.";
+		mes "Kafra Corporation จะอยู่กับคุณทุกที่ที่คุณไป";
 		next;
-		switch( select( "Use Storage", "Use Teleport Service", "Rent a Pushcart", "Cancel" ) ) {
+		switch( select( "ใช้พื้นที่เก็บของ", "ใช้บริการเทเลพอร์ต", "เช่ารถเข็น", "ยกเลิก" ) ) {
 		case 1:
 			if (getskilllv("NV_BASIC") > 5) {
 				mes "[Kafra Employee]";
-				mes "Here, let me open";
-				mes "your Storage for you.";
-				mes "Thank you for using";
-				mes "the Kafra Service.";
-				close2;
-				openstorage;
+				mes "เอาล่ะ ให้ฉันเปิดคลังเก็บของของคุณให้คุณ";
+				mes "ขอบคุณที่ใช้บริการ Kafra";
+				if (vip_status(1)){
+					close2;
+					openstorage2 1,STOR_MODE_GET|STOR_MODE_PUT;
+				}else{
+					close2;
+					openstorage;
+				}
 			} else {
 				mes "[Kafra Employee]";
-				mes "I'm sorry, but you";
-				mes "need the Novice's";
-				mes "Basic Skill Level 6 to";
-				mes "use the Storage Service.";
+				mes "ฉันขอโทษ แต่คุณจำเป็นต้องมีทักษะพื้นฐานระดับ 6 เพื่อใช้บริการจัดเก็บข้อมูล";
 				close2;
 			}
 			break;
@@ -247,32 +247,22 @@ OnMyMobDead:
 		case 3:
 			mes "[Kafra Employee]";
 			if (BaseClass != Job_Merchant) {
-				mes "I'm sorry, but the";
-				mes "Pushcart rental service";
-				mes "is only available to Merchants,";
-				mes "Blacksmiths and Alchemists.";
+				mes "ขออภัย บริการเช่ารถเข็นมีให้เฉพาะพ่อค้า ช่างตีเหล็ก และนักเล่นแร่แปรธาตุเท่านั้น";
 				close2;
 			}
 			else if (checkcart()) {
-				mes "You already have";
-				mes "a Pushcart equipped.";
-				mes "Unfortunately, we can't";
-				mes "rent more than one to";
-				mes "each customer at a time.";
+				mes "คุณมีรถเข็นพร้อมอยู่แล้ว";
+				mes "น่าเสียดาย เราไม่สามารถเช่ามากกว่าหนึ่งรายการให้กับลูกค้าแต่ละรายในแต่ละครั้งได้";
 				close2;
 			}
 			else {
-				mes "The Pushcart rental";
-				mes "fee is 800 zeny. Would";
-				mes "you like to rent a Pushcart?";
+				mes "ค่าเช่ารถเข็นคือ 800 zeny";
+				mes "คุณต้องการเช่ารถเข็นหรือไม่?";
 				next;
-				if (select( "Rent a Pushcart","Cancel" ) == 1) {
+				if (select( "เช่ารถเข็น","ยกเลิก" ) == 1) {
 					if (Zeny < 800) {
 						mes "[Kafra Employee]";
-						mes "I'm sorry, but you";
-						mes "don't have enough";
-						mes "zeny to pay the Pushcart";
-						mes "rental fee of 800 zeny.";
+						mes "ฉันขอโทษ แต่คุณไม่มี zeny เพียงพอที่จะจ่ายค่าเช่ารถเข็นเด็ก 800 zeny";
 						close2;
 					}
 					else {
@@ -285,14 +275,13 @@ OnMyMobDead:
 			break;
 		case 4:
 			mes "[Kafra Employee]";
-			mes "We, here at Kafra Corporation,";
-			mes "are always endeavoring to provide you with the best services. We hope that we meet your adventuring needs and standards of excellence.";
+			mes "พวกเราที่ Kafra Corporation พยายามอย่างเต็มที่เพื่อมอบบริการที่ดีที่สุดให้กับคุณ เราหวังว่าเราจะตอบสนองความต้องการในการผจญภัยและมาตรฐานความเป็นเลิศของคุณ";
 			close2;
 			break;
 		}
 	}
 	else {
-		mes "I am instructed to only offer my services to the ^ff0000"+ .@guildname$ +"^000000 Guild. Please try another Kafra Employee around here. Sorry for the inconvenience.";
+		mes "ฉันได้รับคำสั่งให้ให้บริการเฉพาะ ^ff0000"+ .@guildname$ +"^000000 Guild เท่านั้น โปรดลองพนักงาน Kafra คนอื่นแถวๆ นี้ ขออภัยในความไม่สะดวก.";
 		close2;
 	}
 	cutin "",255;
@@ -300,17 +289,14 @@ OnMyMobDead:
 
 S_Warp:
 	mes "[Kafra Employee]";
-	mes "Please choose";
-	mes "your destination.";
+	mes "กรุณาเลือกจุดหมายปลายทางของคุณ";
 	next;
-	switch( select( getarg(0) + " -> 200 z", "Cancel it" ) ) {
+	switch( select( getarg(0) + " -> 200 z", "ยกเลิกมัน" ) ) {
 	case 1:
 		if (Zeny < 200) {
 			mes "[Kafra Employee]";
-			mes "I'm sorry, but you don't have";
-			mes "enough zeny for the Teleport";
-			mes "Service. The fee to teleport";
-			mes "to "+getarg(0)+" is 200 zeny.";
+			mes "ขออภัย แต่คุณไม่มี zeny เพียงพอสำหรับบริการ Teleport";
+			mes "ค่าธรรมเนียมในการเทเลพอร์ตไปที่ "+getarg(0)+" คือ 200 zeny";
 			close2;
 			cutin "",255;
 			end;
@@ -340,16 +326,16 @@ function GuardianData;
 
 	mes .@npc_name$;
 	if (.@guild_id == 0) {
-		mes "I have been waiting for a master to fulfill my destiny.";
-		mes "Brave soul... fate will guide you towards your future...";
+		mes "ฉันรอคอยปรมาจารย์มาเติมเต็มชะตากรรมของฉัน”;
+		mes "วิญญาณผู้กล้า... โชคชะตาจะนำทางคุณไปสู่อนาคตของคุณ...";
 		close;
 	}
 	if (strcharinfo(0) != .@guildmaster$) {
-		mes "No matter how much you pester me, I'll still follow my master ^ff0000"+.@guildmaster$+"^000000. Where are the Guardians?! Send these ruffians away right now!";
+		mes "ไม่ว่านายจะรบกวนฉันมากแค่ไหน ฉันก็จะตามนายของฉันไป ^ff0000"+.@guildmaster$+"^000000 ผู้พิทักษ์อยู่ที่ไหน! ส่งพวกอันธพาลออกไปเดี๋ยวนี้!";
 		close;
 	}
-	mes "Welcome. My honorable master, ^ff0000"+strcharinfo(0)+"^000000...";
-	mes "Your humble servent, "+strnpcinfo(1)+", is here to serve you.";
+	mes "ยินดีต้อนรับ. อาจารย์ผู้มีเกียรติของข้าพเจ้า ^ff0000"+strcharinfo(0)+"^000000...";
+	mes "ข้ารับใช้ผู้ต่ำต้อยของคุณ "+strnpcinfo(1)+" อยู่ที่นี่เพื่อให้บริการคุณ";
 	next;
 	switch( select( "Castle briefing", "Invest in commercial growth", "Invest in Castle Defenses", "Summon Guardian", "Hire / Fire a Kafra Employee", "Go into Master's room" ) ) {
 	case 1:
