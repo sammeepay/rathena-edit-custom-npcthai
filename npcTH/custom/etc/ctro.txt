@@ -174,3 +174,18 @@ OnPCLogoutEvent:
 	##CASHPOINTS = #CASHPOINTS;
 	end;
 }
+
+
+moc_para01,18,35,4	script	Mr.Kennet::npcguildreward	833,{
+	.@GID = getcharid(2);
+	if (.@GID == 0) {
+		mes "ขออภัย คุณไม่ได้อยู่ในกิลด์";
+		close;
+	}
+	if (strcharinfo(0) != getguildmaster(.@GID)) {
+		mes "ขออภัย คุณไม่ได้เป็นเจ้าของกิลด์ที่คุณอยู่";
+		close;
+	}
+	mes "ยินดีต้อนรับ หัวหน้ากิลด์ของ " + getguildname(.@GID);
+	close;
+}

@@ -622,7 +622,7 @@ OnRecvCastle:
 	mes "ยินดีต้อนรับ ท่านอาจารย์ ^ff0000"+strcharinfo(0)+"^000000...";
 	mes "ข้ารับใช้ผู้ต่ำต้อยของคุณ "+strnpcinfo(1)+" อยู่ที่นี่เพื่อให้บริการคุณ";
 	next;
-	switch (select("การบรรยายสรุปของปราสาท:Invest in commercial growth:Invest in Castle Defenses:Summon Guardian:Hire / Fire a Kafra Employee:Go into Master's room")) {
+	switch (select("การบรรยายสรุปของปราสาท:ลงทุนในการเติบโตเชิงพาณิชย์:ลงทุนในการป้องกันปราสาท:เรียกผู้พิทักษ์:จ้าง / ไล่พนักงาน Kafra:เข้าไปในห้องมาสเตอร์")) {
 	case 1:
 		mes "["+strnpcinfo(1)+"]";
 		mes "ฉันจะรายงานการบรรยายสรุปเกี่ยวกับปราสาทครับอาจารย์";

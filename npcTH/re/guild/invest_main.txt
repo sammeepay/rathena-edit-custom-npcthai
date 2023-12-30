@@ -175,7 +175,7 @@ function	script	F_Invest_Abyss	{
 		mes "ว้าว คุณได้นำใบรับรองการลงทุนมาด้วย";
 		mes "คุณจะส่งใบรับรองกี่ใบ?";
 		next;
-		switch(select("1 Investment Certificate:5 Investment Certificates:Another amount:Cancel")) {
+		switch(select("1 Investment Certificate:5 Investment Certificates:จำนวนอื่น:ยกเลิก")) {
 		case 1:
 			set .@tickets,1;
 			break;
@@ -1256,27 +1256,27 @@ L_Enter:
 // Item Investments :: tooja_namis
 //============================================================
 malangdo,218,126,4	script	Cat Paw Merchants Notice	857,{
-	mes "<< Cat Paw Merchants Notice >>";
+	mes "<< ประกาศเกี่ยวกับ Cat Paw Merchants >>";
 	mes "'^C379CEInvest Unused Items for Prizes!^000000'";
 	next;
-	switch(select("Read Notice:Check Event 1:Check Event 2")) {
+	switch(select("อ่านประกาศ:Check Event 1:Check Event 2")) {
 	case 1:
-		mes "- Notice -";
-		mes "Hello all Cat Paw Merchants customers! With your love, we Cat Paw Merchants are growing every day. All executives and staff members promise to do our best to further our frontier and development.";
+		mes "- ประกาศ -";
+		mes "สวัสดีลูกค้า Cat Paw Merchants ทุกท่าน! ด้วยความรักของคุณ พวกเรา Cat Paw Merchants เติบโตขึ้นทุกวัน ผู้บริหารและพนักงานทุกคนสัญญาว่าจะพยายามอย่างเต็มที่เพื่อก้าวต่อไปในขอบเขตและการพัฒนาของเรา";
 		next;
-		mes "- Event Notice! -";
-		mes " An Event called '^C379CEInvest Unused Items for Prizes!^000000' is under way, where you could exchange unused items in your storage for Investment Certificate of the Cat Paw Merchants.";
+		mes "- ประกาศกิจกรรม! -";
+		mes " กิจกรรมที่เรียกว่า '^C379CEInvest Unused Items for Prizes!^000000' กำลังดำเนินอยู่ ซึ่งคุณสามารถแลกเปลี่ยนรายการที่ไม่ได้ใช้ในคลังของคุณเป็น Investment Certificate of the Cat Paw Merchants";
 		next;
-		mes "Exchangeable items will be announced on a separate sheet. Thank you for your time.";
-		mes "- From all the employees of Cat Paw Merchants -";
+		mes "รายการที่สามารถแลกเปลี่ยนได้จะถูกประกาศในแผ่นงานแยกต่างหาก ขอบคุณที่สละเวลา";
+		mes "- จากพนักงานทั้งหมดของ Cat Paw Merchants -";
 		next;
-		mes "There is a small warning at the bottom.";
+		mes "มีคำเตือนเล็กๆที่ด้านล่าง";
 		mes " ";
-		mes "^FF0000This event could be changed or repealed due to the Merchants' situation.^000000";
+		mes "^FF0000กิจกรรมนี้สามารถเปลี่ยนแปลงหรือยกเลิกได้เนื่องจากสถานการณ์ของพ่อค้า^000000";
 		close;
 	case 2:
 		mes "'^C379CEInvest Unused Items for Prizes!^000000'";
-		mes "There are details of Event 1.";
+		mes "มีรายละเอียดของกิจกรรมที่ 1";
 		next;
 		setarray .@event1$[0],
 			"Wings of the Insect Queen","Crown of the Fly King","I hear Dragon Scales are tough 01","The Meaning of the Mother's Nightmare",
