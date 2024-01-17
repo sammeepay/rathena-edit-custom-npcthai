@@ -98,18 +98,6 @@ Body:
       - Combo:
           - Shooting_Star_C
           - Iron_Arrow
-      - Combo:
-          - Shooting_Star_C
-          - Holy_Arrow
-      - Combo:
-          - Shooting_Star_C
-          - Hunting_Arrow
-      - Combo:
-          - Shooting_Star_C
-          - Siege_Arrow_S
-      - Combo:
-          - Shooting_Star_C
-          - Siege_Arrow_A
     Script: |
       bonus3 bAutoSpell,"RA_ARROWSTORM",10,300;
       bonus3 bAutoSpell,"RA_AIMEDBOLT",10,300;
