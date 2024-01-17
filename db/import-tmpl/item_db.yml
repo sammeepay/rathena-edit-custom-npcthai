@@ -250,6 +250,21 @@ Body:
       NoAuction: true
     Script: |
       getitem 6417,500;
+  - Id: 23165
+    AegisName: Service30_AID_Buff
+    Name: "Premium Service Staff"
+    Type: Usable
+    Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoSell: true
+      NoCart: true
+      NoGuildStorage: true
+      NoMail: true
+      NoAuction: true
+    Script: |
+      
       
 # Add Items Equip
 #=============================================================

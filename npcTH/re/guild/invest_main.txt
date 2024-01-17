@@ -452,7 +452,7 @@ OnTimer3600000:
 			if ($agit_result_timer % 10 == 5 || $agit_result_timer % 10 == 0 || $agit_result_timer == 58) {
 				set $agit_result_notice, $agit_result_notice+1;
 				donpcevent "Investment_total#fund00::OnVarInit";
-				announce "ไม่ "+$agit_result_notice+" ใบแจ้งยอดชั่วคราวพร้อมใช้งานแล้ว สามารถตรวจสอบได้จากกระดานสถานะการลงทุนในแต่ละพื้นที่ WOE",bc_all,0xFF0000; //FW_NORMAL 10
+				announce "ขณะนี้มีใบแจ้งยอดระหว่างกาลฉบับที่ "+$agit_result_notice+" แล้ว สามารถตรวจสอบได้จากกระดานสถานะการลงทุนในแต่ละพื้นที่ WOE",bc_all,0xFF0000; //FW_NORMAL 10
 			}
 
 			donpcevent "Investment_total#fund00::OnTimerReset";
