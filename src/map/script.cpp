@@ -5603,6 +5603,7 @@ BUILDIN_FUNC(rand)
 			return SCRIPT_CMD_FAILURE;
 		}
 	}
+
 	if( minimum == maximum ){
 		ShowError( "buildin_rand: minimum (%" PRId64 ") and maximum (%" PRId64 ") are equal. No randomness possible.\n", minimum, maximum );
 		st->state = END;
@@ -17957,6 +17958,7 @@ BUILDIN_FUNC(npcshopitem)
 	RECREATE(nd->u.shop.shop_item, struct npc_item_list, amount);
 	nd->u.shop.count = 0;
 	for (n = 0, i = 3; n < amount; n++, i+=offs) {
+		t_itemid nameid = script_getnum( st, i );
 		std::shared_ptr<item_data> id = item_db.find(nameid);
 
 		if( !id ){
@@ -18035,7 +18037,6 @@ BUILDIN_FUNC(npcshopadditem)
 			}
 
 			int32 stock = script_getnum(st, i + 2);
-
 			if( stock < -1 ){
 				ShowError( "builtin_npcshopadditem: Invalid stock amount in marketshop '%s'.\n", nd->exname );
 				script_pushint( st, 0 );
@@ -27784,6 +27785,7 @@ struct script_function buildin_func[] = {
 
 	// Channel System
 	BUILDIN_DEF(channel_create,"ss?????"),
+	BUILDIN_DEF(channel_join, "s?"),
 	BUILDIN_DEF(channel_setopt,"sii"),
 	BUILDIN_DEF(channel_getopt,"si"),
 	BUILDIN_DEF(channel_setcolor,"si"),
