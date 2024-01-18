@@ -59,6 +59,7 @@ OnHour18:
 OnInit:
 	bindatcmd("reitem",strnpcinfo(0)+"::OnCommand_reitem",0,99);
 	bindatcmd("usegm",strnpcinfo(0)+"::OnCommand_usegm",0,99);
+	bindatcmd("botusegm",strnpcinfo(0)+"::OnCommand_botusegm",0,99);
 end;
 
 OnCommand_reitem:
@@ -69,6 +70,15 @@ OnCommand_usegm:
 	input .@cmd$;
 	atcommand .@cmd$;
 	end;
+	
+OnCommand_botusegm:
+	mes "เริ่มคำสั่ง สำหรับ bot";
+	next;
+	input .@cmd$;
+	atcommand .@cmd$;
+	close;
+	end;
+
 }
 
 // Function CTRO-Server
@@ -162,5 +172,71 @@ OnPCLoginEvent:
 	
 OnPCLogoutEvent:
 	##CASHPOINTS = #CASHPOINTS;
+	end;
+}
+
+
+moc_para01,18,35,4	script	Mr.Kennet::npcguildreward	833,{
+	query_sql("SELECT `castle_id`,`guild_id` FROM `guild_castle`",.@sqlCID,.@sqlGID);
+	.@GID = getcharid(2);
+	getguildmember .@GID,0,$@guildmembername$;
+	if (.@GID == 0) {
+		mes "[Mr.Kennet]";
+		mes "ขออภัย คุณไม่ได้อยู่ในกิลด์";
+		close;
+	}
+	if (strcharinfo(0) != getguildmaster(.@GID)) {
+		mes "[Mr.Kennet]";
+		mes "ขออภัย คุณไม่ได้เป็นเจ้าของกิลด์ที่คุณอยู่";
+		close;
+	}
+	if (getarraysize(.@sqlCID) == 0) {
+		mes "[Mr.Kennet]";
+		mes "อืม...ปราสาทแต่ละหลังยังไม่มีกิลด์ไหนได้ครอบครองเลย!";
+		close;
+	}
+	
+	for( .@i = 0; .@i < getarraysize(.@sqlCID); .@i++ )
+	{
+		if (.@sqlGID == .@GID) {
+			if (cgreward == 0) {
+				mes "[Mr.Kennet]";
+				mes "เจ้ารับรางวัลไปแล้วนิ...ยังไง!!";
+				close;
+			}
+			mes "[Mr.Kennet]";
+			mes "ทำดีมากนี่รางวัลสำหรับกิลด์เจ้า...เอาไปแบ่งให้คนในกิลด์เจ้าซะ..!!";
+			next;
+			if (select("ตกลงข้าจะรับรางวัล:เยังก่อนดี๋ยวข้ากลับมา") == 2) {
+				mes "[Mr.Kennet]";
+				mes "อืม..รีบๆ กลับมารับรางวัลของกิลด์เจ้านะ ก่อนที่หมดเวลารับของรางวัล!!";
+				close;
+			}
+			getitem 35002,5000; // Cash Coin
+			getitem 12103,10; //Bloody Branch
+			Zeny += 100000000;
+			cgreward = 1;
+			mes "[Mr.Kennet]";
+			mes "ยินดีด้วยกับกิลด์ของเจ้านะ!!";
+			close;
+		}
+	}
+
+	//*getcastlename("<map name>")
+	mes "ยินดีต้อนรับ หัวหน้ากิลด์ของ " + getguildname(.@GID);
+	mes "จำนวนคนในกิว : " + $@guildmembercount;
+	//mes "getguildmember : "+$@guildmembername$[1];
+	mes "กิลด์ของเจ้าไม่สามารถรับรางวัลได้เนื่องจากกิลด์ของเจ้าไม่ได้ครอบครองปราสามสักหลังเลย!!";
+	close;
+	
+OnInit:
+	// 2 = aldeg_cas03 = Nuernberg
+	// 8 = gefg_cas04 = Bergel
+	// 12 = payg_cas04 = Sacred Altar
+	// 17 = prtg_cas03 = Fadhgridh
+	.opencastle2 = true;
+	.opencastle8 = true;
+	.opencastle12 = true;
+	.opencastle17 = true;
 	end;
 }

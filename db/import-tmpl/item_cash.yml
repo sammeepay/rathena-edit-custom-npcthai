@@ -45,8 +45,8 @@ Header:
 #
 #  - Tab: Limited
 #    Items:
-#      - Item: Apple
-#        Price: 1
+#      - Item: C_Wing_Of_Fly_1Day_Box
+#        Price: 149
 #
 #  - Tab: Rental
 #    Items:
@@ -260,6 +260,18 @@ Header:
 #
 #  - Tab: Other
 #    Items:
+#      - Item: World_Tour_Ticket
+#        Price: 1
+#      - Item: Silvervine
+#        Price: 1
+#      - Item: Silvervine_Fruit_Box10
+#        Price: 10
+#      - Item: Silvervine_Box100
+#        Price: 100
+#      - Item: Silvervine_Box500
+#        Price: 500
+#      - Item: Megaphone_Box
+#        Price: 45
 #      - Item: F_Clothing_Dye_Coupon
 #        Price: 150
 #      - Item: Apple

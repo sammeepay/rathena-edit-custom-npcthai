@@ -40,7 +40,7 @@ schg_cas01,121,302,0	script	LF-06#schg_cas01	111,{ callfunc "LinkFlag","Defense 
 schg_cas01,124,302,0	script	LF-07#schg_cas01	111,{ callfunc "LinkFlag","Center 1 Area",120,168,"Center 2 Area",119,211; }
 schg_cas01,127,302,0	script	LF-08#schg_cas01	111,{ callfunc "LinkFlag","Area 1-1",89,43,"Area 2-1",94,147,"Area 3-1",100,242; }
 schg_cas01,130,302,0	script	LF-09#schg_cas01	111,{ callfunc "LinkFlag","Area 1-2",141,45,"Area 2-3",163,140,"Area 3-2",136,243; }
-schg_cas01,133,302,0	script	LF-10#schg_cas01	111,{ callfunc "LinkFlag","Convenience Facility",275,244; }
+schg_cas01,133,302,0	script	LF-10#schg_cas01	111,{ callfunc "LinkFlag","สิ่งอำนวยความสะดวก",275,244; }
 schg_cas01,17,45,0	script	Himinn#LF_sc01_1::LF_sc01_1	111,{ callfunc "LinkFlag","Emperium Center",120,290; }
 schg_cas01,207,95,0	duplicate(LF_sc01_1)	Himinn#LF_sc01_2	111
 schg_cas01,111,46,4	script	Himinn#LF_sc01_3::LF_sc01_2	722,{
