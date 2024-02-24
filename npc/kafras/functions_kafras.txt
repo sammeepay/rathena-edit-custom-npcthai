@@ -276,8 +276,21 @@ function	script	F_KafStor	{
 		}
 	}
 	callfunc("F_CheckKafCode");	//check your storage password, if set
-	close2;
-	openstorage;
+	if (vip_status(1)){
+		switch(select("Main:VIP")) {
+			case 1:
+				close2;
+				openstorage;
+				break;
+			case 2:
+				close2;
+				openstorage2 1,STOR_MODE_GET|STOR_MODE_PUT;
+				 break;
+		}
+	}else{
+		close2;
+		openstorage;
+	}
 	cutin "", 255;
 	end;
 }
@@ -303,7 +316,7 @@ function	script	F_KafTele	{
 			mes "ฉันขออภัย แต่คุณ";
 			mes "มี zeny ไม่มีเพียงพอ";
 			mes "ที่จะใช้บริการเทเลพอต";
-			mes "to " + @wrpD$[.@j] + " is " + @wrpP[.@j] + " zeny.";
+			mes "ไปยัง " + @wrpD$[.@j] + " ราคา " + @wrpP[.@j] + " zeny.";
 			close3;
 		}
 		Zeny -= @wrpP[.@j];
@@ -660,7 +673,7 @@ function	script	F_KafSet	{
 	.@warp_size = getarraysize(@wrpD$);
 
 	// VIP pricing varies across the regional servers; this is most practical.
-	if (VIP_SCRIPT && !vip_status(VIP_STATUS_ACTIVE)) {
+	if (vip_is_enabled(CHK_VIP_SCRIPT) && !vip_status(VIP_STATUS_ACTIVE)) {
 		for ( .@i = 0; .@i < .@warp_size; .@i++ )
 			@wrpP[.@i] *= 2;
 	}
