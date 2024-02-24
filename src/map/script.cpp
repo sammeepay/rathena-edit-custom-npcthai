@@ -23392,7 +23392,7 @@ BUILDIN_FUNC(vip_is_enabled) {
 	}
 	return SCRIPT_CMD_SUCCESS;
 }
-}
+
 
 /**
  * Turns a player into a monster and optionally can grant a SC attribute effect.
