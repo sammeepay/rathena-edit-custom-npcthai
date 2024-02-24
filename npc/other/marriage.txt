@@ -198,7 +198,7 @@ prt_church,97,100,4	script	Wedding Staff#w	71,{
 		break;
 	case 3:
 		cutin "wedding_marry02",2;
-		if (VIP_SCRIPT) {
+		if (vip_is_enabled(CHK_VIP_SCRIPT)) {
 			mes "[Marry Happy]";
 			mes "^FF0000เดี๋ยวก่อน!^000000";
 			mes "^FF0000หากบัญชีของคุณไม่ใช่แบบพรีเมี่ยมคุณต้องมีกติกาการแต่งงานที่จะแต่งงาน^000000";
