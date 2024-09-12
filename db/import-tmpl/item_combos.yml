@@ -101,3 +101,13 @@ Body:
     Script: |
       bonus3 bAutoSpell,"RA_ARROWSTORM",10,300;
       bonus3 bAutoSpell,"RA_AIMEDBOLT",10,300;
+  - Combos:
+      - Combo:
+          - C_Guardian_Butterwing
+          - C_20th_Anniversary_Hat
+    Script: |
+      bonus bPAtk,20;
+      bonus bSMatk,20;
+      bonus bHit,20;
+      bonus bFlee,20;
+

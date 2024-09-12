@@ -4379,6 +4379,10 @@ int status_calc_pc_sub(map_session_data* sd, uint8 opt)
 		base_status->patk += skill * 3;
 		base_status->smatk += skill * 3;
 	}
+	if ((skill = pc_checkskill(sd, HN_SELFSTUDY_TATICS)) > 0)
+		base_status->patk += skill;
+	if ((skill = pc_checkskill(sd, HN_SELFSTUDY_SOCERY)) > 0)
+		base_status->smatk += skill;
 
 	// 2-Handed Staff Mastery
 	if( sd->status.weapon == W_2HSTAFF && ( skill = pc_checkskill( sd, AG_TWOHANDSTAFF ) ) > 0 ){
@@ -8012,6 +8016,10 @@ static unsigned short status_calc_speed(struct block_list *bl, status_change *sc
 				val = max(val, sc->getSCE(SC_SP_SHA)->val2);
 			if (sc->getSCE(SC_CREATINGSTAR))
 				val = max(val, 90);
+			if (sc->getSCE(SC_SHIELDCHAINRUSH))
+				val = max(val, 20);
+			if (sc->getSCE(SC_GROUNDGRAVITY))
+				val = max(val, 20);
 
 			if( sd && sd->bonus.speed_rate + sd->bonus.speed_add_rate > 0 ) // Permanent item-based speedup
 				val = max( val, sd->bonus.speed_rate + sd->bonus.speed_add_rate );
@@ -15410,8 +15418,7 @@ void status_change_clear_onChangeMap(struct block_list *bl, status_change *sc)
  * @param current: Current row being read into SCDisabled array
  * @return True - Successfully stored, False - Invalid SC
  */
-static bool status_readdb_status_disabled(char **str, int columns, int current)
-{
+static bool status_readdb_status_disabled( char **str, size_t columns, size_t current ){
 	int64 type = SC_NONE;
 
 	if (ISDIGIT(str[0][0]))

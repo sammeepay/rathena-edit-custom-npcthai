@@ -30,7 +30,7 @@
 	export_constant(MAX_GUILD_STORAGE);
 	export_constant(MAX_BG_MEMBERS);
 	export_constant(MAX_CHAT_USERS);
-	export_constant(VIP_SCRIPT);
+	export_deprecated_constant(VIP_SCRIPT);
 	export_constant(MIN_STORAGE);
 	export_constant(MAX_SLOTS);
 	export_constant(MAX_ITEM_RDM_OPT);
@@ -613,7 +613,6 @@
 	export_parameter(PCDIECOUNTER_VAR, SP_PCDIECOUNTER);
 	export_parameter(COOKMASTERY_VAR, SP_COOKMASTERY);
 	export_parameter(ACHIEVEMENTLEVEL, SP_ACHIEVEMENT_LEVEL);
-	export_parameter(GOLDPC_POINT_VAR, SP_GOLDPC_POINTS);
 
 	export_constant2("bMaxHP",SP_MAXHP);
 	export_constant2("bMaxSP",SP_MAXSP);
@@ -1895,6 +1894,12 @@
 	export_constant(SC_RUSH_QUAKE1);
 	export_constant(SC_RUSH_QUAKE2);
 	export_constant(SC_G_LIFEPOTION);
+	export_constant(SC_HNNOWEAPON);
+	export_constant(SC_SHIELDCHAINRUSH);
+	export_constant(SC_MISTYFROST);
+	export_constant(SC_GROUNDGRAVITY);
+	export_constant(SC_BREAKINGLIMIT);
+	export_constant(SC_RULEBREAK);
 
 #ifdef RENEWAL
 	export_constant(SC_EXTREMITYFIST2);
@@ -5181,6 +5186,9 @@
 	export_constant(VIP_STATUS_EXPIRE);
 	export_constant(VIP_STATUS_REMAINING);
 
+	export_constant(CHK_VIP_ENABLED);
+	export_constant(CHK_VIP_SCRIPT);
+	
 	/* item groups */
 	export_constant(IG_BLUEBOX);
 	export_constant(IG_VIOLETBOX);
@@ -9617,8 +9625,13 @@
 	export_constant(HAT_EF_AUTUMN_FULL_MOON);
 	export_constant(HAT_EF_NIFLHEIM_NIGHT_SKY);
 	export_constant(HAT_EF_C_ROS2023_CAPE_1);
+	export_constant(HAT_EF_BLACK_THUNDER_);
 	export_constant(HAT_EF_C_ROS2023_CAPE_2);
 	export_constant(HAT_EF_C_15TH_NOV_HELMET);
+	export_constant(HAT_EF_COSMIC_CONNECTION);
+	export_constant(HAT_EF_C_BABY_GLOOM);
+	export_constant(HAT_EF_WINTERNIGHTBELLS);
+	export_constant(HAT_EF_NIGHTSKYOFRUTIE);
 
 	/* pet catch */
 	export_constant(PET_CATCH_UNIVERSAL);
@@ -10066,12 +10079,21 @@
 	export_constant(UNT_LIGHTNING_LAND);
 	export_constant(UNT_VENOM_SWAMP);
 	export_constant(UNT_CONFLAGRATION);
-
 	export_constant(UNT_DEEPBLINDTRAP);
 	export_constant(UNT_SOLIDTRAP);
 	export_constant(UNT_SWIFTTRAP);
 	export_constant(UNT_FLAMETRAP);
-
+	export_constant(UNT_TWINKLING_GALAXY);
+	export_constant(UNT_STAR_CANNON);
+	export_constant(UNT_GRENADES_DROPPING);
+	export_constant(UNT_FUUMASHOUAKU);
+	export_constant(UNT_MISSION_BOMBARD);
+	export_constant(UNT_TOTEM_OF_TUTELARY);
+	export_constant(UNT_HYUN_ROKS_BREEZE);
+	export_constant(UNT_SHINKIROU);
+	export_constant(UNT_JACK_FROST_NOVA);
+	export_constant(UNT_GROUND_GRAVITATION);
+	export_constant(UNT_KUNAIWAIKYOKU);
 	export_constant(UNT_GD_LEADERSHIP);
 	export_constant(UNT_GD_GLORYWOUNDS);
 	export_constant(UNT_GD_SOULCOLD);

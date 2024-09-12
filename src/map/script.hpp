@@ -10,6 +10,7 @@
 #include <common/database.hpp>
 #include <common/cbasetypes.hpp>
 #include <common/db.hpp>
+#include <common/malloc.hpp>
 #include <common/mmo.hpp>
 #include <common/timer.hpp>
 
@@ -754,6 +755,11 @@ enum vip_status_type {
 	VIP_STATUS_ACTIVE = 1,
 	VIP_STATUS_EXPIRE,
 	VIP_STATUS_REMAINING
+};
+
+enum vip_check_type {
+	CHK_VIP_ENABLED = 1,
+	CHK_VIP_SCRIPT,
 };
 
 enum e_special_effects {
@@ -2120,8 +2126,13 @@ enum e_hat_effects : int16{
 	HAT_EF_AUTUMN_FULL_MOON,
 	HAT_EF_NIFLHEIM_NIGHT_SKY,
 	HAT_EF_C_ROS2023_CAPE_1,
+	HAT_EF_BLACK_THUNDER_,
 	HAT_EF_C_ROS2023_CAPE_2,
 	HAT_EF_C_15TH_NOV_HELMET,
+	HAT_EF_COSMIC_CONNECTION,
+	HAT_EF_C_BABY_GLOOM,
+	HAT_EF_WINTERNIGHTBELLS,
+	HAT_EF_NIGHTSKYOFRUTIE,
 	HAT_EF_MAX
 };
 
@@ -2205,7 +2216,8 @@ void script_error(const char* src, const char* file, int start_line, const char*
 void script_warning(const char* src, const char* file, int start_line, const char* error_msg, const char* error_pos);
 
 bool is_number(const char *p);
-struct script_code* parse_script(const char* src,const char* file,int line,int options);
+struct script_code* parse_script_( const char *src, const char *file, int line, int options, const char* src_file, int src_line, const char* src_func );
+#define parse_script( src, file, line, options ) parse_script_( ( src ), ( file ), ( line ), ( options ), ALC_MARK )
 void run_script(struct script_code *rootscript,int pos,int rid,int oid);
 
 bool set_reg_num(struct script_state* st, map_session_data* sd, int64 num, const char* name, const int64 value, struct reg_db *ref);

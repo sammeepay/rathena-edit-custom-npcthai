@@ -2472,8 +2472,7 @@ void script_warning(const char* src, const char* file, int start_line, const cha
 /*==========================================
  * Analysis of the script
  *------------------------------------------*/
-struct script_code* parse_script(const char *src,const char *file,int line,int options)
-{
+struct script_code* parse_script_( const char *src, const char *file, int line, int options, const char* src_file, int src_line, const char* src_func ){
 	const char *p,*tmpp;
 	int i;
 	struct script_code* code = NULL;
@@ -2653,7 +2652,7 @@ struct script_code* parse_script(const char *src,const char *file,int line,int o
 	}
 #endif
 
-	CREATE(code,struct script_code,1);
+	CREATE2( code, struct script_code, 1, src_file, src_line, src_func );
 	code->script_buf  = script_buf;
 	code->script_size = script_size;
 	code->local.vars = NULL;
@@ -23369,6 +23368,31 @@ BUILDIN_FUNC(vip_time) {
 	return SCRIPT_CMD_SUCCESS;
 }
 
+/**
+ * Returns various VIP settings for server
+ * vip_is_enabled <type>
+ * @param type: Info type, see enum vip_check_type
+ */
+BUILDIN_FUNC(vip_is_enabled) {
+	int type = script_getnum(st, 2);
+	switch(type) {
+		case CHK_VIP_ENABLED:
+#ifdef VIP_ENABLE
+			script_pushint(st, 1);
+#else
+			script_pushint(st, 0);
+#endif
+			break;
+		case CHK_VIP_SCRIPT:
+			script_pushint(st, VIP_SCRIPT);
+			break;
+		default:
+			ShowError("buildin_vip_is_enabled: Unsupported type %d.\n", type);
+			return SCRIPT_CMD_FAILURE;
+	}
+	return SCRIPT_CMD_SUCCESS;
+}
+
 
 /**
  * Turns a player into a monster and optionally can grant a SC attribute effect.
@@ -27124,6 +27148,106 @@ BUILDIN_FUNC(opentips){
 #endif
 }
 
+BUILDIN_FUNC(setdialogalign){
+	map_session_data *sd;
+
+	if ( !script_rid2sd(sd) ) {
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	int32 align = script_getnum( st, 2 );
+	
+	if( align < DIALOG_ALIGN_LEFT || align > DIALOG_ALIGN_BOTTOM ){
+		ShowError( "buildin_setdialogalign: Unknown align value %d\n", align );
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	clif_set_dialog_align( *sd, st->oid, static_cast<e_say_dialog_align>( align ) );
+
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(setdialogsize){
+	map_session_data *sd;
+
+	if ( !script_rid2sd(sd) ) {
+		script_pushint(st, 0);
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	int32 x = script_getnum( st, 2 );
+	
+	if( x < 0 || x > INT16_MAX ){
+		ShowError( "buildin_setdialogsize: x size %d is out of range [0,%d]\n", x, INT16_MAX );
+		return SCRIPT_CMD_FAILURE;
+	}
+	
+	int32 y = script_getnum( st, 3 );
+	
+	if( y < 0 || y > INT16_MAX ){
+		ShowError( "buildin_setdialogsize: y size %d is out of range [0,%d]\n", y, INT16_MAX );
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	clif_set_npc_window_size( *sd, x, y );
+
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(setdialogpos){
+	map_session_data *sd;
+
+	if ( !script_rid2sd(sd) ) {
+		script_pushint(st, 0);
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	int32 x = script_getnum( st, 2 );
+	
+	if( x < 0 || x > INT16_MAX ){
+		ShowError( "buildin_setdialogpos: x position %d is out of range [0,%d]\n", x, INT16_MAX );
+		return SCRIPT_CMD_FAILURE;
+	}
+	
+	int32 y = script_getnum( st, 3 );
+	
+	if( y < 0 || y > INT16_MAX ){
+		ShowError( "buildin_setdialogpos: y position %d is out of range [0,%d]\n", y, INT16_MAX );
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	clif_set_npc_window_pos( *sd, x, y );
+
+	return SCRIPT_CMD_SUCCESS;
+}
+
+BUILDIN_FUNC(setdialogpospercent){
+	map_session_data *sd;
+
+	if ( !script_rid2sd(sd) ) {
+		script_pushint(st, 0);
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	int32 x = script_getnum( st, 2 );
+	
+	if( x < 0 || x > 100 ){
+		ShowError( "buildin_setdialogpospercent: x rate %d is out of range [0,100]\n", x );
+		return SCRIPT_CMD_FAILURE;
+	}
+	
+	int32 y = script_getnum( st, 3 );
+	
+	if( y < 0 || y > 100 ){
+		ShowError( "buildin_setdialogpospercent: y rate %d is out of range [0,100]\n", y );
+		return SCRIPT_CMD_FAILURE;
+	}
+	
+	clif_set_npc_window_pos_percent( *sd, x, y );
+
+	return SCRIPT_CMD_SUCCESS;
+}
+
 #include <custom/script.inc>
 
 // declarations that were supposed to be exported from npc_chat.cpp
@@ -27741,6 +27865,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF2(montransform, "active_transform", "vi?????"),
 	BUILDIN_DEF(vip_status,"i?"),
 	BUILDIN_DEF(vip_time,"i?"),
+	BUILDIN_DEF(vip_is_enabled,"i"),
 	BUILDIN_DEF(bonus_script,"si????"),
 	BUILDIN_DEF(bonus_script_clear,"??"),
 	BUILDIN_DEF(getgroupitem,"i??"),
@@ -27883,6 +28008,11 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(has_autoloot,"?"),
 	BUILDIN_DEF(autoloot,"??"),
 	BUILDIN_DEF(opentips, "i?"),
+	
+	BUILDIN_DEF(setdialogalign, "i"),
+	BUILDIN_DEF(setdialogsize, "ii"),
+	BUILDIN_DEF(setdialogpos, "ii"),
+	BUILDIN_DEF(setdialogpospercent, "ii"),
 
 #include <custom/script_def.inc>
 

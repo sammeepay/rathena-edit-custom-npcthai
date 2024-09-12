@@ -1,2 +1,2 @@
 // Internal default is limited to 128 lines.  If you need more, you will need to modify the MOTD_LINE_SIZE definition in pc.cpp
-ยินดีต้อนรับสู่ rAthena! สนุก! กรุณารายงานข้อบกพร่องใดๆ ที่คุณพบ
+�Թ�յ�͹�Ѻ��� rAthena! ʹء! ��س���§ҹ��ͺ����ͧ�� ���س��
