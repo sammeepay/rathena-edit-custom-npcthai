@@ -10551,6 +10551,7 @@ bool pc_setparam(map_session_data *sd,int64 type,int64 val_tmp)
 		// If you do not check this, some funny things happen (circle logics, timer mismatches, etc...)
 		if( !sd->state.connect_new ){
 			// Make sure to always delete the timer
+			const struct TimerData* td{};
 			if (sd->goldpc_tid != INVALID_TIMER) {
 				td = get_timer(sd->goldpc_tid);
 				delete_timer( sd->goldpc_tid, pc_goldpc_update );
