@@ -40,7 +40,8 @@ function	script	F_CashStore	{
 	mes "ยินดีต้อนรับสู่ Kafra Corporation";
 	mes "ที่นี่ให้ฉันเปิดคลังเก็บของของคุณ";
 	if (vip_status(1)){
-		switch(select("Main:VIP")) {
+		next;
+		switch(select("เปิดคลังหลัก:เปิดคลัง VIP")) {
 			case 1:
 				close2;
 				openstorage;
@@ -48,7 +49,7 @@ function	script	F_CashStore	{
 			case 2:
 				close2;
 				openstorage2 1,STOR_MODE_GET|STOR_MODE_PUT;
-				 break;
+			break;
 		}
 	}else{
 		close2;
@@ -272,6 +273,26 @@ function	script	F_CashSiegeTele	{
 	case 18: warp "prt_gld",153,133; end;
 	case 19: warp "prt_gld",126,240; end;
 	case 20: warp "prt_gld",195,240; end;
+	}
+	return;
+}
+
+// Siege Teleport Scroll 2 (WoE 1.5)
+//============================================================ 
+// - Warp player to selected guild castle.
+// - No arguments.
+function	script	F_CashSiegeTele2	{
+	switch(select("Mardoll (arug_cas01):Cyr (arug_cas02):Horn (arug_cas03):Gefn (arug_cas04):Badanis (arug_cas05):Himinn (schg_cas01):Andlangr (schg_cas02):Vidblainn (schg_cas03):Hljod (schg_cas04):Schatirnil (schg_cas05)")) {
+	case 1: warp "aru_gld",159,272; end;
+	case 2: warp "aru_gld",86,50; end;
+	case 3: warp "aru_gld",63,157; end;
+	case 4: warp "aru_gld",307,354; end;
+	case 5: warp "aru_gld",298,110; end;
+	case 6: warp "sch_gld",300,100; end;
+	case 7: warp "sch_gld",284,249; end;
+	case 8: warp "sch_gld",102,196; end;
+	case 9: warp "sch_gld",140,83; end;
+	case 10: warp "sch_gld",70,320; end;
 	}
 	return;
 }

@@ -12,7 +12,3 @@
  *	 <datatype> name;
  **/
 
-int feature_goldpc_active;
-int feature_goldpc_time;
-int feature_goldpc_max_points;
-int feature_goldpc_vip;

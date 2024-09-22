@@ -211,6 +211,7 @@ Body:
       breakguild: true
       channel: true
       langtype: true
+      who: true
   - Id: 10
     Name: Law Enforcement
     Inherit:
@@ -269,6 +270,7 @@ Body:
       bypass_stat_onclone: true
       bypass_max_stat: true
       macro_register: true
+      trade_unconditional: true
       #all_permission: true
 
 Footer:

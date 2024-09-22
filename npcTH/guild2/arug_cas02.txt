@@ -38,7 +38,7 @@ arug_cas02,98,258,0	script	LF-04#arug_cas02	111,{ callfunc "LinkFlag","Defense A
 arug_cas02,98,253,0	script	LF-05#arug_cas02	111,{ callfunc "LinkFlag","Defense Area 2-3",156,324,"Defense Area 2-4",174,372; }
 arug_cas02,98,249,0	script	LF-06#arug_cas02	111,{ callfunc "LinkFlag","Defense Area 3-1",28,325,"Defense Area 3-2",57,325; }
 arug_cas02,98,245,0	script	LF-07#arug_cas02	111,{ callfunc "LinkFlag","Center 2nd Area",156,263,"Center 3rd Area",43,354; }
-arug_cas02,98,241,0	script	LF-08#arug_cas02	111,{ callfunc "LinkFlag","สิ่งอำนวยความสะดวก",387,323; }
+arug_cas02,98,241,0	script	LF-08#arug_cas02	111,{ callfunc "LinkFlag","Convenience Facility",387,323; }
 arug_cas02,216,92,0	script	Cyr#LF_ar02_1::LF_ar02_1	111,{ callfunc "LinkFlag","Emperium Center",43,256; }
 arug_cas02,63,92,0	duplicate(LF_ar02_1)	Cyr#LF_ar02_2	111
 arug_cas02,127,133,4	duplicate(LF_ar02_1)	Cyr#LF_ar02_3	111

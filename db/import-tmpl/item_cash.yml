@@ -31,7 +31,7 @@
 Header:
   Type: ITEM_CASH_DB
   Version: 1
-  
+
 #Body:
 #  - Tab: New
 #    Items:
@@ -281,4 +281,3 @@ Header:
 #    Items:
 #      - Item: Apple
 #        Price: 1
-

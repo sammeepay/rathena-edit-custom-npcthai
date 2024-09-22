@@ -71,7 +71,7 @@ function	script	F_CoolEventCorp	{
 		mes "กรุณาเลือก";
 		mes "ปลายทางของคุณ";
 		next;
-		if (vip_is_enabled(CHK_VIP_SCRIPT) && !vip_status(VIP_STATUS_ACTIVE))
+		if (VIP_SCRIPT && !vip_status(VIP_STATUS_ACTIVE))
 			set .@cost,4400;
 		else
 			set .@cost,2200;

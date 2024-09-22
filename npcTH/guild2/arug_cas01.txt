@@ -40,7 +40,7 @@ arug_cas01,89,232,0	script	LF-06#arug_cas01	111,{ callfunc "LinkFlag","Defense A
 arug_cas01,92,232,0	script	LF-07#arug_cas01	111,{ callfunc "LinkFlag","Gate House Fork",233,130; }
 arug_cas01,95,232,0	script	LF-08#arug_cas01	111,{ callfunc "LinkFlag","Area 1-1",197,144,"Area 2-1",256,35,"Area 3-1",146,65; }
 arug_cas01,98,232,0	script	LF-09#arug_cas01	111,{ callfunc "LinkFlag","Area 1-2",245,103,"Area 2-2",186,26,"Area 3-3",68,171; }
-arug_cas01,101,232,0	script	LF-10#arug_cas01	111,{ callfunc "LinkFlag","สิ่งอำนวยความสะดวก",121,357; }
+arug_cas01,101,232,0	script	LF-10#arug_cas01	111,{ callfunc "LinkFlag","Convenience Facility",121,357; }
 arug_cas01,72,176,0	script	Mardol#LF_ar01_1::LF_ar01_1	111,{ callfunc "LinkFlag","Emperium Center",67,193; }
 arug_cas01,103,186,0	duplicate(LF_ar01_1)	Mardol#LF_ar01_2	111
 arug_cas01,92,126,4	script	Mardol#LF_ar01_3::LF_ar01_2	111,{

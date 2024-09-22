@@ -75,7 +75,7 @@ OnGuildBreak:
 	disablenpc "Kafra Employee#"+substr(strnpcinfo(2),0,1)+substr(strnpcinfo(2),8,9);
 	setcastledata strnpcinfo(2),CD_GUILD_ID,0;
 	sleep 7000;
-	announce "ฐานกิลด์ ["+getcastlename(strnpcinfo(2))+"] ถูกยกเลิก",0;
+	announce "Guild Base ["+getcastlename(strnpcinfo(2))+"] has been abandoned.",0;
 	donpcevent strnpcinfo(0)+"::OnRecvCastle2";
 	end;
 
@@ -314,7 +314,7 @@ OnTreasureDied:
 			mes "invest one more time?";
 		}
 		next;
-		switch(select("Invest in Commercial Growth:ยกเลิก")) {
+		switch(select("Invest in Commercial Growth:Cancel")) {
 		case 1:
 			if (getcastledata(strnpcinfo(4),CD_INVESTED_ECONOMY) >= 2) {
 				mes "[ Steward ]";
@@ -401,7 +401,7 @@ OnTreasureDied:
 			mes "Will you invest now?";
 		}
 		next;
-		switch(select("Invest in Defense:ยกเลิก")) {
+		switch(select("Invest in Defense:Cancel")) {
 		case 1:
 			if (getcastledata(strnpcinfo(4),CD_INVESTED_DEFENSE) >= 2) {
 				mes "[ Steward ]";
@@ -441,7 +441,7 @@ OnTreasureDied:
 			mes "the Kafra Employee that";
 			mes "we've hired for the guild?";
 			next;
-			switch(select("Dismiss:ยกเลิก")) {
+			switch(select("Dismiss:Cancel")) {
 			case 1:
 				cutin "kafra_01",2;
 				mes "[ Hired Kafra Employee ]";
@@ -452,7 +452,7 @@ OnTreasureDied:
 				mes "guild members of this";
 				mes "stronghold, I promise!";
 				next;
-				switch(select("Dismiss:ยกเลิก")) {
+				switch(select("Dismiss:Cancel")) {
 				case 1:
 					mes "[ Hired Kafra Employee ]";
 					mes "Why?! What have I done";
@@ -493,7 +493,7 @@ OnTreasureDied:
 			mes "our stronghold? You must";
 			mes "pay ^FF000010,000 Zeny^000000 to hire one.";
 			next;
-			switch(select("Hire:ยกเลิก")) {
+			switch(select("Hire:Cancel")) {
 			case 1:
 				if (getgdskilllv(.@GID,10001) == 0) {
 					mes "[ Steward ]";
@@ -564,7 +564,7 @@ OnTreasureDied:
 		mes "treasure may disappear if";
 		mes "something unexpected happens.";
 		next;
-		switch(select("Go to Treasure Room:ยกเลิก")) {
+		switch(select("Go to Treasure Room:Cancel")) {
 		case 1:
 			mes "[ Steward ]";
 			mes "Allow me to guide you";
@@ -663,13 +663,13 @@ OnStartArena:
 				mes "this stronghold. For now,";
 				mes "all is quiet in this place.";
 				next;
-				switch(select("Converse:ยกเลิก")) {
+				switch(select("Converse:Cancel")) {
 				case 1:
 					mes .@n$;
 					mes "Do you have any questions";
 					mes "about this stronghold?";
 					next;
-					switch(select("Guardian Stones:Fortress Gates:Link Flags:Battle Strategy:ยกเลิก")) {
+					switch(select("Guardian Stones:Fortress Gates:Link Flags:Battle Strategy:Cancel")) {
 					case 1:
 						mes .@n$;
 						mes "There is one Emperium";
@@ -768,7 +768,7 @@ OnStartArena:
 				mes "Greetings, "+strcharinfo(0)+".";
 				mes "What are your orders?";
 				next;
-				switch(select("Increase Stronghold Defense:Situational Briefing:ยกเลิก")) {
+				switch(select("Increase Stronghold Defense:Situational Briefing:Cancel")) {
 				case 1:
 					if (!getd("$agit_"+strnpcinfo(2)+"[5]")) {
 						if (getgdskilllv(.@GID,10002) == 0) {
@@ -846,7 +846,7 @@ OnInit:
 		mes "The Kafra Corporation is ready";
 		mes "to assist you wherever you go!";
 		next;
-		switch(select("Use Storage:Use Warp Service:Rent Pushcart:ยกเลิก")) {
+		switch(select("Use Storage:Use Warp Service:Rent Pushcart:Cancel")) {
 		case 1:
 			if(!callfunc("F_CanOpenStorage")){
 				mes "[Kafra Employee]";
@@ -861,7 +861,7 @@ OnInit:
 			mes "Please tell me your";
 			mes "Warp destination.";
 			next;
-			switch(select("Rachel -> 200 z:ยกเลิก")) {
+			switch(select("Rachel -> 200 z:Cancel")) {
 			case 1:
 				if (Zeny < 200) {
 					mes "[Kafra Employee]";
@@ -900,7 +900,7 @@ OnInit:
 				mes "is 800 Zeny. Would you";
 				mes "like to rent a Pushcart?";
 				next;
-				switch(select("Rent Pushcart:ยกเลิก")) {
+				switch(select("Rent Pushcart:Cancel")) {
 				case 1:
 					if (Zeny < 800) {
 						mes "[Kafra Employee]";
@@ -969,7 +969,7 @@ OnInit:
 		mes "^3355FFDo you want to continue?^000000";
 		next;
 		if(select("No:Continue") == 1) {
-			mes "^3355FFWork ยกเลิกed.^000000";
+			mes "^3355FFWork canceled.^000000";
 			close;
 		}
 		if ((countitem(984) > 0) && (countitem(985) > 0) && (countitem(7049) > 29) && (countitem(717) > 4) && (countitem(715) > 4) && (countitem(716) > 4)) {
@@ -1711,25 +1711,32 @@ OnDisable:
 //============================================================
 function	script	LinkFlag	{
 	if (!getcharid(2) || getcharid(2) != getcastledata(strnpcinfo(4),CD_GUILD_ID)) end;
-	if (getarg(0) == "สิ่งอำนวยความสะดวก") {
-		mes "^3355FFนี่คือบริการเทเลพอร์ตฐานที่มั่น";
-		mes "คุณต้องการที่จะเทเลพอร์ตไปยังสิ่งอำนวยความสะดวกสำหรับสมาชิกกิลด์หรือไม่?^000000";
-		if(select("ไปที่สิ่งอำนวยความสะดวก:ยกเลิก") == 1)
+	if (getarg(0) == "Convenience Facility") {
+		mes "^3355FFThis is the Stronghold";
+		mes "Teleport Service. Would";
+		mes "you like to teleport to the";
+		mes "Convenience Facility for";
+		mes "guild members?^000000";
+		if(select("Go to Convenience Facility:Cancel") == 1)
 			warp strnpcinfo(4),getarg(1),getarg(2);
 		close;
 	}
 	if (getarg(0) == "Emperium Center") {
-		mes "^3355FFนี่คือบริการเทเลพอร์ตฐานที่มั่น";
-		mes "คุณต้องการที่จะเทเลพอร์ตไปยัง Emperium Center หรือไม่?^000000";
-		if(select("เทเลพอร์ต:ยกเลิก") == 1)
+		mes "^3355FFThis is the Stronghold";
+		mes "Teleport Service. Would";
+		mes "you like to teleport to";
+		mes "the Emperium Center?^000000";
+		if(select("Teleport:Cancel") == 1)
 			warp strnpcinfo(4),getarg(1),getarg(2);
 		close;
 	}
-	mes "^3355FFนี่คือบริการเทเลพอร์ตฐานที่มั่น";
-	mes "โปรดเลือกปลายทางภายในฐานที่มั่น^000000";
+	mes "^3355FFThis is the Stronghold";
+	mes "Teleport Service. Please";
+	mes "choose a destination";
+	mes "within the stronghold.^000000";
 	for(set .@i,0; .@i<getargcount(); set .@i,.@i+3)
 		set .@menu$, .@menu$+getarg(.@i)+":";
-	set .@menu$, .@menu$+"ยกเลิก";
+	set .@menu$, .@menu$+"Cancel";
 	set .@i, select(.@menu$)-1;
 	if (.@i != getargcount()/3)
 		warp strnpcinfo(4),getarg(.@i*3+1),getarg(.@i*3+2);
@@ -1743,15 +1750,22 @@ function	script	ReturnFlag	{
 	set .@str$, (compare(strnpcinfo(4),"aru"))?"Arunafeltz":"Schwarzwald";
 	.@GID =  getcastledata(.@map$,CD_GUILD_ID);
 	if (!.@GID) {
-		mes "[ พระราชกฤษฎีกา "+.@str$+" ]";
-		mes " อาณาจักรอันศักดิ์สิทธิ์แห่ง "+.@str$+" ประกาศว่ายังมีใครยังไม่ได้อ้างอำนาจเหนือฐานที่มั่นนี้ ผู้ที่ทำลาย Emperium จะได้รับการยอมรับว่าเป็นเจ้าของคนใหม่";
+		mes "[ "+.@str$+" Royal Edict ]";
+		mes "The Holy Kingdom of";
+		mes .@str$+" declares that";
+		mes "one has yet to claim lordship";
+		mes "over this stronghold. The one";
+		mes "that breaks the Emperium will";
+		mes "be recognized as its new owner.";
 		close;
 	}
 	if (getcharid(2) == .@GID && getarg(1,0)) {
-		mes "[ เสียงเรียกเข้า ]";
-		mes "ผู้กล้าหาญ คุณต้องการที่จะกลับไปยังฐานที่มั่นของคุณหรือไม่?";
+		mes "[ Ringing Voice ]";
+		mes "Courageous one,";
+		mes "do you wish to return";
+		mes "to your stronghold?";
 		next;
-		if(select("กลับสู่ฐานที่มั่น:ยกเลิก") == 1 && getcharid(2) == getcastledata(.@map$,CD_GUILD_ID)) {
+		if(select("Return to the Stronghold:Cancel") == 1 && getcharid(2) == getcastledata(.@map$,CD_GUILD_ID)) {
 			if (compare(.@map$,"arug")) {
 				if (.@map$ == "arug_cas01") setarray .@i[0],67,193;
 				else if (.@map$ == "arug_cas02") setarray .@i[0],43,256;
@@ -1766,13 +1780,19 @@ function	script	ReturnFlag	{
 		}
 		close;
 	}
-	mes "[ พระราชกฤษฎีกา "+.@str$+" ]";
-	mes "อาณาจักรศักดิ์สิทธิ์แห่ง "+.@str$+" ออกคำสั่งว่าฐานที่มั่นนี้เป็นของ ^FF0000"+getguildname(.@GID)+"^000000 Guild.";
+	mes "[ "+.@str$+" Royal Edict ]";
+	mes "The Holy Kingdom of";
+	mes .@str$+" decrees that";
+	mes "this stronghold is owned";
+	mes "by the ^FF0000"+getguildname(.@GID)+"^000000 Guild.";
 	next;
-	mes "[ พระราชกฤษฎีกา "+.@str$+" ]";
-	mes "^FF0000"+getguildmaster(.@GID)+"^000000 คือ";
-	mes "Guild Master ของ ^FF0000"+getguildname(.@GID)+"^000000.";
-	mes "วัตถุใดก็ตามนั้นจะต้องยึดครองฐานที่มั่นนี้ด้วยความแข็งแกร่งของเหล็กและเวทมนตร์ในช่วงเวลาที่กำหนดของ Guild Siege";
+	mes "[ "+.@str$+" Royal Edict ]";
+	mes "^FF0000"+getguildmaster(.@GID)+"^000000 is";
+	mes "Guild Master of ^FF0000"+getguildname(.@GID)+"^000000.";
+	mes "Any that object must claim this";
+	mes "stronghold through strength of";
+	mes "steel and magic during the";
+	mes "appointed Guild Siege times.";
 	close;
 }
 
@@ -1780,9 +1800,10 @@ function	script	ReturnFlag	{
 //============================================================
 -	script	Switch#template	-1,{
 	mes " ";
-	mes "^3355FFคุณจะดึงคันโยกเล็ก ๆ นี้หรือไม่?^000000";
+	mes "^3355FFWill you pull";
+	mes "this small lever?^000000";
 	next;
-	if(select("ดึงคันโยก:ยกเลิก") == 2) close;
+	if(select("Pull Lever:Cancel") == 2) close;
 	if (compare(strnpcinfo(4),"arug")) {
 		if (strnpcinfo(4) == "arug_cas01") setarray .@i[0],121,357;
 		else if (strnpcinfo(4) == "arug_cas02") setarray .@i[0],387,323;
@@ -1801,9 +1822,9 @@ function	script	ReturnFlag	{
 //============================================================
 -	script	Sunflower#template	-1,{
 	if (getcharid(2) == getcastledata(strnpcinfo(4),CD_GUILD_ID)) {
-		mes "- มันเป็นดอกทานตะวันขนาดใหญ่ที่น่าทึ่ง ใหญ่เท่ากับมนุษย์! ... คุณรู้สึกถึงบางสิ่งลึกลับที่เล็ดลอดออกมาจากดอกไม้ -";
+		mes "- It's an amazingly huge sunflower; as big as a human! ... You feel something mysterious emanating from the flower. -";
 		next;
-		switch(select("ถือก้าน.:ไม่ทำอะไร.")) {
+		switch(select("Hold the stem.:Do nothing.")) {
 		case 1:
 			if (compare(strnpcinfo(4),"arug")) {
 				set .@map$,"arug_dun01";
@@ -1819,7 +1840,7 @@ function	script	ReturnFlag	{
 			warp .@map$,.@mapx[.@i],.@mapy[.@i];
 			close;
 		case 2:
-			mes "มันน่ากลัวเกินไปที่จะสัมผัสสิ่งที่ไม่รู้จัก";
+			mes "It's too scary to touch unknown things.";
 			close;
 		}
 	}
