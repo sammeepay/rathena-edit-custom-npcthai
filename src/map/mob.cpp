@@ -3000,92 +3000,38 @@ int mob_dead(struct mob_data *md, struct block_list *src, int type)
 		}
 
 		// Process map specific drops
-		//Any Map (map_drops) [Hyroshima]
- 		std::shared_ptr<s_map_drops> mapdrops;
-		std::shared_ptr<s_map_drops> anymapdrops = map_drop_db.find(ANY_MAP_ID);
-		int map_drop_run = ( anymapdrops != nullptr ? 2 : 1);
-		bool on_instance = ( map[md->bl.m].instance_id > 0 ? 1 : 0);
+		std::shared_ptr<s_map_drops> mapdrops;
 
 		// If it is an instance map, we check for map specific drops of the original map
-		// Now instance maps need the mapflag mapdrops [Hyroshima]
-		if( on_instance && map_getmapflag( md->bl.m, MF_MAPDROPS) )
+		if( map[md->bl.m].instance_id > 0 ){
 			mapdrops = map_drop_db.find( map[md->bl.m].instance_src_map );
-		else if( !on_instance && !map_getmapflag( md->bl.m, MF_NOMAPDROPS ) )
+		}else{
 			mapdrops = map_drop_db.find( md->bl.m );
-		
-		for (i = 0; i < map_drop_run; i++){
-			if(i)
-			{
-				if( on_instance )
-				{
-					if( map_getmapflag( md->bl.m, MF_MAPDROPS) )
-						mapdrops = anymapdrops;
+		}
+
+		if( mapdrops != nullptr ){
+			// Process map wide drops
+			for( const auto& it : mapdrops->globals ){
+				if( rnd_chance( it.second->rate, 100000u ) ){
+					// 'Cheat' for autoloot command: rate is changed from n/100000 to n/10000
+					int32 map_drops_rate = max(1, (it.second->rate / 10));
+					std::shared_ptr<s_item_drop> ditem = mob_setdropitem(*it.second, 1, md->mob_id);
+					mob_item_drop( md, dlist, ditem, 0, map_drops_rate, homkillonly || merckillonly );
 				}
-				else if( !map_getmapflag(md->bl.m, MF_NOMAPDROPS) )
-					mapdrops = anymapdrops;
 			}
 
-			if( mapdrops != nullptr ){
-				// Process map wide drops
-				for( const auto& it : mapdrops->globals ){
-					unsigned char flag = 0;
+			// Process map drops for this specific mob
+			const auto& specific = mapdrops->specific.find( md->mob_id );
+
+			if( specific != mapdrops->specific.end() ){
+				for( const auto& it : specific->second ){
 					if( rnd_chance( it.second->rate, 100000u ) ){
-						if(it.second->direct_inventory)
-						{
-							if(!pet_create_egg(sd,it.second->nameid))
-							{
-								struct item item_tmp = {};
-								item_tmp.nameid=it.second->nameid;
-								item_tmp.identify=1;
-
-								if((flag=pc_additem(sd,&item_tmp,1,LOG_TYPE_SCRIPT))){
-									clif_additem(sd,0,0,flag);
-									map_addflooritem(&item_tmp,1,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0,0);
-								}
-							}
-						}
-						else
-						{
-							// 'Cheat' for autoloot command: rate is changed from n/100000 to n/10000
-							int32 map_drops_rate = max(1, (it.second->rate / 10));
-							std::shared_ptr<s_item_drop> ditem = mob_setdropitem(*it.second, 1, md->mob_id);
-							mob_item_drop( md, dlist, ditem, 0, map_drops_rate, homkillonly || merckillonly );
-						}
+						// 'Cheat' for autoloot command: rate is changed from n/100000 to n/10000
+						int32 map_drops_rate = max(1, (it.second->rate / 10));
+						std::shared_ptr<s_item_drop> ditem = mob_setdropitem(*it.second, 1, md->mob_id);
+						mob_item_drop( md, dlist, ditem, 0, map_drops_rate, homkillonly || merckillonly );
 					}
 				}
-
-				// Process map drops for this specific mob
-				const auto& specific = mapdrops->specific.find( md->mob_id );
-
-				if( specific != mapdrops->specific.end() ){
-					for( const auto& it : specific->second ){
-						unsigned char flag = 0;
-						if( rnd_chance( it.second->rate, 100000u ) ){
-							if(it.second->direct_inventory)
-							{
-								if(!pet_create_egg(sd,it.second->nameid))
-								{
-									struct item item_tmp = {};
-									item_tmp.nameid=it.second->nameid;
-									item_tmp.identify=1;
-
-									if((flag=pc_additem(sd,&item_tmp,1,LOG_TYPE_SCRIPT))){
-										clif_additem(sd,0,0,flag);
-										map_addflooritem(&item_tmp,1,sd->bl.m,sd->bl.x,sd->bl.y,0,0,0,0,0);
-									}
-								}
-							}
-							else
-							{
-								// 'Cheat' for autoloot command: rate is changed from n/100000 to n/10000
-								int32 map_drops_rate = max(1, (it.second->rate / 10));
-								std::shared_ptr<s_item_drop> ditem = mob_setdropitem(*it.second, 1, md->mob_id);
-								mob_item_drop( md, dlist, ditem, 0, map_drops_rate, homkillonly || merckillonly );
-							}
-						}
-					}
-				}
-				mapdrops = nullptr;
 			}
 		}
 
@@ -3731,7 +3677,7 @@ int mob_summonslave(struct mob_data *md2,int *value,int amount,uint16 skill_id)
 			md->status.hp = md->status.max_hp*hp_rate/100;
 
 		if (skill_id == NPC_SUMMONSLAVE) // Only appies to NPC_SUMMONSLAVE
-			status_calc_slave_mode(md, md2); // Inherit the aggressive mode of the master.
+			status_calc_slave_mode(*md); // Inherit the aggressive mode of the master.
 
 		if (md2->state.copy_master_mode)
 			md->status.mode = md2->status.mode;
@@ -5392,7 +5338,7 @@ static int mob_read_sqldb(void)
 	for( uint8 fi = 0; fi < ARRAYLENGTH(mob_db_name); ++fi ) {
 		// retrieve all rows from the mob database
 		if( SQL_ERROR == Sql_Query(mmysql_handle, "SELECT `id`,`name_aegis`,`name_english`,`name_japanese`,`level`,`hp`,`sp`,`base_exp`,`job_exp`,`mvp_exp`,`attack`,`attack2`,`defense`,`magic_defense`,`str`,`agi`,`vit`,`int`,`dex`,`luk`,`attack_range`,`skill_range`,`chase_range`,`size`,`race`,"
-			"`racegroup_goblin`,`racegroup_kobold`,`racegroup_orc`,`racegroup_golem`,`racegroup_guardian`,`racegroup_ninja`,`racegroup_gvg`,`racegroup_battlefield`,`racegroup_treasure`,`racegroup_biolab`,`racegroup_manuk`,`racegroup_splendide`,`racegroup_scaraba`,`racegroup_ogh_atk_def`,`racegroup_ogh_hidden`,`racegroup_bio5_swordman_thief`,`racegroup_bio5_acolyte_merchant`,`racegroup_bio5_mage_archer`,`racegroup_bio5_mvp`,`racegroup_clocktower`,`racegroup_thanatos`,`racegroup_faceworm`,`racegroup_hearthunter`,`racegroup_rockridge`,`racegroup_werner_lab`,`racegroup_temple_demon`,`racegroup_illusion_vampire`,`racegroup_malangdo`,`racegroup_ep172alpha`,`racegroup_ep172beta`,`racegroup_ep172bath`,`racegroup_illusion_turtle`,`racegroup_rachel_sanctuary`,`racegroup_illusion_luanda`,`racegroup_illusion_frozen`,`racegroup_illusion_moonlight`,"
+			"`racegroup_goblin`,`racegroup_kobold`,`racegroup_orc`,`racegroup_golem`,`racegroup_guardian`,`racegroup_ninja`,`racegroup_gvg`,`racegroup_battlefield`,`racegroup_treasure`,`racegroup_biolab`,`racegroup_manuk`,`racegroup_splendide`,`racegroup_scaraba`,`racegroup_ogh_atk_def`,`racegroup_ogh_hidden`,`racegroup_bio5_swordman_thief`,`racegroup_bio5_acolyte_merchant`,`racegroup_bio5_mage_archer`,`racegroup_bio5_mvp`,`racegroup_clocktower`,`racegroup_thanatos`,`racegroup_faceworm`,`racegroup_hearthunter`,`racegroup_rockridge`,`racegroup_werner_lab`,`racegroup_temple_demon`,`racegroup_illusion_vampire`,`racegroup_malangdo`,`racegroup_ep172alpha`,`racegroup_ep172beta`,`racegroup_ep172bath`,`racegroup_illusion_turtle`,`racegroup_rachel_sanctuary`,`racegroup_illusion_luanda`,`racegroup_illusion_frozen`,`racegroup_illusion_moonlight`,`racegroup_ep16_def`,"
 			"`element`,`element_level`,`walk_speed`,`attack_delay`,`attack_motion`,`damage_motion`,`damage_taken`,`ai`,`class`,"
 			"`mode_canmove`,`mode_looter`,`mode_aggressive`,`mode_assist`,`mode_castsensoridle`,`mode_norandomwalk`,`mode_nocast`,`mode_canattack`,`mode_castsensorchase`,`mode_changechase`,`mode_angry`,`mode_changetargetmelee`,`mode_changetargetchase`,`mode_targetweak`,`mode_randomtarget`,`mode_ignoremelee`,`mode_ignoremagic`,`mode_ignoreranged`,`mode_mvp`,`mode_ignoremisc`,`mode_knockbackimmune`,`mode_teleportblock`,`mode_fixeditemdrop`,`mode_detector`,`mode_statusimmune`,`mode_skillimmune`,"
 			"`mvpdrop1_item`,`mvpdrop1_rate`,`mvpdrop1_option`,`mvpdrop1_index`,`mvpdrop2_item`,`mvpdrop2_rate`,`mvpdrop2_option`,`mvpdrop2_index`,`mvpdrop3_item`,`mvpdrop3_rate`,`mvpdrop3_option`,`mvpdrop3_index`,"
@@ -6518,18 +6464,14 @@ uint64 MapDropDatabase::parseBodyNode( const ryml::NodeRef& node ){
 
 	uint16 mapindex = mapindex_name2idx( mapname.c_str(), nullptr );
 
-	//Any Map (map_drops) [Hyroshima]
-	if( mapindex == 0 && strcmp(mapname.c_str(),ANY_MAP_REF)){
+	if( mapindex == 0 ){
 		this->invalidWarning( node["Map"], "Unknown map \"%s\".\n", mapname.c_str() );
 		return 0;
 	}
 
 	int16 mapid = map_mapindex2mapid( mapindex );
 
-	//Any Map (map_drops) [Hyroshima]
-	if(!strcmp(mapname.c_str(),ANY_MAP_REF))
-		mapid = ANY_MAP_ID;
-	else if( mapid < 0 ){
+	if( mapid < 0 ){
 		// Silently ignore. Map might be on a different map-server
 		return 0;
 	}
@@ -6665,12 +6607,6 @@ bool MapDropDatabase::parseDrop( const ryml::NodeRef& node, std::unordered_map<u
 			drop->randomopt_group = 0;
 		}
 	}
-
-	//Any Map (map_drops) [Hyroshima]
-	if( this->nodeExists( node, "DirectInventory" ) )
-		drop->direct_inventory = 1;
-	else
-		drop->direct_inventory = 0;
 
 	if( !exists ){
 		drops[index] = drop;
