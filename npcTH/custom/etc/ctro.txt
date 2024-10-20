@@ -16,9 +16,9 @@
 
 OnHour00:
 OnHour12:
-	set $@brate,1500;
-	set $@jrate,1500;
-	set $@drate,1000;
+	set $@brate,600;
+	set $@jrate,600;
+	set $@drate,600;
 	
 	//Base exp
 	setbattleflag("base_exp_rate",$@brate);
@@ -35,9 +35,9 @@ OnHour12:
 
 OnHour06:
 OnHour18:
-	set $@brate,1000;
-	set $@jrate,1000;
-	set $@drate,500;
+	set $@brate,300;
+	set $@jrate,300;
+	set $@drate,300;
 
 	//Base exp
 	setbattleflag("base_exp_rate",$@brate);
@@ -202,6 +202,24 @@ moc_para01,44,16,4	script	Lydia::npcexpc	4_F_05,{
 			mes "งั้นมาใหม่นะ";
 			close;
 		}
+}
+
+//morocc,138,101,4	script	แร่อัพเกรด	2_M_OLDBLSMITH,{
+//	mes "[ "+strnpcinfo(1)+" ]";
+//	mes "ข้ามีของให้เจ้าแลกนะ แล้วเจ้าต้องการไรล่ะ...";
+//	next;
+//	close2;
+//	callshop "Item_Mineral", 1;
+//	end;
+//}
+
+moc_para01,44,22,4	script	เตวสหมวกสวมใส่	4_M_ROGUE,{
+	mes "[ "+strnpcinfo(1)+" ]";
+	mes "เจ้าต้องการอันไหนล่ะมีแต่ของสวยๆ งามๆ ทั้งนั้น...";
+	next;
+	close2;
+	callshop "Item_Headgear", 1;
+	end;
 }
 
 moc_para01,53,33,4	script	รับซื้อการ์ด	90,{

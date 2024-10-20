@@ -410,3 +410,409 @@ Body:
           - Index: 0
             Item: Poring_Coin
             Amount: 500
+
+###########################################################################
+##= ·≈°¢Õß·√Ë
+###########################################################################
+  - Name: Item_Mineral
+    Items:
+      - Index: 0
+        Item: Oridecon
+        Zeny: 10
+        RequiredItems:
+          - Index: 0
+            Item: Oridecon_Stone
+            Amount: 5
+      - Index: 1
+        Item: Elunium
+        Zeny: 10
+        RequiredItems:
+          - Index: 0
+            Item: Elunium_Stone
+            Amount: 5
+###########################################################################
+##= ‡§« ·≈°¢Õß «¡„ Ë
+###########################################################################
+  - Name: Item_Headgear
+    Items:
+      - Index: 0
+        Item: L_Magestic_Goat2
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1200
+          - Index: 1
+            Item: Magestic_Goat_
+            Amount: 1
+          - Index: 2
+            Item: Magestic_Goat
+            Amount: 1
+      - Index: 1
+        Item: Filir_Wing
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1500
+          - Index: 1
+            Item: Red_Feather
+            Amount: 25
+          - Index: 2
+            Item: Blue_Feather
+            Amount: 25
+      - Index: 2
+        Item: Pecopeco_Wing_Ears
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1000
+          - Index: 1
+            Item: Peco_Wing_Feather
+            Amount: 500
+          - Index: 2
+            Item: Illusion_Flower
+            Amount: 10
+      - Index: 3
+        Item: Darkness_Helm_J
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1500
+          - Index: 1
+            Item: Bone_Helm_
+            Amount: 1
+          - Index: 2
+            Item: Dark_Crystal
+            Amount: 500
+      - Index: 4
+        Item: Chick_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1200
+          - Index: 1
+            Item: Feather_Of_Birds
+            Amount: 500
+          - Index: 2
+            Item: Egg_Shell
+            Amount: 1
+          - Index: 3
+            Item: Side_Winder_Card
+            Amount: 1
+      - Index: 5
+        Item: Rainbow_Scarf
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1200
+          - Index: 1
+            Item: Soft_Silk_Cloth
+            Amount: 500
+          - Index: 2
+            Item: Red_Feather
+            Amount: 10
+          - Index: 3
+            Item: Blue_Feather
+            Amount: 10
+      - Index: 6
+        Item: Skull_Cap
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 3000
+          - Index: 1
+            Item: Skull
+            Amount: 500
+          - Index: 2
+            Item: Red_Feather
+            Amount: 10
+          - Index: 3
+            Item: Black_Dyestuffs
+            Amount: 1
+      - Index: 6
+        Item: Gang_Scarf
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1200
+          - Index: 1
+            Item: Scarlet_Dyestuffs
+            Amount: 20
+          - Index: 2
+            Item: Seagate_Mark
+            Amount: 5
+          - Index: 3
+            Item: Pocket_Watch
+            Amount: 2
+      - Index: 7
+        Item: Evil's_Bone_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 2000
+          - Index: 1
+            Item: Clattering_Skull
+            Amount: 350
+          - Index: 2
+            Item: Ice_Heart
+            Amount: 350
+          - Index: 3
+            Item: Ice_Scale
+            Amount: 5
+      - Index: 8
+        Item: Darkness_Helm
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 2000
+          - Index: 1
+            Item: Valhalla_Flower
+            Amount: 50
+          - Index: 2
+            Item: Ear_Of_Devil's_Wing
+            Amount: 1
+          - Index: 3
+            Item: Ear_Of_Angel's_Wing
+            Amount: 1
+      - Index: 9
+        Item: L_Orc_Hero_Helm
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 4000
+          - Index: 1
+            Item: Voucher_Of_Orcish_Hero
+            Amount: 100
+          - Index: 2
+            Item: Gold
+            Amount: 20
+      - Index: 10
+        Item: Little_Angel_Doll
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 2000
+          - Index: 1
+            Item: Red_Feather
+            Amount: 500
+          - Index: 2
+            Item: Fur
+            Amount: 50
+      - Index: 11
+        Item: Rabbit_Ear_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1200
+          - Index: 1
+            Item: Magician_Hat
+            Amount: 1
+          - Index: 2
+            Item: Dragon_Fly_Wing
+            Amount: 350
+          - Index: 3
+            Item: Spring_Rabbit_Card
+            Amount: 1
+      - Index: 12
+        Item: Pencil_In_Mouth
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 700
+          - Index: 1
+            Item: Pencil_Case
+            Amount: 7
+          - Index: 2
+            Item: Apple_Of_Archer
+            Amount: 1
+          - Index: 3
+            Item: Tree_Knot
+            Amount: 450
+      - Index: 13
+        Item: Fish_In_Mouth
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 700
+          - Index: 1
+            Item: Lip_Of_Ancient_Fish
+            Amount: 350
+          - Index: 2
+            Item: Mistic_Frozen
+            Amount: 50
+          - Index: 3
+            Item: Rough_Wind
+            Amount: 50
+      - Index: 14
+        Item: Alice_Doll
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 2000
+          - Index: 1
+            Item: Alice's_Apron
+            Amount: 350
+          - Index: 2
+            Item: Sway_Apron
+            Amount: 3
+          - Index: 3
+            Item: Marionette_Doll
+            Amount: 1
+      - Index: 15
+        Item: Claris_Doll_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 2000
+          - Index: 1
+            Item: Alice's_Apron
+            Amount: 350
+          - Index: 2
+            Item: Sway_Apron
+            Amount: 3
+          - Index: 3
+            Item: Marionette_Doll
+            Amount: 1
+      - Index: 16
+        Item: Carmen_Miranda's_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 2000
+          - Index: 1
+            Item: Prickly_Fruit_
+            Amount: 250
+          - Index: 2
+            Item: Prickly_Fruit
+            Amount: 250
+      - Index: 17
+        Item: Dress_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 2000
+          - Index: 1
+            Item: Magician_Hat
+            Amount: 1
+          - Index: 2
+            Item: Soft_Feather
+            Amount: 500
+      - Index: 18
+        Item: Rideword_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 2000
+          - Index: 1
+            Item: Bookclip_In_Memory
+            Amount: 200
+          - Index: 2
+            Item: Old_Magic_Book
+            Amount: 2
+      - Index: 19
+        Item: Pumpkin_Hat_H
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1200
+          - Index: 1
+            Item: Pumpkin_Bucket
+            Amount: 1000
+          - Index: 2
+            Item: Four_Leaf_Clover
+            Amount: 20
+      - Index: 20
+        Item: Pirate_Dagger
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1200
+          - Index: 1
+            Item: Dried_Clover
+            Amount: 20
+          - Index: 2
+            Item: Heart_Of_Tree
+            Amount: 120
+      - Index: 21
+        Item: New_Cowboy_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1200
+          - Index: 1
+            Item: Corsair
+            Amount: 1
+          - Index: 2
+            Item: Soft_Feather
+            Amount: 300
+      - Index: 22
+        Item: Santa_Poring_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1200
+          - Index: 1
+            Item: Santa's_Hat
+            Amount: 10
+          - Index: 2
+            Item: Angelic_Chain
+            Amount: 1
+          - Index: 3
+            Item: Turquoise
+            Amount: 20
+      - Index: 23
+        Item: Pisces_Crown
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1200
+          - Index: 1
+            Item: Crown
+            Amount: 1
+          - Index: 2
+            Item: Skyblue_Jewel
+            Amount: 70
+      - Index: 24
+        Item: Necromencer's_Hood
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1200
+          - Index: 1
+            Item: Cursed_Seal
+            Amount: 10
+          - Index: 2
+            Item: Evil_Horn
+            Amount: 50
+      - Index: 25
+        Item: Drooping_White_Kitty
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1200
+          - Index: 1
+            Item: Drooping_Kitty
+            Amount: 1
+      - Index: 26
+        Item: Moonlight_Flower_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 1200
+          - Index: 1
+            Item: Fox_Tail
+            Amount: 500
+          - Index: 2
+            Item: Golden_Jewel
+            Amount: 250
+      - Index: 27
+        Item: Fish_Head_Hat
+        RequiredItems:
+          - Index: 0
+            Item: Poring_Coin
+            Amount: 700
+          - Index: 1
+            Item: Delicious_Fish
+            Amount: 300
+
+
+
