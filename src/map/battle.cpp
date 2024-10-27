@@ -744,7 +744,8 @@ int battle_calc_cardfix(int attack_type, struct block_list *src, struct block_li
 				// On (at least) BF_MAGIC, damages are calculated consecutively and rounded down in the following order to match official damage :
 				// size, race2, ele, atk_ele, race, class
 				APPLY_CARDFIX_RE( damage, sd->indexed_bonus.magic_addsize[tstatus->size] + sd->indexed_bonus.magic_addsize[SZ_ALL] );
-// race2 is the same as the bonus per class ID
+				
+				// race2 is the same as the bonus per class ID
 				for (const auto &raceit : t_race2)
 					race2_val += sd->indexed_bonus.magic_addrace2[raceit];
 				for (const auto &it : sd->add_mdmg) {
@@ -766,7 +767,6 @@ int battle_calc_cardfix(int attack_type, struct block_list *src, struct block_li
 
 // Pre-renewal / old renewal behaviour
 #else
-
 				for (const auto &raceit : t_race2)
 					race2_val += sd->indexed_bonus.magic_addrace2[raceit];
 				cardfix = cardfix * (100 + sd->indexed_bonus.magic_addrace[tstatus->race] + sd->indexed_bonus.magic_addrace[RC_ALL] + race2_val) / 100;
@@ -784,6 +784,7 @@ int battle_calc_cardfix(int attack_type, struct block_list *src, struct block_li
 					}
 				}
 				APPLY_CARDFIX(damage, cardfix);
+#endif
 			}
 
 			// Affected by target DEF bonuses
