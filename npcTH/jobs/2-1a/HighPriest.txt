@@ -20,63 +20,45 @@ valkyrie,44,42,5	script	High Priest#Valkyrie	60,{
 		set .@karma_d,rand(1,10);
 		if (.@karma_d > 4) {
 			mes "[High Priest]";
-			mes "Congratulations.";
-			mes "Honor to the warriors!";
+			mes "ขอแสดงความยินดี";
+			mes "ขอแสดงความนับถือต่อเหล่านักรบ!";
 			close;
 		}
 		mes "[High Priest]";
-		mes "Through the power";
-		mes "of holiness, may we";
-		mes "find peace, strength";
-		mes "and protection. Deliver";
-		mes "us from the forces of evil...";
+		mes "ด้วยพลังแห่งความศักดิ์สิทธิ์ ขอให้เราพบกับความสงบสุข ความเข้มแข็ง และความคุ้มกัน โปรดช่วยให้เราพ้นจากกองกำลังแห่งความชั่วร้าย...";
 		close;
 	}
 	else if (ADVJOB == Job_High_Priest && Class == Job_Acolyte_High && JobLevel > 39) {
 		mes "[High Priest]";
-		mes "Our world is in";
-		mes "need of people of";
-		mes "talent and conviction.";
-		mes "Please continue your";
-		mes "good works as an even";
-		mes "greater hero of holiness...";
+		mes "โลกของเราต้องการคนที่มีพรสวรรค์และความเชื่อมั่น";
+		mes "โปรดทำความดีต่อไปในฐานะวีรบุรุษแห่งความศักดิ์สิทธิ์ที่ยิ่งใหญ่กว่านี้...";
 		next;
 		mes "[High Priest]";
-		mes "Would you like";
-		mes "to become a High Priest?";
+		mes "คุณอยากเป็นมหาปุโรหิตไหม?";
 		next;
-		if (select("No.:Yes.") == 1) {
+		if (select("ไม่:ใช่.") == 1) {
 			mes "[High Priest]";
-			mes "When you're ready,";
-			mes "feel free to come back.";
-			mes "Honor to the warriors!";
+			mes "เมื่อคุณพร้อมแล้ว โปรดกลับมาได้";
+			mes "ขอแสดงความนับถือต่อเหล่านักรบ!";
 			close;
 		}
 		if (SkillPoint) {
 			mes "[High Priest]";
-			mes "It is still possible for you to learn more skills. Please use";
-			mes "all of your remaining Skill Points before returning to me.";
+			mes "คุณยังสามารถเรียนรู้ทักษะเพิ่มเติมได้ โปรดใช้แต้มทักษะที่เหลือทั้งหมดก่อนกลับมาหาฉัน";
 			close;
 		}
 		jobchange Job_High_Priest;
 		set ADVJOB,0;
 		mes "[High Priest]";
-		mes "Congratulations.";
-		mes "As a High Priest,";
-		mes "I hope you will guide";
-		mes "others upon the path";
-		mes "to holiness...";
+		mes "ขอแสดงความยินดีด้วย";
+		mes "ในฐานะที่เป็นมหาปุโรหิต ฉันหวังว่าคุณจะนำพาผู้อื่นไปบนเส้นทางสู่ความศักดิ์สิทธิ์...";
 		close;
 	}
 	mes "[High Priest]";
-	mes "Welcome";
-	mes "to Valhalla,";
-	mes "the Hall of Honor.";
+	mes "ยินดีต้อนรับสู่วัลฮัลลา หอเกียรติยศ";
 	next;
 	mes "[High Priest]";
-	mes "Please make";
-	mes "yourself comfortable";
-	mes "while you are here.";
-	mes "Honor to the warriors!";
+	mes "โปรดทำให้ตัวเองรู้สึกสบายขณะที่อยู่ที่นี่";
+	mes "ขอแสดงความนับถือต่อเหล่านักรบ!";
 	close;
 }

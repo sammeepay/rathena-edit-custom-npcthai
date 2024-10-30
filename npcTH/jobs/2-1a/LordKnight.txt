@@ -20,65 +20,50 @@ valkyrie,44,39,5	script	Lord Knight#Valkyrie	56,{
 		set .@karma_d,rand(1,10);
 		if (.@karma_d > 4) {
 			mes "[Lord Knight]";
-			mes "Congratulations.";
-			mes "Honor to the warriors!";
+			mes "ขอแสดงความยินดี";
+			mes "ขอแสดงความนับถือต่อเหล่านักรบ!";
 			close;
 		}
 		mes "[Lord Knight]";
-		mes "We Knights have an";
-		mes "awesome responsibility...";
-		mes "To serve and protect.";
+		mes "พวกเราเหล่าอัศวินมีความรับผิดชอบอันยิ่งใหญ่...";
+		mes "ในการรับใช้และปกป้อง";
 		next;
 		mes "[Lord Knight]";
-		mes "Even at the cost";
-		mes "of our own lives,";
-		mes "we must safeguard the";
-		mes "well being of our comrades.";
+		mes "ถึงแม้ต้องแลกมาด้วยชีวิต เราก็ต้องปกป้องสวัสดิภาพของสหายร่วมรบของเรา";
 		close;
 	}
 	else if (ADVJOB == Job_Lord_Knight && Class == Job_Swordman_High && JobLevel > 39) {
 		mes "[Lord Knight]";
-		mes "Your time has come!";
-		mes "The world still needs you.";
-		mes "Please continue your life";
-		mes "as a hero with a new appearance.";
+		mes "ถึงเวลาของคุณแล้ว!";
+		mes "โลกยังต้องการคุณ";
+		mes "โปรดดำเนินชีวิตต่อไปในฐานะฮีโร่ที่มีรูปลักษณ์ใหม่";
 		next;
 		mes "[Lord Knight]";
-		mes "Would you like";
-		mes "to become a Lord Knight?";
+		mes "คุณอยากเป็นอัศวินผู้กล้าหาญหรือไม่?";
 		next;
-		if (select("No.:Yes.") == 1) {
+		if (select("ไม่:ใช่.") == 1) {
 			mes "[Lord Knight]";
-			mes "When you're ready,";
-			mes "feel free to come back.";
-			mes "Honor to the warriors!";
+			mes "เมื่อคุณพร้อมแล้ว โปรดกลับมาได้";
+			mes "ขอแสดงความนับถือต่อเหล่านักรบ!";
 			close;
 		}
 		if (SkillPoint) {
 			mes "[Lord Knight]";
-			mes "It is still possible for you to learn more skills. Please use";
-			mes "all of your remaining Skill Points before returning to me.";
+			mes "คุณยังสามารถเรียนรู้ทักษะเพิ่มเติมได้ โปรดใช้แต้มทักษะที่เหลือทั้งหมดก่อนกลับมาหาฉัน";
 			close;
 		}
 		jobchange Job_Lord_Knight;
 		set ADVJOB,0;
 		mes "[Lord Knight]";
-		mes "Congratulations!";
-		mes "As a Lord Knight,";
-		mes "I hope that you will be";
-		mes "at the forefront of battle,";
-		mes "and lead your allies to victory!";
+		mes "ขอแสดงความยินดีด้วย!";
+		mes "ในฐานะอัศวินผู้ยิ่งใหญ่ ข้าหวังว่าเจ้าจะอยู่ที่แนวหน้าของการต่อสู้ และนำพาพันธมิตรของคุณไปสู่ชัยชนะ!";
 		close;
 	}
 	mes "[Lord Knight]";
-	mes "Welcome";
-	mes "to Valhalla,";
-	mes "the Hall of Honor.";
+	mes "ยินดีต้อนรับสู่วัลฮัลลา หอเกียรติยศ";
 	next;
 	mes "[Lord Knight]";
-	mes "Please make";
-	mes "yourself comfortable";
-	mes "while you are here.";
-	mes "Honor to the warriors!";
+	mes "โปรดทำให้ตัวเองรู้สึกสบายขณะที่อยู่ที่นี่";
+	mes "ขอแสดงความนับถือต่อเหล่านักรบ!";
 	close;
 }

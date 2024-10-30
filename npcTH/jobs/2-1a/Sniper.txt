@@ -20,64 +20,46 @@ valkyrie,44,55,5	script	Sniper#Valkyrie	727,{
 		set .@karma_d,rand(1,10);
 		if (.@karma_d > 4) {
 			mes "[Sniper]";
-			mes "Congratulations.";
-			mes "Honor to the warriors!";
+			mes "ขอแสดงความยินดีด้วย";
+			mes "ขอแสดงความนับถือต่อเหล่านักรบ!";
 			close;
 		}
 		mes "[Sniper]";
-		mes "One shot.";
-		mes "One kill.";
-		mes "It's not so hard";
-		mes "once you develop the";
-		mes "vision for that style";
-		mes "of battling.";
+		mes "นัดเดียว";
+		mes "ฆ่าครั้งเดียว";
+		mes "มันไม่ยากเลยเมื่อคุณพัฒนาวิสัยทัศน์สำหรับรูปแบบการต่อสู้แบบนั้น";
 		close;
 	}
 	else if (ADVJOB == Job_Sniper && Class == Job_Archer_High && JobLevel > 39) {
 		mes "[Sniper]";
-		mes "The world is in";
-		mes "need of mighty Bowmen";
-		mes "like you. Are you ready for";
-		mes "the awesome responsibility?";
+		mes "โลกต้องการนักธนูผู้แข็งแกร่งอย่างคุณ คุณพร้อมสำหรับความรับผิดชอบอันยิ่งใหญ่นี้หรือยัง";
 		next;
 		mes "[Sniper]";
-		mes "Are you willing to";
-		mes "take the next step and";
-		mes "become a Sniper?";
+		mes "คุณเต็มใจที่จะก้าวไปสู่ขั้นต่อไปและกลายเป็นนักซุ่มยิงหรือไม่";
 		next;
-		if (select("No.:Yes.") == 1) {
+		if (select("ไม่:ใช่.") == 1) {
 			mes "[Sniper]";
-			mes "When you're ready,";
-			mes "feel free to come back.";
-			mes "Honor to the warriors!";
+			mes "เมื่อคุณพร้อมแล้ว โปรดกลับมาได้";
+			mes "ขอแสดงความนับถือต่อเหล่านักรบ!";
 			close;
 		}
 		if (SkillPoint) {
 			mes "[Sniper]";
-			mes "It is still possible for you to learn more skills. Please use";
-			mes "all of your remaining Skill Points before returning to me.";
+			mes "คุณยังสามารถเรียนรู้ทักษะเพิ่มเติมได้ โปรดใช้แต้มทักษะที่เหลือทั้งหมดก่อนกลับมาหาฉัน";
 			close;
 		}
 		jobchange Job_Sniper;
 		set ADVJOB,0;
 		mes "[Sniper]";
-		mes "Congratulations!";
-		mes "As a Sniper, I hope";
-		mes "that the minions of evil";
-		mes "will never be safe so";
-		mes "long as they are in";
-		mes "your sight!";
+		mes "ยินดีด้วย!";
+		mes "ในฐานะมือปืน ฉันหวังว่าเหล่าสมุนของความชั่วร้ายจะไม่มีวันปลอดภัยตราบใดที่พวกมันยังอยู่ในสายตาของคุณ!";
 		close;
 	}
 	mes "[Sniper]";
-	mes "Welcome";
-	mes "to Valhalla,";
-	mes "the Hall of Honor.";
+	mes "ยินดีต้อนรับสู่วัลฮัลลา หอเกียรติยศ";
 	next;
 	mes "[Sniper]";
-	mes "Please make";
-	mes "yourself comfortable";
-	mes "while you are here.";
-	mes "Honor to the warriors!";
+	mes "โปรดทำให้ตัวเองรู้สึกสบายขณะที่อยู่ที่นี่";
+	mes "ขอแสดงความนับถือต่อเหล่านักรบ!";
 	close;
 }

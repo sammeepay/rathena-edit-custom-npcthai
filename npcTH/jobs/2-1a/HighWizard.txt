@@ -20,67 +20,48 @@ valkyrie,44,47,5	script	High Wizard#Valkyrie	735,{
 		set .@karma_d,rand(1,10);
 		if (.@karma_d > 4) {
 			mes "[High Wizard]";
-			mes "Congratulations.";
-			mes "Honor to the warriors!";
+			mes "ขอแสดงความยินดีด้วย";
+			mes "ขอแสดงความนับถือต่อเหล่านักรบ!";
 			close;
 		}
 		mes "[High Wizard]";
-		mes "We High Wizards have";
-		mes "the responsibility of";
-		mes "using our destructive magic";
-		mes "for the right purposes.";
+		mes "พวกเราพ่อมดชั้นสูงมีหน้าที่ในการใช้เวทมนตร์ทำลายล้างเพื่อจุดประสงค์ที่ถูกต้อง";
 		next;
 		mes "[High Wizard]";
-		mes "A lifetime of training";
-		mes "is required before becoming";
-		mes "a High Wizard. Can you imagine";
-		mes "what would happen if our power";
-		mes "was placed in the wrong hands?!";
+		mes "ต้องฝึกฝนตลอดชีวิตจึงจะกลายเป็นพ่อมดชั้นสูงได้ คุณลองนึกภาพดูว่าจะเกิดอะไรขึ้นถ้าพลังของเราตกอยู่ในมือคนผิด!";
 		close;
 	}
 	else if (ADVJOB == Job_High_Wizard && Class == Job_Mage_High && JobLevel > 39) {
 		mes "[High Wizard]";
-		mes "It is time.";
-		mes "And Midgard has";
-		mes "need of those who can";
-		mes "wield the strongest of magic...";
+		mes "ถึงเวลาแล้ว";
+		mes "และมิดการ์ดต้องการผู้ที่สามารถใช้เวทมนตร์ที่แข็งแกร่งที่สุดได้...";
 		next;
 		mes "[High Wizard]";
-		mes "Would you like to";
-		mes "become a High Wizard?";
+		mes "คุณอยากจะเป็นพ่อมดชั้นสูงไหม?";
 		next;
-		if (select("No.:Yes.") == 1) {
+		if (select("ไม่:ใช่.") == 1) {
 			mes "[High Wizard]";
-			mes "When you're ready,";
-			mes "feel free to come back.";
-			mes "Honors to the warriors!";
+			mes "เมื่อคุณพร้อมแล้ว โปรดกลับมาได้เลย";
+			mes "ขอแสดงความนับถือต่อเหล่านักรบ!";
 			close;
 		}
 		if (SkillPoint) {
 			mes "[High Wizard]";
-			mes "It is still possible for you to learn more skills. Please use";
-			mes "all of your remaining Skill Points before returning to me.";
+			mes "คุณยังสามารถเรียนรู้ทักษะเพิ่มเติมได้ โปรดใช้แต้มทักษะที่เหลือทั้งหมดก่อนกลับมาหาฉัน";
 			close;
 		}
 		jobchange Job_high_Wizard;
 		set ADVJOB,0;
 		mes "[High Wizard]";
-		mes "Congratulations.";
-		mes "As a High Wizard,";
-		mes "I hope use you use";
-		mes "your powers to bring";
-		mes "peace to the oppressed.";
+		mes "ขอแสดงความยินดีด้วย";
+		mes "ในฐานะที่เป็นพ่อมดชั้นสูง ฉันหวังว่าคุณจะใช้พลังของคุณเพื่อนำสันติสุขมาสู่ผู้ถูกกดขี่";
 		close;
 	}
 	mes "[High Wizard]";
-	mes "Welcome";
-	mes "to Valhalla,";
-	mes "the Hall of Honor.";
+	mes "ยินดีต้อนรับสู่วัลฮัลลา หอเกียรติยศ";
 	next;
 	mes "[High Wizard]";
-	mes "Please make";
-	mes "yourself comfortable";
-	mes "while you are here.";
-	mes "Honor to the warriors!";
+	mes "โปรดทำให้ตัวเองรู้สึกสบายขณะที่อยู่ที่นี่";
+	mes "ขอแสดงความนับถือต่อเหล่านักรบ!";
 	close;
 }
