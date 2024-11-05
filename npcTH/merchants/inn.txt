@@ -204,21 +204,21 @@ ve_in,157,219,5	script	Inn Master#Receptionist	709,{
 //======================== Brasilis =================================
 bra_in01,27,24,3	script	Hotel Keeper#bra1	478,{
 	mes "[Hotel Keeper]";
-	mes "Welcome to the beautiful Brasilis Hotel.";
+	mes "ยินดีต้อนรับสู่โรงแรม Brasilis ที่สวยงาม";
 	next;
-	switch(select("Save:Rest -5000 zeny:Cancel")) {
+	switch(select("บันทึก:พัก -5,000 zeny:ยกเลิก")) {
 	case 1:
 		mes "[Hotel Keeper]";
-		mes "Do you want to save here at the Brasilis Hotel?";
+		mes "คุณต้องการประหยัดค่าใช้จ่ายที่โรงแรม Brasilis หรือไม่?";
 		next;
-		switch(select("No thank you.:Absolutely.")) {
+		switch(select("ไม่เป็นไร ขอบคุณ.:แน่นอน.")) {
 		case 1:
 			mes "[Hotel Keeper]";
-			mes "Ok then, enjoy your stay.";
+			mes "โอเค งั้นก็ขอให้สนุกกับการเข้าพักนะ";
 			close;
 		case 2:
 			mes "[Hotel Keeper]";
-			mes "Your respawn has been saved here at the hotel. I hope that you enjoy your stay here in Brasilis.";
+			mes "การเกิดใหม่ของคุณได้รับการบันทึกไว้ที่โรงแรมแห่งนี้ ฉันหวังว่าคุณจะเพลิดเพลินกับการอยู่ที่นี่ในบราซิล";
 			savepoint "bra_in01",144,69,1,1;
 			close;
 		}
@@ -226,7 +226,7 @@ bra_in01,27,24,3	script	Hotel Keeper#bra1	478,{
 	case 2:
 		if (Zeny > 4999) {
 			mes "[Hotel Keeper]";
-			mes "I will show you a great room.";
+			mes "ฉันจะแสดงห้องใหญ่ให้คุณดู";
 			close2;
 			if (Zeny < 5000)
 				end;
@@ -236,10 +236,63 @@ bra_in01,27,24,3	script	Hotel Keeper#bra1	478,{
 			end;
 		}
 		mes "[Hotel Keeper]";
-		mes "I'm sorry, but the service charge is 5,000 zeny per night.";
+		mes "ขออภัยค่ะ แต่ค่าบริการอยู่ที่ 5,000 เซนีต่อคืน";
 	case 3:
 		close;
 	}
+}
+
+//======================== Einbroch =================================
+ein_in01,206,224,3	script	Hotel Employee#ein	855,{
+	mes "[Hotel Employee]";
+	mes "สวัสดีค่ะ ยินดีต้อนรับสู่";
+	mes "โรงแรม Einbroch พนักงานของเรามุ่งมั่นที่จะให้บริการแขกของเราด้วยมาตรฐานสูงสุดทั้งในเรื่องความสะอาด การบริการ และความสะดวกสบาย~";
+	next;
+	if (kain_ticket == 5) {
+		mes "[Hotel Employee]";
+		mes "คุณกำลังมองหาคุณเดฟรู อาร์คอยู่หรือเปล่า";
+		mes "อ๋อ ใช่แล้ว เขาบอกว่ากำลังรอพัสดุจากสนามบินอยู่น่ะ ตอนนี้ขอฉันหาข้อมูลนั้นก่อน...";
+		next;
+		mes "[Hotel Employee]";
+		mes "อ๋อ เรามาถึงแล้ว";
+		mes "คุณเดฟรู อาร์ค พักอยู่ที่ห้อง 201";
+		next;
+	}
+	else {
+		switch(select("บันทึก:พักผ่อน - 5,000 เซนี:ยกเลิก")) {
+		case 1:
+			mes "[Hotel Employee]";
+			mes "จุดเกิดใหม่ของคุณได้รับการบันทึกไว้ที่นี่ในโรงแรม Einbroch";
+			mes "ขอบคุณและโปรดมาอีกครั้ง";
+			close2;
+			savepoint "ein_in01",200,224,1,1;
+			end;
+		case 2:
+			if (Zeny > 4999) {
+				mes "[Hotel Employee]";
+				mes "ขอบคุณค่ะ";
+				mes "ขอให้พักผ่อนให้สนุกนะคะ~";
+				close2;
+				set Zeny, Zeny-5000;
+				percentheal 100,100;
+				warp "ein_in01",272,167;
+				end;
+			}
+			else {
+				mes "[Hotel Employee]";
+				mes "ขอโทษทีค่ะ แต่ค่าที่พัก 5,000 เซนี คราวหน้าอย่าลืมพกเงินเซนีไปพอนะคะ";
+				close;
+			}
+		case 3:
+			mes "[Hotel Employee]";
+			mes "ขอบคุณนะและ";
+			mes "โปรดมาอีกครั้งนะ~";
+			close;
+		}
+	}
+	mes "[Hotel Employee]";
+	mes "ขอให้เป็นวันที่ดี.";
+	close;
 }
 
 //======================= Inn Function ==============================
