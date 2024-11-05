@@ -7417,7 +7417,7 @@ static unsigned short status_calc_watk(struct block_list *bl, status_change *sc,
 	return (unsigned short)cap_value(watk,0,USHRT_MAX);
 }
 
-#ifdef RENEWAL
+
 /**
  * Adds flat magic attack modifications from skills
  * @param sd: Object to change matk [PC]
