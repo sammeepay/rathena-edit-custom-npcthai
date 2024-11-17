@@ -1,12 +1,12 @@
 moc_para01,26,15,4	script	Primo d'Buffer	790,{
 	if( vip_status(1) ) {
 		mes "[Primo d'Buffer]";
-		mes "Hello adventurer, you look like you are itching to get out there and save the world!";
-		mes "I can also tell that you have been blessed with 'VIP Status'!";
+		mes "สวัสดี นักผจญภัย ดูเหมือนคุณจะอยากออกไปช่วยโลกแล้วสินะ!";
+		mes "ฉันยังบอกได้เลยว่าคุณได้รับพรให้มี 'สถานะ VIP'!";
 		next;
 		mes "[Primo d'Buffer]";
-		mes "That is awesome!";
-		mes "Here is +7 to all your stats for 30 minutes to help you on your Journey.  Just come back when you need to refill your stats!";
+		mes "สุดยอดไปเลย!";
+		mes "นี่คือ +7 ให้กับ all stats ของคุณเป็นเวลา 30 นาทีเพื่อช่วยคุณในการเดินทางของคุณ กลับมาอีกครั้งเมื่อคุณต้องการเติม stats ของคุณ!";
 		close2;
 		sc_start SC_STRFood,1800000,7;
 		sc_start SC_AGIFood,1800000,7;
@@ -17,17 +17,17 @@ moc_para01,26,15,4	script	Primo d'Buffer	790,{
 		end;
 	} else {
 		mes "[Primo d'Buffer]";
-		mes "Hello adventurer, you look like you are itching to get out there and save the world!";
-		mes "I can also tell that you haven't been blessed with '^072cffVIP Status^000000'.";
+		mes "สวัสดี นักผจญภัย ดูเหมือนคุณจะอยากออกไปช่วยโลกแล้วสินะ!";
+		mes "ฉันยังบอกได้ว่าคุณไม่ได้รับพรให้มี '^072cffสถานะ VIP^000000' ด้วยซ้ำ";
 		next;
 		mes "[Primo d'Buffer]";
-		mes "My orders are to help out any Adventurer marked as VIP with special Buffs!";
-		mes "Currently I will give you ^e92f2f+7 to all of your Stats for 30 minutes^000000 if you are VIP.";
+		mes "คำสั่งของฉันคือให้ช่วยเหลือผู้เล่นที่ถูกทำเครื่องหมายว่าเป็น VIP ด้วยบัฟพิเศษ!";
+		mes "ในขณะนี้ ฉันจะให้ ^e92f2f+7 all stats ของคุณเป็นเวลา 30 นาที^000000 หากคุณเป็น VIP";
 		next;
 		mes "[Primo d'Buffer]";
-		mes "If you would like to be VIP, you can use WarpPortal to ^ffd07bPower-UP^000000 your game account with VIP Status.";
-		mes "Of course there are many other advantages to being VIP, like higher EXP and Drop Rates, more Storage and special buff NPCs like me!";
-		mes "Happy Journeys!";
+		mes "หากคุณต้องการเป็น VIP คุณสามารถใช้ WarpPortal เพื่อ ^ffd07bPower-UP^000000 บัญชีเกมของคุณพร้อมสถานะ VIP ได้";
+		mes "แน่นอนว่าการเป็น VIP ยังมีข้อดีอื่นๆ อีกมากมาย เช่น EXP และ Drop Rate ที่สูงขึ้น พื้นที่เก็บของที่มากขึ้น และ NPC ที่มีบัฟพิเศษอย่างฉัน!";
+		mes "ขอให้การเดินทางมีความสุข!";
 		close;
 	}
 }
