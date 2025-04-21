@@ -25875,7 +25875,7 @@ void clif_parse_dynamic_npc( int32 fd, map_session_data* sd ){
  		p->myStall = 1;
  	else
  		p->myStall = 0;
- 	p->expireTime = const_cast<int32>((st->expire_time - time(NULL)) * 1000); //if 0 == unlimited on client..
+ 	p->expireTime = (int32)((st->expire_time - time(NULL)) * 1000); //if 0 == unlimited on client..
  
  	int16 slot = 0;
  	for(int32 i = 0; i < st->vend_num ; i++){
@@ -25938,7 +25938,7 @@ void clif_parse_dynamic_npc( int32 fd, map_session_data* sd ){
  		p->myStall = 1;
  	else
  		p->myStall = 0;
- 	p->expireTime = const_cast<int32>((st->expire_time - time(NULL)) * 1000); //if 0 == unlimited on client..
+ 	p->expireTime = (int32)((st->expire_time - time(NULL)) * 1000); //if 0 == unlimited on client..
  
  	uint64 total_price = 0;
  	int16 k = 0;
