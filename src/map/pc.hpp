@@ -427,6 +427,7 @@ public:
 		uint32 buyingstore : 1;
 		uint32 lesseffect : 1;
 		uint32 vending : 1;
+		bool stall_ui_open;
 		uint32 noks : 3; // [Zeph Kill Steal Protection]
 		uint32 changemap : 1;
 		uint32 callshop : 1; // flag to indicate that a script used callshop; on a shop
@@ -544,6 +545,9 @@ public:
 		reproduceskill_idx; ///Stores index of copied skill by Reproduce
 	int32 menuskill_id, menuskill_val, menuskill_val2;
 
+	uint16 stallvending_level;
+ 	uint32 stall_expire_time;
+	
 	int32 invincible_timer;
 	t_tick canlog_tick;
 	t_tick canuseitem_tick;	// [Skotlex]
@@ -745,8 +749,10 @@ public:
 
 	int32 vended_id;
 	int32 vender_id;
+	int32 stall_id;
 	int32 vend_num;
 	uint16 vend_skill_lv;
+	uint16 stall_skill_lv;
 	char message[MESSAGE_SIZE];
 	struct s_vending vending[MAX_VENDING];
 

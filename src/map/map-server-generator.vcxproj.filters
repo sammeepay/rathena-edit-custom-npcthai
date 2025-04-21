@@ -137,6 +137,9 @@
     <ClInclude Include="skill.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+	<ClInclude Include="stall.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="status.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -263,6 +266,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="skill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+	<ClCompile Include="stall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="status.cpp">
