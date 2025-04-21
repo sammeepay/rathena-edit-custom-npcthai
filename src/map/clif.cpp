@@ -5629,7 +5629,7 @@ int32 clif_outsight(struct block_list *bl,va_list ap)
 				clif_clearunit_single( bl->id, CLR_OUTSIGHT, *tsd );
 			break;
 		case BL_STALL:
- 			clif_clearunit_single( bl->id, CLR_OUTSIGHT, &tsd->fd );
+ 			clif_clearunit_single( bl->id, CLR_OUTSIGHT, *tsd );
  			break;
 		default:
 			if((vd=status_get_viewdata(bl)) && vd->class_ != JT_INVISIBLE)
@@ -14173,7 +14173,7 @@ void clif_parse_PurchaseReq2(int32 fd, map_session_data* sd){
 	const PACKET_CZ_PC_PURCHASE_ITEMLIST_FROMMC2* p = reinterpret_cast<PACKET_CZ_PC_PURCHASE_ITEMLIST_FROMMC2*>( RFIFOP( fd, 0 ) );
 
 	//vending_purchasereq( sd, p->AID, p->UniqueID, (uint8*)p->list, ( p->packetLength - sizeof( *p ) ) / sizeof( p->list[0] ) );
-	if(uid >= START_STALL_NUM)
+	if(p->UniqueID >= START_STALL_NUM)
  		stall_vending_purchasereq( sd, p->AID, p->UniqueID, (uint8*)p->list, ( p->packetLength - sizeof( *p ) ) / sizeof( p->list[0] ) );
  	else
  		vending_purchasereq( sd, p->AID, p->UniqueID, (uint8*)p->list, ( p->packetLength - sizeof( *p ) ) / sizeof( p->list[0] ) );
