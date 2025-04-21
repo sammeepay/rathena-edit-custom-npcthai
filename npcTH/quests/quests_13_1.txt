@@ -4716,7 +4716,7 @@ mid_camp,9,215,5	duplicate(Camp Guard#man1)	Camp Guard#man3	852
 mid_camp,49,154,0	script	#env_clear	-1,3,3,{
 OnTouch:
 	if (ep13_animal == 7) {
-		enablenpc "นักพฤกษศาสตร์#EP13_1";
+		enablenpc "Botanist#ep13_1";
 		mes "[นักพฤกษศาสตร์]";
 		mes "นี่คือ";
 		next;
@@ -4730,13 +4730,13 @@ OnTouch:
 		close;
 	}
 	else if (ep13_animal == 8) {
-		enablenpc "นักพฤกษศาสตร์#EP13_1";
+		enablenpc "Botanist#ep13_1";
 		mes "[นักพฤกษศาสตร์]";
 		mes "โปรดพยายามปลูกลำต้นที่เน่าเปื่อยลงในพื้นดิน";
 		close;
 	}
 	else if (ep13_animal == 9) {
-		enablenpc "นักพฤกษศาสตร์#EP13_1";
+		enablenpc "Botanist#ep13_1";
 	}
 	end;
 }
@@ -4772,14 +4772,14 @@ mid_camp,45,148,7	script	Botanist#ep13_1	750,{
 		mes "และอย่าลืมบอกเขาว่าฉันได้สร้างผลการวิจัยที่ยอดเยี่ยมนั่นจะทำให้เขาร้องไห้เหมือนเด็กทารกฮ่าฮ่าฮ่าฮ่า";
 		set ep13_animal,10;
 		changequest 2152,2153;
-		disablenpc "นักพฤกษศาสตร์#EP13_1";
+		disablenpc "Botanist#ep13_1";
 		close;
 	}
 	end;
 
 
 OnInit:
-	disablenpc "นักพฤกษศาสตร์#EP13_1";
+	disablenpc "Botanist#ep13_1";
 	end;
 }
 
@@ -10438,34 +10438,34 @@ lhz_in01,110,174,5	script	Gerhart	903,{
 
 spl_fild02,1,1,0	script	ep13_spl_fild02_mon_edq	-1,{
 OnInit:
-	enablenpc "EP13_SPL_FILD02_MON_EDQ";
+	enablenpc "ep13_spl_fild02_mon_edq";
 	donpcevent "ep13_spl_fild02_mon_edq::OnEnable";
 	end;
 
 
 OnEnable:
-	monster "spl_fild02",0,0,"Luciola Vespa",1994,7,"EP13_SPL_FILD02_MON_EDQ::OnMyMobDead";
-	monster "spl_fild02",0,0,"pinguicula",1995,7,"EP13_SPL_FILD02_MON_EDQ::OnMyMobDead";
+	monster "spl_fild02",0,0,"Luciola Vespa",1994,7,"ep13_spl_fild02_mon_edq::OnMyMobDead";
+	monster "spl_fild02",0,0,"pinguicula",1995,7,"ep13_spl_fild02_mon_edq::OnMyMobDead";
 	initnpctimer;
 	end;
 
 
 OnDisable:
 	stopnpctimer;
-	killmonster "spl_fild02","EP13_SPL_FILD02_MON_EDQ::OnMyMobDead";
-	disablenpc "EP13_SPL_FILD02_MON_EDQ";
+	killmonster "spl_fild02","ep13_spl_fild02_mon_edq::OnMyMobDead";
+	disablenpc "ep13_spl_fild02_mon_edq";
 	end;
 
 
 OnTimer600000:
-	killmonster "spl_fild02","EP13_SPL_FILD02_MON_EDQ::OnMyMobDead";
+	killmonster "spl_fild02","ep13_spl_fild02_mon_edq::OnMyMobDead";
 	stopnpctimer;
 	donpcevent "ep13_spl_fild02_mon_edq::OnEnable";
 	end;
 
 
 OnMyMobDead:
-	if (mobcount("spl_fild02","EP13_SPL_FILD02_MON_EDQ::OnMyMobDead") < 14 && (ep13_1_edq == 71 || ep13_1_edq == 72))
+	if (mobcount("spl_fild02","ep13_spl_fild02_mon_edq::OnMyMobDead") < 14 && (ep13_1_edq == 71 || ep13_1_edq == 72))
 		getitem 6040,1; //Some_Of_Report
 	end;
 }
