@@ -5629,7 +5629,7 @@ int32 clif_outsight(struct block_list *bl,va_list ap)
 				clif_clearunit_single( bl->id, CLR_OUTSIGHT, *tsd );
 			break;
 		case BL_STALL:
- 			clif_clearunit_single( bl->id, CLR_OUTSIGHT, tsd->fd );
+ 			clif_clearunit_single( bl->id, CLR_OUTSIGHT, &tsd->fd );
  			break;
 		default:
 			if((vd=status_get_viewdata(bl)) && vd->class_ != JT_INVISIBLE)
@@ -25875,7 +25875,7 @@ void clif_parse_dynamic_npc( int32 fd, map_session_data* sd ){
  		p->myStall = 1;
  	else
  		p->myStall = 0;
- 	p->expireTime = const_cast<int>((st->expire_time - time(NULL)) * 1000); //if 0 == unlimited on client..
+ 	p->expireTime = const_cast<int32>((st->expire_time - time(NULL)) * 1000); //if 0 == unlimited on client..
  
  	int16 slot = 0;
  	for(int32 i = 0; i < st->vend_num ; i++){
