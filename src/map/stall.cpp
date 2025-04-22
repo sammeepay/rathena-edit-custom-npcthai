@@ -81,7 +81,7 @@ int8 stall_ui_open(map_session_data* sd, uint16 skill_lv, int16 type){
 		return 1;
 	}
 
-	if( sd->sc.data[SC_NOCHAT] && (sd->sc.data[SC_NOCHAT]->val1&MANNER_NOROOM) )
+	if( sd->sc.getSCE(SC_NOCHAT) && (sd->sc.getSCE(SC_NOCHAT)->val1&MANNER_NOROOM) )
 	{// custom: mute limitation
 		return 2;
 	}
@@ -134,7 +134,7 @@ int8 stall_vending_setup(map_session_data* sd, const char* message, const int16 
 
 	// check number of items in shop
 	if( count < 1 || count > 2 + sd->stallvending_level ) { // invalid item count
-		clif_skill_fail(sd, ALL_ASSISTANT_VENDING, USESKILL_FAIL_LEVEL, 0);
+		clif_skill_fail(*sd, ALL_ASSISTANT_VENDING, USESKILL_FAIL_LEVEL, 0);
 		clif_stall_ui_close(sd,100,STALLSTORE_OK);
 		return 3;
 	}
@@ -192,7 +192,7 @@ int8 stall_vending_setup(map_session_data* sd, const char* message, const int16 
 
 	if (i != j || j > MAX_STALL_SLOT) {
 		clif_displaymessage(sd->fd, msg_txt(sd, 266)); //"Some of your items cannot be vended and were removed from the shop."
-		clif_skill_fail(sd, ALL_ASSISTANT_VENDING, USESKILL_FAIL_LEVEL, 0); // custom reply packet
+		clif_skill_fail(*sd, ALL_ASSISTANT_VENDING, USESKILL_FAIL_LEVEL, 0); // custom reply packet
 		clif_stall_ui_close(sd,100,STALLSTORE_OK);
 		stall_vending_getbackitems(st);
 		aFree(st);
@@ -200,7 +200,7 @@ int8 stall_vending_setup(map_session_data* sd, const char* message, const int16 
 	}
 
 	if( i == 0 ) { // no valid item found
-		clif_skill_fail(sd, ALL_ASSISTANT_VENDING, USESKILL_FAIL_LEVEL, 0); // custom reply packet
+		clif_skill_fail(*sd, ALL_ASSISTANT_VENDING, USESKILL_FAIL_LEVEL, 0); // custom reply packet
 		clif_stall_ui_close(sd,100,STALLSTORE_OK);
 		aFree(st);
 		return 5;
@@ -362,13 +362,12 @@ int8 stall_buying_setup(map_session_data* sd, const char* message, const int16 x
 	i = 0;
 	uint32 temp_price = 0;
 	for( j = 0; j < count; j++ ) {
-		const struct STALL_BUYING_SET_sub *item = &itemlist[i];
+		const struct STALL_BUYING_SET_sub* item = &itemlist[i];
+		std::shared_ptr<item_data> id = item_db.find(item->itemId);
 
-		struct item_data* id = itemdb_exists( item->itemId );
-
-		if( id == NULL || item->count == 0 // invalid input
+		if( id == nullptr || item->count == 0 // invalid input
 		||  item->price <= 0 || item->price > BUYINGSTALL_MAX_PRICE // invalid price: unlike vending, items cannot be bought at 0 Zeny
-		||  !id->flag.buyingstore || !itemdb_cantrade_sub( id, pc_get_group_level( sd ), pc_get_group_level( sd ) ) ) // untradeable item
+		||  !id->flag.buyingstore || !itemdb_cantrade_sub( id.get(), pc_get_group_level( sd ), pc_get_group_level( sd ) ) ) // untradeable item
 			continue;
 
 		int32 idx = pc_search_inventory( sd, item->itemId );
@@ -409,7 +408,7 @@ int8 stall_buying_setup(map_session_data* sd, const char* message, const int16 x
 
 	if (i != j || j > MAX_STALL_SLOT) {
 		clif_displaymessage(sd->fd, msg_txt(sd, 266)); //"Some of your items cannot be vended and were removed from the shop."
-		clif_skill_fail(sd, ALL_ASSISTANT_BUYING, USESKILL_FAIL_LEVEL, 0); // custom reply packet
+		clif_skill_fail(*sd, ALL_ASSISTANT_BUYING, USESKILL_FAIL_LEVEL, 0); // custom reply packet
 		clif_stall_ui_close(sd,101,STALLSTORE_OK);
 		stall_buying_getbackzeny(st);
 		aFree(st);
@@ -425,7 +424,7 @@ int8 stall_buying_setup(map_session_data* sd, const char* message, const int16 x
 	}
 
 	if( i == 0 ) { // no valid item found
-		clif_skill_fail(sd, ALL_ASSISTANT_BUYING, USESKILL_FAIL_LEVEL, 0); // custom reply packet
+		clif_skill_fail(*sd, ALL_ASSISTANT_BUYING, USESKILL_FAIL_LEVEL, 0); // custom reply packet
 		clif_stall_ui_close(sd,101,STALLSTORE_OK);
 		aFree(st);
 		return 5;
@@ -583,11 +582,11 @@ void stall_vending_purchasereq(map_session_data* sd, int32 aid, int32 uid, const
 	}
 
 	if( st->vender_id != uid || st->vended_id != aid ) { // shop has changed
-		clif_buyvending(sd, 0, 0, 6);  // store information was incorrect
+		clif_buyvending(*sd, 0, 0, PURCHASEMC_STORE_INCORRECT);  // store information was incorrect
 		return;
 	}
 
-	if( !searchstore_queryremote(sd, st->vended_id) && (sd->bl.m != st->bl.m || !check_distance_bl(&sd->bl, &st->bl, AREA_SIZE)) )
+	if( !searchstore_queryremote(*sd, st->vended_id) && (sd->bl.m != st->bl.m || !check_distance_bl(&sd->bl, &st->bl, AREA_SIZE)) )
 		return; // shop too far away
 
 	if( count < 1 || count > MAX_STALL_SLOT || count > st->vend_num )
@@ -614,19 +613,19 @@ void stall_vending_purchasereq(map_session_data* sd, int32 aid, int32 uid, const
 
 		z += ((double)st->price[idx] * (double)amount);
 		if( z > (double)sd->status.zeny || z < 0. || z > (double)MAX_ZENY ) {
-			clif_buyvending(sd, idx, amount, 1); // you don't have enough zeny
+			clif_buyvending(*sd, idx, amount, PURCHASEMC_NO_ZENY); // you don't have enough zeny
 			return;
 		}
 
 		w += itemdb_weight(st->items_inventory[idx].nameid) * amount;
 		if( w + sd->weight > sd->max_weight ) {
-			clif_buyvending(sd, idx, amount, 2); // you can not buy, because overweight
+			clif_buyvending(*sd, idx, amount, PURCHASEMC_OVERWEIGHT); // you can not buy, because overweight
 			return;
 		}
 
 		//Check to see if cart/vend info is in sync.
 		if( amount > st->items_inventory[idx].amount ){
-			clif_buyvending(sd, idx, st->items_inventory[idx].amount, 4); // not enough quantity
+			clif_buyvending(*sd, idx, st->items_inventory[idx].amount, PURCHASEMC_OUT_OF_STOCK); // not enough quantity
 			return;
 		}
 	}
@@ -756,7 +755,7 @@ void stall_buying_purchasereq(map_session_data* sd, int32 aid, int32 uid, const 
 		return;
 	}
 
-	if( !searchstore_queryremote(sd, st->vended_id) && (sd->bl.m != st->bl.m || !check_distance_bl(&sd->bl, &st->bl, AREA_SIZE)) ){
+	if( !searchstore_queryremote(*sd, st->vended_id) && (sd->bl.m != st->bl.m || !check_distance_bl(&sd->bl, &st->bl, AREA_SIZE)) ){
 		clif_buyingstore_trade_failed_seller(sd, BUYINGSTORE_TRADE_SELLER_FAILED, 0);
 		return; // shop too far away
 	}
@@ -1037,7 +1036,7 @@ void stall_remove(struct s_stall_data* st){
 	}),
 	stall_db.end());
 
-	clif_clearunit_area(&st->bl,CLR_OUTSIGHT);
+	clif_clearunit_area(st->bl,CLR_OUTSIGHT);
 	map_delblock(&st->bl);
 	map_freeblock(&st->bl);
 }

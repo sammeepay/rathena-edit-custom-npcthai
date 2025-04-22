@@ -4227,7 +4227,7 @@
  	export_constant(USTALL_TYPE);
  	export_constant(USTALL_CLASS);
  	export_constant(USTALL_SEX);
- 	export_constant(USTALL_MAPNAME);
+ 	export_constant(USTALL_MAPID);
  	export_constant(USTALL_X);
  	export_constant(USTALL_Y);
  	export_constant(USTALL_MESSAGE);
