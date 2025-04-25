@@ -23,7 +23,7 @@
 class map_session_data;
 struct block_list;
 struct view_data;
-struct status_change;
+class status_change;
 struct mail_message;
 
 /// result for close stall ui constants
@@ -37,7 +37,7 @@ enum e_stall_result
 struct s_stall_data {
 	struct block_list bl;
 	struct view_data vd;
-	struct status_change sc; //They can't have status changes, but.. they want the visual opt values.
+	class status_change sc; //They can't have status changes, but.. they want the visual opt values.
 
 	struct item items_inventory[MAX_STALL_SLOT];
 	uint32 price[MAX_STALL_SLOT];
