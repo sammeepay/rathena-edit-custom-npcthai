@@ -430,7 +430,7 @@ int8 stall_buying_setup(map_session_data* sd, const char* message, const int16 x
 		return 5;
 	}
 
-	pc_payzeny(sd, temp_price, LOG_TYPE_BUYING_STORE, NULL);
+	pc_payzeny(sd, temp_price, LOG_TYPE_BUYING_STORE,0);
 	st->type = 1;
 	st->vender_id = stall_getuid();
 	st->vend_num = i;
@@ -630,7 +630,7 @@ void stall_vending_purchasereq(map_session_data* sd, int32 aid, int32 uid, const
 		}
 	}
 
-	pc_payzeny(sd, (int)z, LOG_TYPE_VENDING, NULL);
+	pc_payzeny(sd, (int)z, LOG_TYPE_VENDING, 0);
 	achievement_update_objective(sd, AG_SPEND_ZENY, 1, (int)z);
 
 	struct mail_message msg_buyer = {};

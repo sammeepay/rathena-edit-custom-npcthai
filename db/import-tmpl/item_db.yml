@@ -282,9 +282,11 @@ Body:
       NoMail: true
       NoAuction: true
     Script: |
-      
- Add Items Offline Voucher
- #=============================================================
+       
+
+#=============================================================      
+# Add Items Offline Voucher
+#=============================================================
    - Id: 23342
      AegisName: Vend_Arbeit1_1Lv
      Name: 1 Day Consignment Merchant Envelope Lv1
