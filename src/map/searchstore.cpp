@@ -201,7 +201,7 @@ void searchstore_query(map_session_data& sd, e_searchstore_searchtype type, uint
 	}
 
 	for (auto& itStalls : stall_db){
- 		if(itStalls->vended_id == pl_sd->status.char_id) // skip own shop, if any
+ 		if(itStalls->vended_id == sd.status.char_id) // skip own shop, if any
  			continue;
  
  		if( !stall_searchall(pl_sd, &s, itStalls, type) ) { // exceeded result size
