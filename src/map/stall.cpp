@@ -1,7 +1,5 @@
-/***********************************/
-/***********    Shakto      ********/
-/**    https://ronovelty.com/     **/
-/***********************************/
+// Copyright (c) rAthena Dev Teams - Licensed under GNU GPL
+// For more information, see LICENCE in the main folder
 
 #include "stall.hpp"
 
