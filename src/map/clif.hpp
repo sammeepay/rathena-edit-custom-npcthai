@@ -1512,7 +1512,9 @@ void clif_goldpc_info( map_session_data& sd );
 // Stall Shop
  void clif_stall_vending_open(map_session_data *sd);
  void clif_stall_buying_open(map_session_data *sd);
- void clif_buyingstall_entry(struct block_list* bl, uint32 stall_id, const char* message);
+ //void clif_buyingstore_entry( map_session_data& sd, struct block_list* tbl = nullptr );
+ //void clif_buyingstall_entry(struct block_list* bl, uint32 stall_id, const char* message);
+ void clif_buyingstall_entry( map_session_data& sd, uint32 stall_id, struct block_list* bl );
  void clif_parse_stall_buying_set( int32 fd, map_session_data* sd );
  void clif_parse_stall_vending_set( int32 fd, map_session_data* sd );
  void clif_stall_showunit(map_session_data *sd, struct s_stall_data *st);
@@ -1520,7 +1522,9 @@ void clif_goldpc_info( map_session_data& sd );
  void clif_parse_stall_vending_cancel( int32 fd, map_session_data* sd );
  void clif_parse_stall_buying_cancel( int32 fd, map_session_data* sd );
  void clif_parse_stall_close( int32 fd, map_session_data* sd );
- void clif_showstallboard(struct block_list* bl, uint32 stall_id, const char* message);
+ //void clif_showstallboard(struct block_list* bl, uint32 stall_id, const char* message);
+ void clif_showstallboard( map_session_data& sd, uint32 stall_id, struct block_list* bl, enum send_target target = AREA );
+ //void clif_showvendingboard( map_session_data& sd, enum send_target target = AREA_WOS, struct block_list* tbl = nullptr );
  void clif_stall_vending_list(map_session_data *sd, struct s_stall_data *st);
  void clif_stall_buying_list(map_session_data *sd, struct s_stall_data *st);
  

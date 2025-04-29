@@ -5075,9 +5075,9 @@ void clif_getareachar_unit( map_session_data* sd,struct block_list *bl ){
  			struct s_stall_data* st = map_id2st(bl->id);
  			clif_stall_showunit(sd,st);
  			if(st->type == 0)
- 				clif_showstallboard(&sd->bl,st->vender_id,st->message);
+				clif_showstallboard(*sd,st->vender_id,&sd->bl);
  			else
- 				clif_buyingstall_entry(&sd->bl,st->vender_id,st->message);
+ 				clif_buyingstall_entry(*sd,st->vender_id,&sd->bl);
  		}
  		break;
 	case BL_NPC:
@@ -5676,9 +5676,9 @@ int32 clif_insight(struct block_list *bl,va_list ap)
  				struct s_stall_data* st = map_id2st(bl->id);
  				clif_stall_showunit(ssd,st);
  				if(st->type == 0)
- 					clif_showstallboard(&ssd->bl,st->vender_id,st->message);
+ 					clif_showstallboard(*ssd,st->vender_id,&ssd->bl);
  				else
- 					clif_buyingstall_entry(&ssd->bl,st->vender_id,st->message);
+					clif_buyingstall_entry(*ssd,st->vender_id,&ssd->bl);
  			}
  			break;
 		default:
@@ -7604,17 +7604,33 @@ void clif_showvendingboard( map_session_data& sd, enum send_target target, struc
 }
 
 /// Displays a stall board to target/area (ZC_STORE_ENTRY).
- /// 0131 <owner id>.L <message>.80B
- void clif_showstallboard(struct block_list* bl, uint32 stall_id, const char* message)
+/// 0131 <owner id>.L <message>.80B
+///void clif_showstallboard(struct block_list* bl, uint32 stall_id, const char* message)
+ void clif_showstallboard( map_session_data& sd, uint32 stall_id, struct block_list* bl, enum send_target target )
  {
- 	unsigned char buf[128];
- 
- 	nullpo_retv(bl);
- 
- 	WBUFW(buf,0) = 0x131;
- 	WBUFL(buf,2) = stall_id;
- 	safestrncpy(WBUFCP(buf,6), message, 80);
- 	clif_send(buf, packet_len(0x131), bl, AREA);
+ 	//unsigned char buf[128];
+	//
+ 	//nullpo_retv(bl);
+	//
+ 	//WBUFW(buf,0) = 0x131;
+ 	//WBUFL(buf,2) = stall_id;
+ 	//safestrncpy(WBUFCP(buf,6), message, 80);
+ 	//clif_send(buf, packet_len(0x131), bl, AREA);
+	
+	if( bl == nullptr ){
+		bl = &sd.bl;
+		target = AREA;
+	}
+	else
+		target = AREA;
+
+	PACKET_ZC_STORE_ENTRY p = {};
+
+	p.packetType = HEADER_ZC_STORE_ENTRY;
+	p.makerAID = sd.status.account_id;
+	safestrncpy( p.storeName, sd.message, sizeof( p.storeName ) );
+
+	clif_send( &p, sizeof( p ), bl, target );
  
  }
 
@@ -19229,15 +19245,33 @@ void clif_buyingstore_entry( map_session_data& sd, struct block_list* tbl ){
 
 /// Notifies clients in area of a buying stall (ZC_BUYING_STORE_ENTRY).
  /// 0814 <stall id>.L <store name>.80B
- void clif_buyingstall_entry(struct block_list* bl, uint32 stall_id, const char* message)
+// void clif_buyingstall_entry(struct block_list* bl, uint32 stall_id, const char* message)
+ void clif_buyingstall_entry( map_session_data& sd, uint32 stall_id, struct block_list* bl )
  {
- 	uint8 buf[MESSAGE_SIZE+6];
- 
- 	WBUFW(buf,0) = 0x814;
- 	WBUFL(buf,2) = stall_id;
- 	safestrncpy(WBUFCP(buf,6), message, 80);
- 
- 	clif_send(buf, packet_len(0x814), bl, AREA);
+ 	//uint8 buf[MESSAGE_SIZE+6];
+	//
+ 	//WBUFW(buf,0) = 0x814;
+ 	//WBUFL(buf,2) = stall_id;
+ 	//safestrncpy(WBUFCP(buf,6), message, 80);
+	//
+ 	//clif_send(buf, packet_len(0x814), bl, AREA);
+	
+	enum send_target target;
+
+	if( bl == nullptr ){
+		bl = &sd.bl;
+		target = AREA_WOS;
+	}
+	else
+		target = SELF;
+
+	PACKET_ZC_BUYING_STORE_ENTRY p = {};
+
+	p.packetType = HEADER_ZC_BUYING_STORE_ENTRY;
+	p.makerAID = sd.status.account_id;
+	safestrncpy( p.storeName, sd.message, sizeof( p.storeName ) );
+
+	clif_send( &p, sizeof( p ), bl, target );
  }
 
 /// Request to close own buying store (CZ_REQ_CLOSE_BUYING_STORE).

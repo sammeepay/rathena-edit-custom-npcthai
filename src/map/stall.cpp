@@ -274,7 +274,7 @@ int8 stall_vending_setup(map_session_data* sd, const char* message, const int16 
 				stall_timeout, st->bl.id, 0);
 
 	clif_stall_showunit(sd,st);
-	clif_showstallboard(&sd->bl,st->vender_id,st->message);
+	clif_showstallboard(*sd,st->vender_id,&sd->bl);
 	clif_stall_ui_close(sd,100,STALLSTORE_OK);
 
 	if(map_addblock(&st->bl))
@@ -482,7 +482,7 @@ int8 stall_buying_setup(map_session_data* sd, const char* message, const int16 x
 				stall_timeout, st->bl.id, 0);
 
 	clif_stall_showunit(sd,st);
-	clif_buyingstall_entry(&sd->bl,st->vender_id,st->message);
+	clif_buyingstall_entry(*sd,st->vender_id,&sd->bl);
 	clif_stall_ui_close(sd,101,STALLSTORE_OK);
 
 	if(map_addblock(&st->bl))
