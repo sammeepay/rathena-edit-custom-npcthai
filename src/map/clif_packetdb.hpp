@@ -1875,18 +1875,17 @@
 	packet(0x0A9B,-1);
 	parseable_packet(0x0A9C,2,clif_parse_equipswitch_request,0);
 	packet(0x0A9D,4);
-	// stall vending
- 	packet( HEADER_ZC_STALL_VENDING_UI_OPEN, -1 );
- 	packet( HEADER_ZC_STALL_UI_CLOSE, sizeof( struct PACKET_ZC_STALL_UI_CLOSE ) );
- 	packet( HEADER_ZC_STALL_CHAR_DETAILS, sizeof( struct PACKET_ZC_STALL_CHAR_DETAILS ) );
- 	parseable_packet( HEADER_CZ_STALL_CLOSE, sizeof( struct PACKET_CZ_STALL_CLOSE ), clif_parse_stall_close, 0 );
- 	parseable_packet( HEADER_CZ_STALL_VENDING_SET, -1, clif_parse_stall_vending_set, 0 );
- 	packet( HEADER_ZC_STALL_VENDING_LIST_REQUEST, sizeof( struct PACKET_ZC_STALL_VENDING_LIST_REQUEST ) );
- 	parseable_packet( HEADER_CZ_STALL_VENDING_CANCEL, sizeof( struct PACKET_CZ_STALL_VENDING_CANCEL ), clif_parse_stall_vending_cancel, 0 );
- 	packet( HEADER_ZC_STALL_BUYING_UI_OPEN, sizeof( struct PACKET_ZC_STALL_BUYING_UI_OPEN ) );
- 	parseable_packet( HEADER_CZ_STALL_BUYING_SET, -1, clif_parse_stall_buying_set, 0 );
- 	packet( HEADER_ZC_STALL_BUYING_LIST_REQUEST, sizeof( struct PACKET_ZC_STALL_BUYING_LIST_REQUEST ) );
- 	parseable_packet( HEADER_CZ_STALL_BUYING_CANCEL, sizeof( struct PACKET_CZ_STALL_BUYING_CANCEL ), clif_parse_stall_buying_cancel, 0 );
+	packet( HEADER_ZC_STALL_VENDING_UI_OPEN, -1 );
+	packet( HEADER_ZC_STALL_UI_CLOSE, sizeof( struct PACKET_ZC_STALL_UI_CLOSE ) );
+	packet( HEADER_ZC_STALL_CHAR_DETAILS, sizeof( struct PACKET_ZC_STALL_CHAR_DETAILS ) );
+	parseable_packet( HEADER_CZ_STALL_CLOSE, sizeof( struct PACKET_CZ_STALL_CLOSE ), clif_parse_stall_close, 0 );
+	parseable_packet( HEADER_CZ_STALL_VENDING_SET, -1, clif_parse_stall_vending_set, 0 );
+	packet( HEADER_ZC_STALL_VENDING_LIST_REQUEST, sizeof( struct PACKET_ZC_STALL_VENDING_LIST_REQUEST ) );
+	parseable_packet( HEADER_CZ_STALL_VENDING_CANCEL, sizeof( struct PACKET_CZ_STALL_VENDING_CANCEL ), clif_parse_stall_vending_cancel, 0 );
+	packet( HEADER_ZC_STALL_BUYING_UI_OPEN, sizeof( struct PACKET_ZC_STALL_BUYING_UI_OPEN ) );
+	parseable_packet( HEADER_CZ_STALL_BUYING_SET, -1, clif_parse_stall_buying_set, 0 );
+	packet( HEADER_ZC_STALL_BUYING_LIST_REQUEST, sizeof( struct PACKET_ZC_STALL_BUYING_LIST_REQUEST ) );
+	parseable_packet( HEADER_CZ_STALL_BUYING_CANCEL, sizeof( struct PACKET_CZ_STALL_BUYING_CANCEL ), clif_parse_stall_buying_cancel, 0 );
 #endif
 
 // 2017-04-19bRagexeRE
@@ -2067,6 +2066,10 @@
 
 #if PACKETVER_MAIN_NUM >= 20240502
 	parseable_packet( HEADER_CZ_GM_CHECKER, sizeof( struct PACKET_CZ_GM_CHECKER ), clif_parse_macro_checker, 0 );
+#endif
+
+#if PACKETVER_MAIN_NUM >= 20250122
+	parseable_packet( 0xc22, 12, clif_parse_dull, 0 );
 #endif
 
 #endif /* CLIF_PACKETDB_HPP */

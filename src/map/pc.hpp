@@ -546,8 +546,8 @@ public:
 	int32 menuskill_id, menuskill_val, menuskill_val2;
 
 	uint16 stallvending_level;
- 	uint32 stall_expire_time;
-	
+	uint32 stall_expire_time;
+
 	int32 invincible_timer;
 	t_tick canlog_tick;
 	t_tick canuseitem_tick;	// [Skotlex]
@@ -730,6 +730,7 @@ public:
 			int16 index, amount;
 		} item[10];
 		int32 zeny, weight;
+		uint8 inventory_space;
 	} deal;
 
 	bool party_creating; // whether the char is requesting party creation

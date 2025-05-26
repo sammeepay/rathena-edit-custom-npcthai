@@ -55,6 +55,8 @@ enum e_hom_state2 : uint8;
 enum _sp;
 enum e_searchstore_failure : uint16;
 
+#define DMGVAL_IGNORE -30000
+
 enum e_PacketDBVersion { // packet DB
 	MIN_PACKET_DB  = 0x064,
 	MAX_PACKET_DB  = 0xCFF,
@@ -489,6 +491,7 @@ enum useskill_fail_cause : uint8_t
 	USESKILL_FAIL_THERE_ARE_NPC_AROUND = 83,
 	USESKILL_FAIL_NEED_MORE_BULLET = 84,
 	USESKILL_FAIL_COINS = 85,
+	USESKILL_FAIL_EXIST_STORE_ASSISTANT = 89,
 	USESKILL_FAIL_SH_TEMPORARY_COMMUNION,
 	USESKILL_FAIL_MAP,
 	USESKILL_FAIL_NEED_SUMMON_SP,
@@ -649,6 +652,10 @@ enum e_clif_messages : uint16 {
 
 	// [Holy Water] must be equipped.
 	MSI_FAIL_NEED_EQUIPPED_GUN_GRANADE = 2561,
+	
+	MSI_CANNOT_ACCESS_BY_WEIGHTOVER_80 = 2921,
+
+	MSI_STORE_ASSISTANT_REUTRN_DATE = 2947,
 
 	// [Grenade Launcher] weapon class must be equipped.
 	MSI_IMPOSSIBLE_CHANGE_GUILD_MASTER_IN_SIEGE_TIME = 2963,
@@ -1509,23 +1516,18 @@ void clif_specialpopup(map_session_data& sd, int32 id);
 
 void clif_goldpc_info( map_session_data& sd );
 
-// Stall Shop
- void clif_stall_vending_open(map_session_data *sd);
- void clif_stall_buying_open(map_session_data *sd);
- //void clif_buyingstore_entry( map_session_data& sd, struct block_list* tbl = nullptr );
- //void clif_buyingstall_entry(struct block_list* bl, uint32 stall_id, const char* message);
- void clif_buyingstall_entry( map_session_data& sd, uint32 stall_id, struct block_list* bl );
- void clif_parse_stall_buying_set( int32 fd, map_session_data* sd );
- void clif_parse_stall_vending_set( int32 fd, map_session_data* sd );
- void clif_stall_showunit(map_session_data *sd, struct s_stall_data *st);
- void clif_stall_ui_close(map_session_data *sd, int32 type, int32 reason);
- void clif_parse_stall_vending_cancel( int32 fd, map_session_data* sd );
- void clif_parse_stall_buying_cancel( int32 fd, map_session_data* sd );
- void clif_parse_stall_close( int32 fd, map_session_data* sd );
- //void clif_showstallboard(struct block_list* bl, uint32 stall_id, const char* message);
- void clif_showstallboard( map_session_data& sd, uint32 stall_id, struct block_list* bl, enum send_target target = AREA );
- //void clif_showvendingboard( map_session_data& sd, enum send_target target = AREA_WOS, struct block_list* tbl = nullptr );
- void clif_stall_vending_list(map_session_data *sd, struct s_stall_data *st);
- void clif_stall_buying_list(map_session_data *sd, struct s_stall_data *st);
- 
+void clif_stall_vending_open(map_session_data *sd);
+void clif_stall_buying_open(map_session_data *sd);
+void clif_buyingstall_entry(struct block_list* bl, uint32 stall_id, const char* message);
+void clif_parse_stall_buying_set( int32 fd, map_session_data* sd );
+void clif_parse_stall_vending_set( int32 fd, map_session_data* sd );
+void clif_stall_showunit(map_session_data *sd, struct s_stall_data *st);
+void clif_stall_ui_close(map_session_data *sd, int32 type, int32 reason);
+void clif_parse_stall_vending_cancel( int32 fd, map_session_data* sd );
+void clif_parse_stall_buying_cancel( int32 fd, map_session_data* sd );
+void clif_parse_stall_close( int32 fd, map_session_data* sd );
+void clif_showstallboard(struct block_list* bl, uint32 stall_id, const char* message);
+void clif_stall_vending_list(map_session_data *sd, s_stall_data *st);
+void clif_stall_buying_list(map_session_data *sd, s_stall_data *st);
+
 #endif /* CLIF_HPP */

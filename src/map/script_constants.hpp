@@ -1976,6 +1976,7 @@
 	export_constant(SC_SBUNSHIN);
 	export_constant(SC_CONTENTS_34);
 	export_constant(SC_CONTENTS_35);
+	export_constant(SC_NOACTION);
 
 /// Do not modify code below this, until the end of the API hook, since it will be automatically generated again
 /// @APIHOOK_START(EFST_CONST)
@@ -4221,27 +4222,6 @@
 	export_constant(UNPC_BODY2);
 	export_constant(UNPC_DEADSIT);
 	export_constant(UNPC_GROUP_ID);
-	
-	export_constant(USTALL_VENDER);
- 	export_constant(USTALL_VENDED);
- 	export_constant(USTALL_TYPE);
- 	export_constant(USTALL_CLASS);
- 	export_constant(USTALL_SEX);
- 	export_constant(USTALL_MAPID);
- 	export_constant(USTALL_X);
- 	export_constant(USTALL_Y);
- 	export_constant(USTALL_MESSAGE);
- 	export_constant(USTALL_HAIRSTYLE);
- 	export_constant(USTALL_HAIRCOLOR);
- 	export_constant(USTALL_BODYSTYLE);
- 	export_constant(USTALL_WEAPON);
- 	export_constant(USTALL_SHIELD);
- 	export_constant(USTALL_HEADTOP);
- 	export_constant(USTALL_HEADMID);
- 	export_constant(USTALL_HEADBOTTOM);
- 	export_constant(USTALL_CLOTHCOLOR);
- 	export_constant(USTALL_NAME);
- 	export_constant(USTALL_TIME);
 
 	export_constant(NAV_NONE);
 	export_constant(NAV_AIRSHIP_ONLY);

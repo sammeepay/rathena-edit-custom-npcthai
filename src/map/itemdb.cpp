@@ -1280,7 +1280,7 @@ std::shared_ptr<item_data> ItemDatabase::searchname( const char *name ){
 * @return <ITEML> string for the item
 * @author [Cydh]
 **/
-std::string ItemDatabase::create_item_link(struct item& item, std::shared_ptr<item_data>& data){
+std::string ItemDatabase::create_item_link(struct item& item, std::shared_ptr<item_data>& data, bool slot){
 	if( data == nullptr ){
 		ShowError( "Tried to create itemlink for unknown item %u.\n", item.nameid );
 		return "Unknown item";
@@ -1304,7 +1304,10 @@ std::string ItemDatabase::create_item_link(struct item& item, std::shared_ptr<it
 		itemstr += start_tag;
 
 		itemstr += util::string_left_pad(util::base62_encode(id->equip), '0', 5);
-		itemstr += itemdb_isequip2(id) ? "1" : "0";
+		if (slot)
+			itemstr += "0";
+		else
+			itemstr += itemdb_isequip2(id) ? "1" : "0";
 		itemstr += util::base62_encode(item.nameid);
 		if (item.refine > 0) {
 			itemstr += "%" + util::string_left_pad(util::base62_encode(item.refine), '0', 2);
@@ -1354,9 +1357,6 @@ std::string ItemDatabase::create_item_link(struct item& item, std::shared_ptr<it
 		}
 
 		itemstr += closing_tag;
-		if ((itemdb_isequip2(id)) && (data->slots == 0))
-			itemstr += " [" + std::to_string(data->slots) + "]";
-
 		return itemstr;
 	}
 #endif
@@ -1368,10 +1368,17 @@ std::string ItemDatabase::create_item_link(struct item& item, std::shared_ptr<it
 
 	itemstr += data->ename;
 
-	if (itemdb_isequip2(id))
+	if (itemdb_isequip2(id) && (data->slots >= 0))
 		itemstr += "[" + std::to_string(data->slots) + "]";
 
 	return itemstr;
+}
+
+std::string ItemDatabase::create_item_link( std::shared_ptr<item_data>& data, bool slot ){
+	struct item it = {};
+	it.nameid = data->nameid;
+
+	return this->create_item_link( it, data, slot );
 }
 
 std::string ItemDatabase::create_item_link( std::shared_ptr<item_data>& data ){

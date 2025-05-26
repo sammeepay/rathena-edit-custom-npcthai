@@ -1,6 +1,3 @@
-// Copyright (c) rAthena Dev Teams - Licensed under GNU GPL
-// For more information, see LICENCE in the main folder
-
 #ifndef	_STALL_HPP_
 #define	_STALL_HPP_
 
@@ -9,10 +6,11 @@
 #include "../common/mmo.hpp"
 
 #include "map.hpp" // struct block_list
-#include "status.hpp" // struct status_change
+#include "status.hpp" // class status_change
 #include "unit.hpp" // struct unit_data
 
 #define START_STALL_NUM 90000000
+#define START_STALL_UID 0
 #define MAX_STALL_SLOT 5
 #define BUYINGSTALL_MAX_PRICE 99990000
 #define BUYINGSTALL_MAX_AMOUNT 9999
@@ -29,6 +27,7 @@ enum e_stall_result
 {
 	STALLSTORE_OK                    = 0,  //
 	STALLSTORE_POSITION              = 2,  // Not allowed on tte position
+	STALLSTORE_LOCATION				 = 3,
 	STALLSTORE_OVERWEIGHT            = 8,  // Overweight error
 };
 
@@ -42,9 +41,12 @@ struct s_stall_data {
 	uint32 itemId[MAX_STALL_SLOT];
 	uint16 amount[MAX_STALL_SLOT];
 
-	bool type; // 0 vending 1 buying
+	short type; // 0 vending 1 buying
 
-	int32 vended_id, vender_id;
+	int32 vid;
+	int32 bid;
+	int32 owner_id;
+	int32 unique_id, vender_id;
 	int32 vend_num;
 	int32 timer;
 	char message[MESSAGE_SIZE];
@@ -58,7 +60,8 @@ extern std::vector<mail_message> stall_mail_db;
 void do_init_stall(void);
 void do_final_stall(void);
 
-int8 stall_ui_open(map_session_data* sd, uint16 skill_lv, int16 type);
+static int32 stall_getuid(void);
+int8 stall_ui_open(map_session_data* sd, uint16 skill_lv, short type);
 int8 stall_vending_setup(map_session_data* sd, const char* message, const int16 xPos, const int16 yPos, uint8 *data, int32 count);
 int8 stall_buying_setup(map_session_data* sd, const char* message, const int16 xPos, const int16 yPos, const struct STALL_BUYING_SET_sub* itemlist, int32 count, uint64 total_price);
 void stall_vending_listreq(map_session_data* sd, int32 id);
@@ -68,11 +71,11 @@ void stall_buying_purchasereq(map_session_data* sd, int32 aid, int32 uid, const 
 void stall_remove(struct s_stall_data* st);
 void stall_vending_save(struct s_stall_data* st);
 void stall_buying_save(struct s_stall_data* st);
-void stall_close(map_session_data* sd);
+void stall_close(map_session_data* sd, int32 uid);
 void stall_vending_getbackitems(struct s_stall_data* st);
 void stall_buying_getbackzeny(struct s_stall_data* st);
-bool stall_isStallOpen(uint32 CID);
-bool stall_searchall(map_session_data* sd, const struct s_search_store_search* s, const struct s_stall_data* st, int16 type);
+bool stall_isStallOpen(uint32 CID, short type);
+bool stall_searchall(map_session_data* sd, const struct s_search_store_search* s, const struct s_stall_data* st, short type);
 TIMER_FUNC(stall_timeout);
 TIMER_FUNC(stall_init);
 TIMER_FUNC(stall_mail_queue);

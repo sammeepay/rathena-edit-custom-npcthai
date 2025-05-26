@@ -61,6 +61,7 @@
 #include "pc_groups.hpp"
 #include "pet.hpp"
 #include "quest.hpp"
+#include "stall.hpp"
 #include "storage.hpp"
 
 using namespace rathena;
@@ -16613,6 +16614,22 @@ BUILDIN_FUNC(mapid2name)
 	return SCRIPT_CMD_SUCCESS;
 }
 
+/// Returns the map ID of given map name.
+///
+/// mapname2id <"map name">;
+BUILDIN_FUNC(mapname2id)
+{
+	const char* map_name = script_getstr(st, 2);
+	int16 mapid = map_mapname2mapid(map_name);
+	if (mapid < 0 || mapid >= MAX_MAP_PER_SERVER) {
+		// Note: no error message here, as map_mapname2mapid will already have reported an error message.
+		script_pushint(st, -1); 
+		return SCRIPT_CMD_FAILURE;
+	}
+	script_pushint(st, mapid); 
+	return SCRIPT_CMD_SUCCESS;
+}
+
 /*==========================================
  * Allows player to write NPC logs (i.e. Bank NPC, etc) [Lupus]
  *------------------------------------------*/
@@ -18541,7 +18558,9 @@ BUILDIN_FUNC(addmonsterdrop)
 		}
 	}
 
-	if( drop == nullptr ){
+	bool exists = (drop != nullptr);
+
+	if( !exists ){
 		// No place to put the new drop
 		if( mob->dropitem.size() == MAX_MOB_DROP ){
 			script_pushint(st, false);
@@ -18576,7 +18595,13 @@ BUILDIN_FUNC(addmonsterdrop)
 	drop->rate = rate;
 	drop->steal_protected = steal_protected > 0;
 	drop->randomopt_group = group;
-	mob_reload_itemmob_data(); // Reload the mob search data stored in the item_data
+
+	if( !exists ){
+		mob->dropitem.push_back( drop );
+	}
+
+	// Reload the mob search data stored in the item_data
+	mob_reload_itemmob_data();
 
 	script_pushint(st, true);
 	return SCRIPT_CMD_SUCCESS;
@@ -19360,33 +19385,6 @@ BUILDIN_FUNC(getunitdata)
 			getunitdata_sub(UNPC_DEADSIT, nd->vd.dead_sit);
 			getunitdata_sub(UNPC_GROUP_ID, nd->ud.group_id);
 			} break;
-
-		case BL_STALL: {
-			TBL_STALL* sta = NULL;
- 			//s_stall_data* sta = reinterpret_cast<s_stall_data*>( bl );
-			sta = map_id2st(bl->id);
- 			
- 			//getunitdata_sub(USTALL_VENDER, sta->vender_id);
- 			//getunitdata_sub(USTALL_VENDED, sta->vended_id);
- 			//getunitdata_sub(USTALL_TYPE, sta->type);
- 			//getunitdata_sub(USTALL_CLASS, sta->vd.class_);
- 			//getunitdata_sub(USTALL_SEX, sta->vd.sex);
- 			//getunitdata_sub(USTALL_MAPID, sta->bl.m);
- 			//getunitdata_sub(USTALL_X, sta->bl.x);
- 			//getunitdata_sub(USTALL_Y, sta->bl.y);
- 			//getunitdata_sub(USTALL_MESSAGE, sta->message);
- 			//getunitdata_sub(USTALL_HAIRSTYLE, sta->vd.hair_style);
- 			//getunitdata_sub(USTALL_HAIRCOLOR, sta->vd.hair_color);
- 			//getunitdata_sub(USTALL_BODYSTYLE, sta->vd.body_style);
- 			//getunitdata_sub(USTALL_WEAPON, sta->vd.weapon);
- 			//getunitdata_sub(USTALL_SHIELD, sta->vd.shield);
- 			//getunitdata_sub(USTALL_HEADTOP, sta->vd.head_top);
- 			//getunitdata_sub(USTALL_HEADMID, sta->vd.head_mid);
- 			//getunitdata_sub(USTALL_HEADBOTTOM, sta->vd.head_bottom);
- 			//getunitdata_sub(USTALL_CLOTHCOLOR, sta->vd.cloth_color);
- 			//getunitdata_sub(USTALL_NAME, sta->name);
- 			//getunitdata_sub(USTALL_TIME, sta->expire_time);
- 			} break;
 
 		default:
 			ShowWarning("buildin_getunitdata: Unknown object type!\n");
@@ -27574,6 +27572,55 @@ BUILDIN_FUNC(specialpopup) {
 	return SCRIPT_CMD_SUCCESS;
 }
 
+BUILDIN_FUNC( open_stall ){
+	map_session_data* sd;
+	uint16 skill_id, skill_lv;
+
+	if( !script_rid2sd( sd ) ){
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	if (script_isstring(st, 2)) {
+		const char *name = script_getstr(st, 2);
+
+		if (!(skill_id = skill_name2id(name))) {
+			ShowError("buildin_unitskilluseid: Invalid skill name %s passed to item bonus. Skipping.\n", name);
+			return SCRIPT_CMD_FAILURE;
+		}
+	}
+	skill_lv = script_getnum(st,3);
+
+	if( sd->itemid == 0 ){
+		ShowError( "open_stall: Called outside of an item script without item id.\n" );
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	if( sd->inventory.u.items_inventory[sd->itemindex].expire_time == 0 ){
+		ShowError( "open_stall: Called from item %u, which is not a consumed delayed.\n", sd->itemid );
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	if( sd->state.stall_ui_open != 0 ){
+		ShowError( "open_stall: Stall window was already open. Player %s (AID: %u, CID: %u) with item id %u.\n", sd->status.name, sd->status.account_id, sd->status.char_id, sd->itemid );
+		return SCRIPT_CMD_FAILURE;
+	}
+
+	sd->stall_expire_time = sd->inventory.u.items_inventory[sd->itemindex].expire_time;
+	sd->stallvending_level = skill_lv;
+
+	// todo check if already set
+
+	short type = (skill_id == ALL_ASSISTANT_BUYING) ? 1 : 0;
+	if (stall_isStallOpen(sd->status.char_id, type)) {
+		clif_skill_fail(*sd, skill_id, USESKILL_FAIL_EXIST_STORE_ASSISTANT, 0, skill_id);
+		return SCRIPT_CMD_SUCCESS;
+	}
+
+	unit_skilluse_id(&sd->bl, sd->bl.id, skill_id, skill_lv);
+
+	return SCRIPT_CMD_SUCCESS;
+}
+
 BUILDIN_FUNC(setdialogalign){
 	map_session_data *sd;
 
@@ -27725,13 +27772,28 @@ BUILDIN_FUNC(permission_add)
 }
 
 BUILDIN_FUNC(mesitemicon){
-	t_itemid nameid = script_getnum( st, 2 );
-	std::shared_ptr<item_data> data = item_db.find( nameid );
-	
-	if( data == nullptr ){
-		ShowError( "buildin_mesitemicon: Item ID %u does not exists.\n", nameid );
-		script_pushconststr( st, "" );
-		return SCRIPT_CMD_FAILURE;
+	std::shared_ptr<item_data> data;
+
+	if( script_isstring( st, 2 ) ){
+		const char* item_name = script_getstr( st, 2 );
+
+		data = item_db.searchname( item_name );
+
+		if( data == nullptr ){
+			ShowError( "buildin_mesitemicon: Item \"%s\" does not exist.\n", item_name );
+			script_pushconststr( st, "" );
+			return SCRIPT_CMD_FAILURE;
+		}
+	}else{
+		t_itemid nameid = script_getnum( st, 2 );
+
+		data = item_db.find( nameid );
+
+		if( data == nullptr ){
+			ShowError( "buildin_mesitemicon: Item ID %u does not exist.\n", nameid );
+			script_pushconststr( st, "" );
+			return SCRIPT_CMD_FAILURE;
+		}
 	}
 
 	const char* name = nullptr;
@@ -27748,49 +27810,6 @@ BUILDIN_FUNC(mesitemicon){
 
 	return SCRIPT_CMD_SUCCESS;
 }
-
-BUILDIN_FUNC( open_stall ){
- 	map_session_data* sd;
- 	uint16 skill_id, skill_lv;
- 
- 	if( !script_rid2sd( sd ) ){
- 		return SCRIPT_CMD_FAILURE;
- 	}
- 
- 	if (script_isstring(st, 2)) {
- 		const char *name = script_getstr(st, 2);
- 
- 		if (!(skill_id = skill_name2id(name))) {
- 			ShowError("buildin_unitskilluseid: Invalid skill name %s passed to item bonus. Skipping.\n", name);
- 			return SCRIPT_CMD_FAILURE;
- 		}
- 	}
- 	skill_lv = script_getnum(st,3);
- 
- 	if( sd->itemid == 0 ){
- 		ShowError( "open_stall: Called outside of an item script without item id.\n" );
- 		return SCRIPT_CMD_FAILURE;
- 	}
- 
-     if( sd->inventory.u.items_inventory[sd->itemindex].expire_time == 0 ){
-         ShowError( "open_stall: Called from item %u, which is not a consumed delayed.\n", sd->itemid );
-         return SCRIPT_CMD_FAILURE;
-     }
- 
- 	if( sd->state.stall_ui_open != 0 ){
- 		ShowError( "open_stall: Stall window was already open. Player %s (AID: %u, CID: %u) with item id %u.\n", sd->status.name, sd->status.account_id, sd->status.char_id, sd->itemid );
- 		return SCRIPT_CMD_FAILURE;
- 	}
- 
- 	sd->stall_expire_time = sd->inventory.u.items_inventory[sd->itemindex].expire_time;
- 	sd->stallvending_level = skill_lv;
- 
- 	// todo check if already set
- 
- 	unit_skilluse_id(&sd->bl, sd->bl.id, skill_id, skill_lv);
- 
- 	return SCRIPT_CMD_SUCCESS;
- }
 
 #include <custom/script.inc>
 
@@ -28142,6 +28161,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(npcstop,"??"),
 	BUILDIN_DEF(getmapxy,"rrr??"),	//by Lorky [Lupus]
 	BUILDIN_DEF(mapid2name,"i"),
+	BUILDIN_DEF(mapname2id,"s"),
 	BUILDIN_DEF(checkoption1,"i?"),
 	BUILDIN_DEF(checkoption2,"i?"),
 	BUILDIN_DEF(guildgetexp,"i"),
@@ -28252,7 +28272,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(setunittitle,"is"),
 	BUILDIN_DEF(getunittitle,"i"),
 	BUILDIN_DEF(getunitdata,"i*"),
-	BUILDIN_DEF(setunitdata,"iii"),
+	BUILDIN_DEF(setunitdata,"iiv"),
 	BUILDIN_DEF(unitwalk,"iii?"),
 	BUILDIN_DEF2(unitwalk,"unitwalkto","ii?"),
 	BUILDIN_DEF(unitkill,"i"),
@@ -28554,6 +28574,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(autoloot,"??"),
 	BUILDIN_DEF(opentips, "i?"),
 	BUILDIN_DEF(specialpopup,"i"),
+	BUILDIN_DEF(open_stall,"si"),
 
 	BUILDIN_DEF(setdialogalign, "i"),
 	BUILDIN_DEF(setdialogsize, "ii"),
@@ -28564,9 +28585,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(permission_add, "i?"),
 	BUILDIN_DEF2(permission_add, "permission_remove", "i?"),
 
-	BUILDIN_DEF( mesitemicon, "i??" ),
-	
-	BUILDIN_DEF(open_stall,"si"),
+	BUILDIN_DEF( mesitemicon, "v??" ),
 
 #include <custom/script_def.inc>
 

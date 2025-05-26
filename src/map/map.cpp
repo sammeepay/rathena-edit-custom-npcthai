@@ -88,10 +88,10 @@ char mob_skill2_table[32] = "mob_skill_db2";
 #endif
 char sales_table[32] = "sales";
 char vendings_table[32] = "vendings";
-char vending_items_table[32] = "vending_items";
 char stalls_table[32] = "stalls";
 char stalls_vending_items_table[32] = "stalls_vending_items";
 char stalls_buying_items_table[32] = "stalls_buying_items";
+char vending_items_table[32] = "vending_items";
 char market_table[32] = "market";
 char partybookings_table[32] = "party_bookings";
 char roulette_table[32] = "db_roulette";
@@ -2032,12 +2032,26 @@ int32 map_addflooritem(struct item *item, int32 amount, int16 m, int16 x, int16 
 		return 0;
 	}
 
+	// If item is flagged as MVP item or dropped by bosses, it is protected for longer
+	bool extend_protection = (flags&1);
+	if (!extend_protection && mob_id > 0) {
+		// Boss and MVP drops both have prelonged loot protection
+		if (auto mob = mob_db.find(mob_id); mob != nullptr && mob->get_bosstype() != BOSSTYPE_NONE)
+			extend_protection = true;
+	}
 	fitem->first_get_charid = first_charid;
-	fitem->first_get_tick = gettick() + (flags&1 ? battle_config.mvp_item_first_get_time : battle_config.item_first_get_time);
 	fitem->second_get_charid = second_charid;
-	fitem->second_get_tick = fitem->first_get_tick + (flags&1 ? battle_config.mvp_item_second_get_time : battle_config.item_second_get_time);
 	fitem->third_get_charid = third_charid;
-	fitem->third_get_tick = fitem->second_get_tick + (flags&1 ? battle_config.mvp_item_third_get_time : battle_config.item_third_get_time);
+	if (extend_protection) {
+		fitem->first_get_tick = gettick() + battle_config.mvp_item_first_get_time;
+		fitem->second_get_tick = fitem->first_get_tick + battle_config.mvp_item_second_get_time;
+		fitem->third_get_tick = fitem->second_get_tick + battle_config.mvp_item_third_get_time;
+	}
+	else {
+		fitem->first_get_tick = gettick() + battle_config.item_first_get_time;
+		fitem->second_get_tick = fitem->first_get_tick + battle_config.item_second_get_time;
+		fitem->third_get_tick = fitem->second_get_tick + battle_config.item_third_get_time;
+	}
 	fitem->mob_id = mob_id;
 
 	memcpy(&fitem->item,item,sizeof(*item));
@@ -2350,9 +2364,9 @@ struct s_elemental_data* map_id2ed(int32 id) {
 }
 
 struct s_stall_data* map_id2st(int32 id) {
- 	struct block_list* bl = map_id2bl(id);
- 	return BL_CAST(BL_STALL, bl);
- }
+	struct block_list* bl = map_id2bl(id);
+	return BL_CAST(BL_STALL, bl);
+}
 
 struct chat_data* map_id2cd(int32 id){
 	struct block_list* bl = map_id2bl(id);
