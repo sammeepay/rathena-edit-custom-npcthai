@@ -21906,7 +21906,7 @@ skill_unit* skill_initunit(std::shared_ptr<s_skill_unit_group> group, int32 idx,
 			break;
 		default:
 			skill_dance_overlap(*unit, OVERLAP_SET);
-				skill_dance_overlap(unit, 1);
+				skill_dance_overlap(*unit, OVERLAP_SET);
 			break;
 	}
 
