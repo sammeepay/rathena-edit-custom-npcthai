@@ -31,8 +31,7 @@ enum e_stall_result
 	STALLSTORE_OVERWEIGHT            = 8,  // Overweight error
 };
 
-struct s_stall_data {
-	struct block_list bl;
+struct s_stall_data : public block_list {
 	struct view_data vd;
 	class status_change sc; //They can't have status changes, but.. they want the visual opt values.
 

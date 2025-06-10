@@ -100,7 +100,7 @@ int8 stall_ui_open(map_session_data* sd, uint16 skill_lv, short type){
 		return 2;
 	}
 
-	if( map_getmapflag(sd->bl.m, MF_NOVENDING) )
+	if( map_getmapflag(sd->m, MF_NOVENDING) )
 	{// custom: no vending maps
 		clif_displaymessage(sd->fd, msg_txt(sd,276)); // "You can't open a shop on this map"
 		return 3;
@@ -155,28 +155,28 @@ int8 stall_vending_setup(map_session_data* sd, const char* message, const int16 
 	}
 
 	// check if shop is allow on the cell
-	if( map_getcell(sd->bl.m,xPos,yPos,CELL_CHKNOVENDING) ) {
+	if( map_getcell(sd->m,xPos,yPos,CELL_CHKNOVENDING) ) {
 		clif_stall_ui_close(sd,100,STALLSTORE_POSITION);
 		return 1;
 	}
 	
 	// Check if the cell is walkable before setting up the stall
-	if (!map_getcell(sd->bl.m, xPos, yPos, CELL_CHKPASS)) {
+	if (!map_getcell(sd->m, xPos, yPos, CELL_CHKPASS)) {
 		clif_stall_ui_close(sd,100,STALLSTORE_POSITION);
 		return 1;
 	}
 
-	if (map_foreachincell(check_player_at_location, sd->bl.m, xPos, yPos, BL_PC)) {
+	if (map_foreachincell(check_player_at_location, sd->m, xPos, yPos, BL_PC)) {
         clif_stall_ui_close(sd,101,STALLSTORE_LOCATION);
 		return 1;
 	}
 
-	if (map_foreachincell(check_player_at_location, sd->bl.m, xPos, yPos, BL_STALL)) {
+	if (map_foreachincell(check_player_at_location, sd->m, xPos, yPos, BL_STALL)) {
         clif_stall_ui_close(sd,101,STALLSTORE_LOCATION);
 		return 1;
 	}
 
-	npc_near_bl.m = sd->bl.m;
+	npc_near_bl.m = sd->m;
 	npc_near_bl.x = xPos;
 	npc_near_bl.y = yPos;
 
@@ -235,7 +235,7 @@ int8 stall_vending_setup(map_session_data* sd, const char* message, const int16 
 		return 5;
 	}
 
-	st->vid = sd->bl.id;
+	st->vid = sd->id;
 	st->type = 0; // TODO vending
 	st->vender_id = stall_getid();
 	st->unique_id = stall_getuid();
@@ -244,24 +244,24 @@ int8 stall_vending_setup(map_session_data* sd, const char* message, const int16 
 	safestrncpy(st->message, message, MESSAGE_SIZE);
 	safestrncpy(st->name, sd->status.name, NAME_LENGTH);
 
-	st->bl.id = st->vender_id;
-	st->bl.type = BL_STALL;
-	st->bl.m = sd->bl.m;
-	st->bl.x = xPos;
-	st->bl.y = yPos;
+	st->id = st->vender_id;
+	st->type = BL_STALL;
+	st->m = sd->m;
+	st->x = xPos;
+	st->y = yPos;
 
-	st->vd.class_ = sd->vd.class_;
-	st->vd.weapon = sd->vd.weapon;
-	st->vd.shield = sd->vd.shield;
-	st->vd.head_top = sd->vd.head_top;
-	st->vd.head_mid = sd->vd.head_mid;
-	st->vd.head_bottom = sd->vd.head_bottom;
-	st->vd.hair_style = sd->vd.hair_style;
-	st->vd.hair_color = sd->vd.hair_color;
-	st->vd.cloth_color = sd->vd.cloth_color;
-	st->vd.body_style = sd->vd.body_style;
+	st->vd.look[LOOK_BASE] = sd->vd.look[LOOK_BASE];
+	st->vd.look[LOOK_WEAPON] = sd->vd.look[LOOK_WEAPON];
+	st->vd.look[LOOK_SHIELD] = sd->vd.look[LOOK_SHIELD];
+	st->vd.look[LOOK_HEAD_TOP] = sd->vd.look[LOOK_HEAD_TOP];
+	st->vd.look[LOOK_HEAD_MID] = sd->vd.look[LOOK_HEAD_MID];
+	st->vd.look[LOOK_HEAD_BOTTOM] = sd->vd.look[LOOK_HEAD_BOTTOM];
+	st->vd.look[LOOK_HAIR] = sd->vd.look[LOOK_HAIR];
+	st->vd.look[LOOK_HAIR_COLOR] = sd->vd.look[LOOK_HAIR_COLOR];
+	st->vd.look[LOOK_CLOTHES_COLOR] = sd->vd.look[LOOK_CLOTHES_COLOR];
+	st->vd.look[LOOK_BODY2] = sd->vd.look[LOOK_BODY2];
 	st->vd.sex = sd->vd.sex;
-	st->vd.robe = sd->vd.robe;
+	st->vd.look[LOOK_ROBE] = sd->vd.look[LOOK_ROBE];
 
 	Sql_EscapeString( mmysql_handle, message_sql, st->message );
 
@@ -269,9 +269,9 @@ int8 stall_vending_setup(map_session_data* sd, const char* message, const int16 
 								  "`title`, `hair`, `hair_color`, `body`, `weapon`, `shield`, `head_top`, `head_mid`, `head_bottom`, `robe`,"
 								  "`clothes_color`, `name`, `expire_time`) "
 		"VALUES( %d, %d, %d, %d, %d, '%c', '%s', %d, %d, '%s', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, '%s', %u  );",
-		stalls_table, st->vender_id, st->unique_id, st->owner_id, st->type, st->vd.class_, st->vd.sex == SEX_FEMALE ? 'F' : 'M', mapindex_id2name(st->bl.m), st->bl.x, st->bl.y,
-		message_sql, st->vd.hair_style, st->vd.hair_color, st->vd.body_style, st->vd.weapon, st->vd.shield, st->vd.head_top, st->vd.head_mid, st->vd.head_bottom, st->vd.robe,
-		st->vd.cloth_color, st->name, st->expire_time) != SQL_SUCCESS ) {
+		stalls_table, st->vender_id, st->unique_id, st->owner_id, st->type, st->vd.look[LOOK_BASE], st->vd.sex == SEX_FEMALE ? 'F' : 'M', mapindex_id2name(st->m), st->x, st->y,
+		message_sql, st->vd.look[LOOK_HAIR], st->vd.look[LOOK_HAIR_COLOR], st->vd.look[LOOK_BODY2], st->vd.look[LOOK_WEAPON], st->vd.look[LOOK_SHIELD], st->vd.look[LOOK_HEAD_TOP], st->vd.look[LOOK_HEAD_MID], st->vd.look[LOOK_HEAD_BOTTOM], st->vd.look[LOOK_ROBE],
+		st->vd.look[LOOK_CLOTHES_COLOR], st->name, st->expire_time) != SQL_SUCCESS ) {
 		Sql_ShowDebug(mmysql_handle);
 	}
 
@@ -305,16 +305,16 @@ int8 stall_vending_setup(map_session_data* sd, const char* message, const int16 
 	StringBuf_Destroy(&buf);
 
 	st->timer = add_timer(gettick() + (st->expire_time - time(nullptr)) * 1000,
-				stall_timeout, st->bl.id, 0);
+				stall_timeout, st->id, 0);
 
 	clif_stall_showunit(sd,st);
-	clif_showstallboard(&sd->bl,st->vender_id,st->message);
+	clif_showstallboard(sd,st->vender_id,st->message);
 	clif_stall_ui_close(sd,100,STALLSTORE_OK);
 
-	if(map_addblock(&st->bl))
+	if(map_addblock(st))
 		return -1;
-	status_change_init(&st->bl);
-	map_addiddb(&st->bl);
+	status_change_init(st);
+	map_addiddb(st);
 	stall_db.push_back(st);
 
 	return 0;
@@ -353,23 +353,23 @@ int8 stall_buying_setup(map_session_data* sd, const char* message, const int16 x
 	}
 	
 	// Check if the cell is walkable before setting up the stall
-	if (!map_getcell(sd->bl.m, xPos, yPos, CELL_CHKPASS)) {
+	if (!map_getcell(sd->m, xPos, yPos, CELL_CHKPASS)) {
 		clif_stall_ui_close(sd,101,STALLSTORE_POSITION);
 		return 1;
 	}
 
 	// check if shop is allow on the cell
-	if( map_getcell(sd->bl.m,xPos,yPos,CELL_CHKNOVENDING) ) {
+	if( map_getcell(sd->m,xPos,yPos,CELL_CHKNOVENDING) ) {
 		clif_stall_ui_close(sd,101,STALLSTORE_LOCATION);
 		return 1;
 	}
 
-	if (map_foreachincell(check_player_at_location, sd->bl.m, xPos, yPos, BL_PC)) {
+	if (map_foreachincell(check_player_at_location, sd->m, xPos, yPos, BL_PC)) {
         clif_stall_ui_close(sd,101,STALLSTORE_LOCATION);
 		return 1;
 	}
 
-	if (map_foreachincell(check_player_at_location, sd->bl.m, xPos, yPos, BL_STALL)) {
+	if (map_foreachincell(check_player_at_location, sd->m, xPos, yPos, BL_STALL)) {
         clif_stall_ui_close(sd,101,STALLSTORE_LOCATION);
 		return 1;
 	}
@@ -380,7 +380,7 @@ int8 stall_buying_setup(map_session_data* sd, const char* message, const int16 x
 		return 1;
 	}
 
-	npc_near_bl.m = sd->bl.m;
+	npc_near_bl.m = sd->m;
 	npc_near_bl.x = xPos;
 	npc_near_bl.y = yPos;
 
@@ -470,7 +470,7 @@ int8 stall_buying_setup(map_session_data* sd, const char* message, const int16 x
 	}
 
 	pc_payzeny(sd, temp_price, LOG_TYPE_BUYING_STORE);
-	st->bid = sd->bl.id;
+	st->bid = sd->id;
 	st->type = 1;
 	st->vender_id = stall_getid();
 	st->unique_id = stall_getuid();
@@ -479,24 +479,24 @@ int8 stall_buying_setup(map_session_data* sd, const char* message, const int16 x
 	safestrncpy(st->message, message, MESSAGE_SIZE);
 	safestrncpy(st->name, sd->status.name, NAME_LENGTH);
 
-	st->bl.id = st->vender_id;
-	st->bl.type = BL_STALL;
-	st->bl.m = sd->bl.m;
-	st->bl.x = xPos;
-	st->bl.y = yPos;
+	st->id = st->vender_id;
+	st->type = BL_STALL;
+	st->m = sd->m;
+	st->x = xPos;
+	st->y = yPos;
 
-	st->vd.class_ = sd->vd.class_;
-	st->vd.weapon = sd->vd.weapon;
-	st->vd.shield = sd->vd.shield;
-	st->vd.head_top = sd->vd.head_top;
-	st->vd.head_mid = sd->vd.head_mid;
-	st->vd.head_bottom = sd->vd.head_bottom;
-	st->vd.hair_style = sd->vd.hair_style;
-	st->vd.hair_color = sd->vd.hair_color;
-	st->vd.cloth_color = sd->vd.cloth_color;
-	st->vd.body_style = sd->vd.body_style;
+	st->vd.look[LOOK_BASE] = sd->vd.look[LOOK_BASE];
+	st->vd.look[LOOK_WEAPON] = sd->vd.look[LOOK_WEAPON];
+	st->vd.look[LOOK_SHIELD] = sd->vd.look[LOOK_SHIELD];
+	st->vd.look[LOOK_HEAD_TOP] = sd->vd.look[LOOK_HEAD_TOP];
+	st->vd.look[LOOK_HEAD_MID] = sd->vd.look[LOOK_HEAD_MID];
+	st->vd.look[LOOK_HEAD_BOTTOM] = sd->vd.look[LOOK_HEAD_BOTTOM];
+	st->vd.look[LOOK_HAIR] = sd->vd.look[LOOK_HAIR];
+	st->vd.look[LOOK_HAIR_COLOR] = sd->vd.look[LOOK_HAIR_COLOR];
+	st->vd.look[LOOK_CLOTHES_COLOR] = sd->vd.look[LOOK_CLOTHES_COLOR];
+	st->vd.look[LOOK_BODY2] = sd->vd.look[LOOK_BODY2];
 	st->vd.sex = sd->vd.sex;
-	st->vd.robe = sd->vd.robe;
+	st->vd.look[LOOK_ROBE] = sd->vd.look[LOOK_ROBE];
 
 	Sql_EscapeString( mmysql_handle, message_sql, st->message );
 
@@ -504,9 +504,9 @@ int8 stall_buying_setup(map_session_data* sd, const char* message, const int16 x
 		                          "`title`, `hair`, `hair_color`, `body`, `weapon`, `shield`, `head_top`, `head_mid`, `head_bottom`, `robe`,"
 								  "`clothes_color`, `name`, `expire_time`) "
 		"VALUES( %d, %d, %d, %d, %d, '%c', '%s', %d, %d, '%s', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, '%s', %u  );",
-		stalls_table, st->vender_id, st->unique_id, st->owner_id, st->type, st->vd.class_, st->vd.sex == SEX_FEMALE ? 'F' : 'M', mapindex_id2name(st->bl.m), st->bl.x, st->bl.y,
-		message_sql, st->vd.hair_style, st->vd.hair_color, st->vd.body_style, st->vd.weapon, st->vd.shield, st->vd.head_top, st->vd.head_mid, st->vd.head_bottom, st->vd.robe,
-		st->vd.cloth_color, st->name, st->expire_time) != SQL_SUCCESS ) {
+		stalls_table, st->vender_id, st->unique_id, st->owner_id, st->type, st->vd.look[LOOK_BASE], st->vd.sex == SEX_FEMALE ? 'F' : 'M', mapindex_id2name(st->m), st->x, st->y,
+		message_sql, st->vd.look[LOOK_HAIR], st->vd.look[LOOK_HAIR_COLOR], st->vd.look[LOOK_BODY2], st->vd.look[LOOK_WEAPON], st->vd.look[LOOK_SHIELD], st->vd.look[LOOK_HEAD_TOP], st->vd.look[LOOK_HEAD_MID], st->vd.look[LOOK_HEAD_BOTTOM], st->vd.look[LOOK_ROBE],
+		st->vd.look[LOOK_CLOTHES_COLOR], st->name, st->expire_time) != SQL_SUCCESS ) {
 		Sql_ShowDebug(mmysql_handle);
 	}
 
@@ -523,16 +523,16 @@ int8 stall_buying_setup(map_session_data* sd, const char* message, const int16 x
 	StringBuf_Destroy(&buf);
 
 	st->timer = add_timer(gettick() + (st->expire_time - time(nullptr)) * 1000,
-				stall_timeout, st->bl.id, 0);
+				stall_timeout, st->id, 0);
 
 	clif_stall_showunit(sd,st);
-	clif_buyingstall_entry(&sd->bl,st->vender_id,st->message);
+	clif_buyingstall_entry(sd,st->vender_id,st->message);
 	clif_stall_ui_close(sd,101,STALLSTORE_OK);
 
-	if(map_addblock(&st->bl))
+	if(map_addblock(st))
 		return -1;
-	status_change_init(&st->bl);
-	map_addiddb(&st->bl);
+	status_change_init(st);
+	map_addiddb(st);
 	stall_db.push_back(st);
 
 	return 0;
@@ -629,7 +629,7 @@ void stall_vending_purchasereq(map_session_data* sd, int32 aid, int32 uid, const
 		return;
 	}
 
-	if( !searchstore_queryremote(*sd, st->unique_id) && (sd->bl.m != st->bl.m || !check_distance_bl(&sd->bl, &st->bl, AREA_SIZE)) )
+	if( !searchstore_queryremote(*sd, st->unique_id) && (sd->m != st->m || !check_distance_bl(sd, st, AREA_SIZE)) )
 		return; // shop too far away
 
 	if( count < 1 || count > MAX_STALL_SLOT || count > st->vend_num )
@@ -822,7 +822,7 @@ void stall_buying_purchasereq(map_session_data* sd, int32 aid, int32 uid, const 
 		return;
 	}
 
-	if( !searchstore_queryremote(*sd, st->unique_id) && (sd->bl.m != st->bl.m || !check_distance_bl(&sd->bl, &st->bl, AREA_SIZE)) ){
+	if( !searchstore_queryremote(*sd, st->unique_id) && (sd->m != st->m || !check_distance_bl(sd, st, AREA_SIZE)) ){
 		clif_buyingstore_trade_failed_seller(sd, BUYINGSTORE_TRADE_SELLER_FAILED, 0);
 		return; // shop too far away
 	}
@@ -1119,9 +1119,9 @@ void stall_remove(struct s_stall_data* st){
 	}),
 	stall_db.end());
 
-	clif_clearunit_area(st->bl,CLR_OUTSIGHT);
-	map_delblock(&st->bl);
-	map_freeblock(&st->bl);
+	clif_clearunit_area(*st,CLR_OUTSIGHT);
+	map_delblock(st);
+	map_freeblock(st);
 }
 
 TIMER_FUNC (stall_timeout){
@@ -1308,29 +1308,29 @@ TIMER_FUNC(stall_init){
 		Sql_GetData(mmysql_handle, 0, &data, NULL); st->vender_id = atoi(data);
 		Sql_GetData(mmysql_handle, 1, &data, NULL); st->unique_id = atoi(data);
 		Sql_GetData(mmysql_handle, 2, &data, NULL); st->owner_id = atoi(data);
-		st->bl.id = st->vender_id;
+		st->id = st->vender_id;
 		Sql_GetData(mmysql_handle, 3, &data, NULL); st->type = atoi(data);
-		Sql_GetData(mmysql_handle, 4, &data, NULL); st->vd.class_ = atoi(data);
+		Sql_GetData(mmysql_handle, 4, &data, NULL); st->vd.look[LOOK_BASE] = atoi(data);
 		Sql_GetData(mmysql_handle, 5, &data, NULL); st->vd.sex = (data[0] == 'F') ? SEX_FEMALE : SEX_MALE;
 		char esc_mapname[NAME_LENGTH*2+1];
 		Sql_GetData(mmysql_handle, 6, &data, &len); safestrncpy(esc_mapname, data, zmin(len + 1, MESSAGE_SIZE));
-		st->bl.m = mapindex_name2id(esc_mapname);
-		Sql_GetData(mmysql_handle, 7, &data, NULL); st->bl.x = atoi(data);
-		Sql_GetData(mmysql_handle, 8, &data, NULL); st->bl.y = atoi(data);
+		st->m = mapindex_name2id(esc_mapname);
+		Sql_GetData(mmysql_handle, 7, &data, NULL); st->x = atoi(data);
+		Sql_GetData(mmysql_handle, 8, &data, NULL); st->y = atoi(data);
 		Sql_GetData(mmysql_handle, 9, &data, &len); safestrncpy(st->message, data, zmin(len + 1, MESSAGE_SIZE));
-		Sql_GetData(mmysql_handle, 10, &data, NULL); st->vd.hair_style = atoi(data);
-		Sql_GetData(mmysql_handle, 11, &data, NULL); st->vd.hair_color = atoi(data);
-		Sql_GetData(mmysql_handle, 12, &data, NULL); st->vd.body_style = atoi(data);
-		Sql_GetData(mmysql_handle, 13, &data, NULL); st->vd.weapon = atoi(data);
-		Sql_GetData(mmysql_handle, 14, &data, NULL); st->vd.shield = atoi(data);
-		Sql_GetData(mmysql_handle, 15, &data, NULL); st->vd.head_top = atoi(data);
-		Sql_GetData(mmysql_handle, 16, &data, NULL); st->vd.head_mid = atoi(data);
-		Sql_GetData(mmysql_handle, 17, &data, NULL); st->vd.head_bottom = atoi(data);
-		Sql_GetData(mmysql_handle, 18, &data, NULL); st->vd.robe = atoi(data);
-		Sql_GetData(mmysql_handle, 19, &data, NULL); st->vd.cloth_color = atoi(data);
+		Sql_GetData(mmysql_handle, 10, &data, NULL); st->vd.look[LOOK_HAIR] = atoi(data);
+		Sql_GetData(mmysql_handle, 11, &data, NULL); st->vd.look[LOOK_HAIR_COLOR] = atoi(data);
+		Sql_GetData(mmysql_handle, 12, &data, NULL); st->vd.look[LOOK_BODY2] = atoi(data);
+		Sql_GetData(mmysql_handle, 13, &data, NULL); st->vd.look[LOOK_WEAPON] = atoi(data);
+		Sql_GetData(mmysql_handle, 14, &data, NULL); st->vd.look[LOOK_SHIELD] = atoi(data);
+		Sql_GetData(mmysql_handle, 15, &data, NULL); st->vd.look[LOOK_HEAD_TOP] = atoi(data);
+		Sql_GetData(mmysql_handle, 16, &data, NULL); st->vd.look[LOOK_HEAD_MID] = atoi(data);
+		Sql_GetData(mmysql_handle, 17, &data, NULL); st->vd.look[LOOK_HEAD_BOTTOM] = atoi(data);
+		Sql_GetData(mmysql_handle, 18, &data, NULL); st->vd.look[LOOK_ROBE] = atoi(data);
+		Sql_GetData(mmysql_handle, 19, &data, NULL); st->vd.look[LOOK_CLOTHES_COLOR] = atoi(data);
 		Sql_GetData(mmysql_handle, 20, &data, &len); safestrncpy(st->name, data, zmin(len + 1, MESSAGE_SIZE));
 		Sql_GetData(mmysql_handle, 21, &data, NULL); st->expire_time = strtoul(data, nullptr, 10);
-		st->bl.type = BL_STALL;
+		st->type = BL_STALL;
 		stall_db.push_back(st);
 	}
 
@@ -1431,12 +1431,12 @@ TIMER_FUNC(stall_init){
 		}
 
 		itStalls->timer = add_timer(gettick() + (remain_time) * 1000,
-			stall_timeout, itStalls->bl.id, 0);
+			stall_timeout, itStalls->id, 0);
 
-		if(map_addblock(&itStalls->bl))
+		if(map_addblock(itStalls))
 			continue;
-		status_change_init(&itStalls->bl);
-		map_addiddb(&itStalls->bl);
+		status_change_init(itStalls);
+		map_addiddb(itStalls);
 	}
 
 	if(stall_remove_list.size() > 0){

@@ -89,8 +89,8 @@ Header:
   Version: 3
 
 Body:
-# Item Customs By CTRO
-# ID Item Start : 35000 - 40000
+# Item Customs By MixRO
+# ID Item Start : 35000+
 #=============================================================
   - Id: 35000
     AegisName: Auto_Trade_Voucher

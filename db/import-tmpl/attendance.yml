@@ -4,16 +4,17 @@
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
+# the Free Software FoundationAmount: either version 3 of the LicenseAmount: or
 # (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful,
+# This program is distributed in the hope that it will be useful
+
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
+# along with this program. If notAmount: see <http://www.gnu.org/licenses/>.
 #
 ###########################################################################
 # Attendance Database
@@ -22,78 +23,78 @@
 # Attendance Settings
 #
 ###########################################################################
-# - Start                   Start date.
-#   End                     End date.
-#   Rewards:                List of rewards for each day.
-#     - Day                 Reward day.
-#       ItemId              Item ID.
+# - Start             Start date.
+#   End               End date.
+#   Rewards:          List of rewards for each day.
+#     - Day           Reward day.
+#       ItemId        Item ID.
 ###########################################################################
 
 Header:
   Type: ATTENDANCE_DB
   Version: 1
 
-#Body:
-#  - Start: 20240101
-#    End: 20241231
-#    Rewards:
-#      - Day: 1
-#        ItemId: 100933
-#        Amount: 2
-#      - Day: 2
-#        ItemId: 25464
-#        Amount: 10
-#      - Day: 3
-#        ItemId: 23582
-#        Amount: 1
-#      - Day: 4
-#        ItemId: 14533
-#        Amount: 1
-#      - Day: 5
-#        ItemId: 23307
-#        Amount: 10
-#      - Day: 6
-#        ItemId: 23012
-#        Amount: 10
-#      - Day: 7
-#        ItemId: 23043
-#        Amount: 1
-#      - Day: 8
-#        ItemId: 6413
-#        Amount: 2
-#      - Day: 9
-#        ItemId: 9587
-#        Amount: 1
-#      - Day: 10
-#        ItemId: 23047
-#        Amount: 5
-#      - Day: 11
-#        ItemId: 23048
-#        Amount: 5
-#      - Day: 12
-#        ItemId: 14533
-#        Amount: 2
-#      - Day: 13
-#        ItemId: 22777
-#        Amount: 1
-#      - Day: 14
-#        ItemId: 100934
-#        Amount: 1
-#      - Day: 15
-#        ItemId: 6316
-#        Amount: 2
-#      - Day: 16
-#        ItemId: 12264
-#        Amount: 5
-#      - Day: 17
-#        ItemId: 23899
-#        Amount: 5
-#      - Day: 18
-#        ItemId: 23898
-#        Amount: 5
-#      - Day: 19
-#        ItemId: 100333
-#        Amount: 5
-#      - Day: 20
-#        ItemId: 25464
-#        Amount: 10
+Body:
+  - Start: 20250101
+    End: 20251231
+    Rewards:
+      - Day: 1
+        ItemId: 100933
+        Amount: 2
+      - Day: 2
+        ItemId: 25464
+        Amount: 10
+      - Day: 3
+        ItemId: 23582
+        Amount: 1
+      - Day: 4
+        ItemId: 14533
+        Amount: 1
+      - Day: 5
+        ItemId: 23307
+        Amount: 10
+      - Day: 6
+        ItemId: 23012
+        Amount: 10
+      - Day: 7
+        ItemId: 23043
+        Amount: 1
+      - Day: 8
+        ItemId: 6413
+        Amount: 2
+      - Day: 9
+        ItemId: 9587
+        Amount: 1
+      - Day: 10
+        ItemId: 23047
+        Amount: 5
+      - Day: 11
+        ItemId: 23048
+        Amount: 5
+      - Day: 12
+        ItemId: 14533
+        Amount: 2
+      - Day: 13
+        ItemId: 23041
+        Amount: 1
+      - Day: 14
+        ItemId: 100934
+        Amount: 1
+      - Day: 15
+        ItemId: 6316
+        Amount: 2
+      - Day: 16
+        ItemId: 12264
+        Amount: 5
+      - Day: 17
+        ItemId: 23899
+        Amount: 5
+      - Day: 18
+        ItemId: 23898
+        Amount: 5
+      - Day: 19
+        ItemId: 100333
+        Amount: 5
+      - Day: 20
+        ItemId: 25464
+        Amount: 10

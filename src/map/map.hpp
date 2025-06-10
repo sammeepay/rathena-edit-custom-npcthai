@@ -376,6 +376,8 @@ enum e_race2 : uint8{
 	RC2_EDDA_ARUNAFELTZ,
 	RC2_LASAGNA,
 	RC2_GLAST_HEIM_ABYSS,
+	RC2_DESTROYED_VALKYRIE_REALM,
+	RC2_ENCROACHED_GEPHENIA,
 	RC2_MAX
 };
 
@@ -479,8 +481,7 @@ struct spawn_data {
 	char filepath[256];
 };
 
-struct flooritem_data {
-	struct block_list bl;
+struct flooritem_data : public block_list {
 	unsigned char subx,suby;
 	int32 cleartimer;
 	int32 first_get_charid,second_get_charid,third_get_charid;
@@ -601,7 +602,8 @@ enum _look {
 	LOOK_RESET_COSTUMES,//Makes all headgear sprites on player vanish when activated.
 	LOOK_ROBE,
 	// LOOK_FLOOR,	// TODO : fix me!! offcial use this ?
-	LOOK_BODY2
+	LOOK_BODY2,
+	LOOK_MAX
 };
 
 enum e_mapflag : int16 {
@@ -1285,7 +1287,7 @@ typedef struct s_elemental_data	TBL_ELEM;
 typedef struct s_stall_data	    TBL_STALL;
 
 #define BL_CAST(type_, bl) \
-	( ((bl) == (struct block_list*)nullptr || (bl)->type != (type_)) ? (T ## type_ *)nullptr : (T ## type_ *)(bl) )
+	( ((bl) == nullptr || (bl)->type != (type_)) ? static_cast<T ## type_ *>(nullptr) : static_cast<T ## type_ *>(bl) )
 
 extern int32 db_use_sqldbs;
 
